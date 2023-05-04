@@ -1,0 +1,19 @@
+Idea 1:
+Rehacer el juego previo.
+
+Idea 2:
+Juego donde se disparen balas que cambien la gravedad de zonas especificas del juego.
+La mécanica principal del juego sería el control de la gravedad por parte del jugador. Esto se haría a través de varios mecanismo:
+	a.	Disparar balas
+	b. 	Palancas o placas repartidas en el mapa que activen las diferentes gravedades
+	c.	Enemigos que tengan efectos gravitacionales sobre el mapa.
+Estas mécanicas se combinarían en un mapa gigante que actúe como un sólo puzzle para el jugador y su meta sea llegar al otro lado.
+
+Clases posibles:
+	a. Jugador
+	b. Enemigo
+	c. Elemento Gravitacional (Tiene una gravedad positiva o negativa y una fuerza asociada)
+		c.1. Balas
+		c.2. Objetos en el mapa
+		c.3. Enemigos en el mapa
+	
