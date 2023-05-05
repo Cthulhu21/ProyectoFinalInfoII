@@ -7,6 +7,7 @@ La mécanica principal del juego sería el control de la gravedad por parte del 
 	a.	Disparar balas
 	b. 	Palancas o placas repartidas en el mapa que activen las diferentes gravedades
 	c.	Enemigos que tengan efectos gravitacionales sobre el mapa.
+	d. 	Un tipo de arma que atraiga o repela objetos
 Estas mécanicas se combinarían en un mapa gigante que actúe como un sólo puzzle para el jugador y su meta sea llegar al otro lado.
 
 Clases posibles:
@@ -16,4 +17,4 @@ Clases posibles:
 		c.1. Balas
 		c.2. Objetos en el mapa
 		c.3. Enemigos en el mapa
-	
+	d. Plataforma
