@@ -1,8 +1,10 @@
-#include <QCoreApplication>
+#include <QApplication>
+#include "Juego.h"
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
-
+    QApplication a(argc, argv);
+    Juego *Game = new Juego;
+    Game->show();
     return a.exec();
 }

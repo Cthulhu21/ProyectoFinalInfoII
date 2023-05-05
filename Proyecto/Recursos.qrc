@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Imagenes">
+        <file alias="Pacman">Recursos/Pacman.png</file>
+    </qresource>
+</RCC>
