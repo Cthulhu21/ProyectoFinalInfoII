@@ -39,14 +39,14 @@ namespace {
 struct qt_meta_stringdata_CLASSJuegoENDCLASS_t {};
 static constexpr auto qt_meta_stringdata_CLASSJuegoENDCLASS = QtMocHelpers::stringData(
     "Juego",
-    "MoverJugador",
+    "Actualizar",
     ""
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSJuegoENDCLASS_t {
     uint offsetsAndSizes[6];
     char stringdata0[6];
-    char stringdata1[13];
+    char stringdata1[11];
     char stringdata2[1];
 };
 #define QT_MOC_LITERAL(ofs, len) \
@@ -54,11 +54,11 @@ struct qt_meta_stringdata_CLASSJuegoENDCLASS_t {
 Q_CONSTINIT static const qt_meta_stringdata_CLASSJuegoENDCLASS_t qt_meta_stringdata_CLASSJuegoENDCLASS = {
     {
         QT_MOC_LITERAL(0, 5),  // "Juego"
-        QT_MOC_LITERAL(6, 12),  // "MoverJugador"
-        QT_MOC_LITERAL(19, 0)   // ""
+        QT_MOC_LITERAL(6, 10),  // "Actualizar"
+        QT_MOC_LITERAL(17, 0)   // ""
     },
     "Juego",
-    "MoverJugador",
+    "Actualizar",
     ""
 };
 #undef QT_MOC_LITERAL
@@ -96,7 +96,7 @@ Q_CONSTINIT const QMetaObject Juego::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSJuegoENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<Juego, std::true_type>,
-        // method 'MoverJugador'
+        // method 'Actualizar'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -108,7 +108,7 @@ void Juego::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         auto *_t = static_cast<Juego *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->MoverJugador(); break;
+        case 0: _t->Actualizar(); break;
         default: ;
         }
     }

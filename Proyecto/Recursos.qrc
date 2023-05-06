@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/Imagenes">
         <file alias="Pacman">Recursos/Pacman.png</file>
+        <file alias="Laberinto">Recursos/Laberinto.png</file>
     </qresource>
 </RCC>

@@ -4,19 +4,16 @@ Jugador::Jugador(QGraphicsItem *parent)
 {
     VelocidadX=10;
     VelocidadY=0;
-    Angulo=0;
-    AceleracionX=0;
-    AceleracionY=0;
     Delta =0.01;
-    Resistencia=0.08;
-    setPixmap(QPixmap(":/Imagenes/Pacman").transformed(QTransform().scale(0.1,0.1)));
+    setPixmap(QPixmap(":/Imagenes/Pacman").transformed(QTransform().scale(0.025,0.025)));
+    setPos(962.5-22.56,947.7-51.44*0.5);
     PosX=this->x();
     PosY=this->y();
 }
 
 void Jugador::AplicarMovimiento()
 {
-    // Se actualizan los datos de posicion y velocidad
+    // Se actualizan los datos de posicion
 
     PosX += VelocidadX*Delta;
     PosY += VelocidadY*Delta;
@@ -47,4 +44,11 @@ void Jugador::CambiarDireccion(int Tecla)
     default:
         break;
     }
+}
+
+void Jugador::SetPos(float X, float Y)
+{
+    this->setPos(X,Y);
+    PosX=X;
+    PosY=Y;
 }

@@ -14,8 +14,11 @@ Juego::Juego(QWidget *parent)
     Player = new Jugador;
     Pantalla->addItem(Player);
 
+    Pared = new Paredes;
+    Pantalla->addItem(Pared);
+
     Timer = new QTimer;
-    connect(Timer, SIGNAL(timeout()),this,SLOT(MoverJugador()));
+    connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
     Timer->start(1);
 
 
@@ -37,7 +40,16 @@ void Juego::keyPressEvent(QKeyEvent *evento)
     }
 }
 
-void Juego::MoverJugador()
+void Juego::Actualizar()
 {
-    Player->AplicarMovimiento();
+    //Mueve al jugador
+    {
+        QPointF Posicion=Player->pos();
+        Player->AplicarMovimiento();
+        if(Player->collidesWithItem(Pared))
+        {
+
+            Player->SetPos(Posicion.rx(),Posicion.ry());
+        }
+    }
 }
