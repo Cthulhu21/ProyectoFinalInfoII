@@ -2,5 +2,7 @@
     <qresource prefix="/Imagenes">
         <file alias="Pacman">Recursos/Pacman.png</file>
         <file alias="Laberinto">Recursos/Laberinto.png</file>
+        <file alias="Sprites">Recursos/Sprites.png</file>
+        <file alias="SpritesPacman">Recursos/SpritesPacman.png</file>
     </qresource>
 </RCC>

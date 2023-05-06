@@ -21,6 +21,13 @@ Juego::Juego(QWidget *parent)
     connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
     Timer->start(1);
 
+    TimerAnimaciones = new QTimer;
+    connect(TimerAnimaciones, SIGNAL(timeout()), this, SLOT(ActualizarFrames()));
+    TimerAnimaciones->start(100);
+}
+
+Juego::~Juego()
+{
 
 }
 
@@ -51,5 +58,13 @@ void Juego::Actualizar()
 
             Player->SetPos(Posicion.rx(),Posicion.ry());
         }
+    }
+}
+
+void Juego::ActualizarFrames()
+{
+    //Jugador
+    {
+        Player->SiguienteFrame();
     }
 }

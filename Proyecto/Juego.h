@@ -17,6 +17,7 @@ public:
     ~Juego();
 private:
     QTimer *Timer;
+    QTimer *TimerAnimaciones;
     void keyPressEvent(QKeyEvent *evento);
     QGraphicsScene *Pantalla;
     Jugador *Player;
@@ -24,6 +25,7 @@ private:
 
 private slots:
     void Actualizar();
+    void ActualizarFrames();
 };
 
 #endif // JUEGO_H
