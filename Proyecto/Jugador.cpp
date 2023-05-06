@@ -1,17 +1,18 @@
 #include "Jugador.h"
 
-Jugador::Jugador(QGraphicsItem *parent)
+Jugador::Jugador(float PosX_, float PosY_, QGraphicsItem *parent)
 {
     Direccion=0;
     VelocidadX=Velocidad;
     VelocidadY=0;
-    setPos(962.5-22.56,947.7-51.44*0.5);
-    PosX=this->x();
-    PosY=this->y();
+    PosX=PosX_;
+    PosY=PosY_;
+    Rectangulo = new QGraphicsRectItem(0,0,32,31);
+    setPos(PosX,PosY);
+
     CargarSprites();
     FrameActual = 0;
     setPixmap(Sprites[FrameActual]);
-    Rectangulo = new QGraphicsRectItem(0,0,32,31);
     //setPixmap(Sprites[0]).transformed(QTransform().scale(0.025,0.025)));
 }
 
@@ -22,7 +23,7 @@ void Jugador::AplicarMovimiento()
     PosX += VelocidadX*Delta;
     PosY += VelocidadY*Delta;
 
-    setPos(PosX, PosY);
+    SetPos(PosX, PosY);
     if(this->pos().x()<-32)
     {
         SetPos(2000,this->y());
@@ -31,7 +32,6 @@ void Jugador::AplicarMovimiento()
     {
         SetPos(-32,this->y());
     }
-    Rectangulo->setRect(PosX, PosY, 32, 31);
 }
 
 void Jugador::CambiarDireccion(int Tecla)
@@ -68,6 +68,7 @@ void Jugador::SetPos(float X, float Y)
     this->setPos(X,Y);
     PosX=X;
     PosY=Y;
+    Rectangulo->setRect(X,Y,32,31);
 }
 
 Jugador::~Jugador()
@@ -104,9 +105,5 @@ QGraphicsRectItem *Jugador::getRectangulo() const
 
 void Jugador::SiguienteFrame()
 {
-    setPixmap(Sprites[FrameActual++].transformed(QTransform().rotate(Direccion)));
-    if(FrameActual>Sprites.size()-1)
-    {
-        FrameActual=0;
-    }
+    setPixmap(Sprites[FrameActual++%Sprites.size()].transformed(QTransform().rotate(Direccion)));
 }

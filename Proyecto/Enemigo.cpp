@@ -1,19 +1,21 @@
 #include "Enemigo.h"
 
-Enemigo::Enemigo()
+Enemigo::Enemigo(float PosX_, float PosY_, QGraphicsItem *parent)
 {
     VelocidadX=Velocidad;
     VelocidadY=0;
-    Delta =0.01;
     Direccion=0;
 
-    setPos(0,450);
-    PosX=this->x();
-    PosY=this->y();
+
+    PosX=PosX_;
+    PosY=PosY_;
+    Rectangulo = new QGraphicsRectItem(PosX,PosY,26,29);
+    SetPos(PosX,PosY);
+
     CargarSprites();
     FrameActual = 0;
     setPixmap(Sprites[FrameActual]);
-    Rectangulo = new QGraphicsRectItem(0,0,26,29);
+
 }
 
 void Enemigo::Mover()
@@ -21,7 +23,7 @@ void Enemigo::Mover()
     PosX += VelocidadX*Delta;
     PosY += VelocidadY*Delta;
 
-    setPos(PosX, PosY);
+    SetPos(PosX, PosY);
     if(this->pos().x()<-26)
     {
         SetPos(2000,this->y());
@@ -30,7 +32,6 @@ void Enemigo::Mover()
     {
         SetPos(-26,this->y());
     }
-    Rectangulo->setRect(PosX, PosY, 26, 29);
 }
 
 void Enemigo::SetPos(float X, float Y)
@@ -38,6 +39,7 @@ void Enemigo::SetPos(float X, float Y)
     this->setPos(X,Y);
     PosX=X;
     PosY=Y;
+    Rectangulo->setRect(X,Y,26,29);
 }
 
 void Enemigo::CargarSprites()
@@ -55,11 +57,11 @@ QGraphicsRectItem *Enemigo::getRectangulo() const
 
 void Enemigo::SiguienteFrame()
 {
-    setPixmap(Sprites[FrameActual++]);
-    if(FrameActual>Sprites.size()-1)
+    setPixmap(Sprites[FrameActual++%Sprites.size()]);
+    /*if(FrameActual>Sprites.size()-1)
     {
         FrameActual=0;
-    }
+    }*/
 }
 
 Enemigo::~Enemigo()

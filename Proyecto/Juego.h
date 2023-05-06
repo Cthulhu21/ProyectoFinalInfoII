@@ -22,7 +22,7 @@ private:
     void keyPressEvent(QKeyEvent *evento);
     QGraphicsScene *Pantalla;
     Jugador *Player;
-    Enemigo *Fantasma;
+    QList<Enemigo*> *Fantasmas;
     Paredes *Pared;
 
 private slots:

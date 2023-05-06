@@ -11,11 +11,16 @@ Juego::Juego(QWidget *parent)
     setScene(Pantalla);
     setBackgroundBrush(QBrush(Qt::black));
 
-    Player = new Jugador;
+    Player = new Jugador(810,300);
     Pantalla->addItem(Player);
 
-    Fantasma = new Enemigo;
-    Pantalla->addItem(Fantasma);
+    Fantasmas = new QList<Enemigo*>;
+    for(int i=0; i<4; i++)
+    {
+
+        Fantasmas->append(new Enemigo(800+i*45,480));
+        Pantalla->addItem(Fantasmas->at(i));
+    }
 
     Pared = new Paredes;
     Pantalla->addItem(Pared);
@@ -52,6 +57,14 @@ void Juego::keyPressEvent(QKeyEvent *evento)
 
 void Juego::Actualizar()
 {
+    for(int i=0; i<Fantasmas->size(); i++)
+    {
+        if(Player->getRectangulo()->collidesWithItem(Fantasmas->at(i)->getRectangulo()))
+        {
+            delete Fantasmas->at(i);
+            Fantasmas->removeAt(i);
+        }
+    }
     //Mueve al jugador
     {
         const float PosX_=Player->getPosX(), PosY_=Player->getPosY();
@@ -60,15 +73,19 @@ void Juego::Actualizar()
         {
             Player->SetPos(PosX_,PosY_);
         }
+
     }
     //Mover a los fantasmas
     {
-        QPointF Posicion = Fantasma->pos();
-        Fantasma->Mover();
-        if(Fantasma->collidesWithItem(Pared))
+        for(Enemigo *Enemigo_ : *Fantasmas)
         {
-            Fantasma->SetPos(Posicion.x(), Posicion.y());
-            Fantasma->CambiarDireccion();
+            QPointF Posicion = Enemigo_->pos();
+            Enemigo_->Mover();
+            if(Enemigo_->getRectangulo()->collidesWithItem(Pared))
+            {
+                Enemigo_->SetPos(Posicion.x(), Posicion.y());
+                Enemigo_->CambiarDireccion();
+            }
         }
     }
 }
@@ -81,6 +98,10 @@ void Juego::ActualizarFrames()
     }
     //Enemigo
     {
-        Fantasma->SiguienteFrame();
+        for(Enemigo *Enemigo_ : *Fantasmas)
+        {
+            Enemigo_->SiguienteFrame();
+        }
+
     }
 }
