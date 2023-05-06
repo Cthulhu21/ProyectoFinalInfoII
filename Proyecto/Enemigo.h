@@ -14,7 +14,10 @@ public:
     void SetPos(float X, float Y);
     void SiguienteFrame();
     ~Enemigo();
+    QGraphicsRectItem *getRectangulo() const;
+
 private:
+    const float Velocidad=20;
     float VelocidadX;
     float VelocidadY;
     float Delta;
@@ -25,6 +28,7 @@ private:
     unsigned int FrameActual;
     QList<QPixmap> Sprites;
     void CargarSprites();
+    QGraphicsRectItem *Rectangulo;
 };
 
 #endif // ENEMIGO_H

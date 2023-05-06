@@ -31,7 +31,7 @@ void Jugador::AplicarMovimiento()
     {
         SetPos(-32,this->y());
     }
-    Rectangulo->setRect(PosX, PosY,32,31);
+    Rectangulo->setRect(PosX, PosY, 32, 31);
 }
 
 void Jugador::CambiarDireccion(int Tecla)

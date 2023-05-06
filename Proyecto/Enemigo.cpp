@@ -2,7 +2,7 @@
 
 Enemigo::Enemigo()
 {
-    VelocidadX=9;
+    VelocidadX=Velocidad;
     VelocidadY=0;
     Delta =0.01;
     Direccion=0;
@@ -13,6 +13,7 @@ Enemigo::Enemigo()
     CargarSprites();
     FrameActual = 0;
     setPixmap(Sprites[FrameActual]);
+    Rectangulo = new QGraphicsRectItem(0,0,26,29);
 }
 
 void Enemigo::Mover()
@@ -29,6 +30,7 @@ void Enemigo::Mover()
     {
         SetPos(-26,this->y());
     }
+    Rectangulo->setRect(PosX, PosY, 26, 29);
 }
 
 void Enemigo::SetPos(float X, float Y)
@@ -44,6 +46,11 @@ void Enemigo::CargarSprites()
     {
         Sprites.append(QPixmap(":/Imagenes/Fantasma").copy(0,29*i,26,29));
     }
+}
+
+QGraphicsRectItem *Enemigo::getRectangulo() const
+{
+    return Rectangulo;
 }
 
 void Enemigo::SiguienteFrame()
@@ -69,19 +76,19 @@ void Enemigo::CambiarDireccion()
     {
     case 0:
         VelocidadY=0;
-        VelocidadX=9;
+        VelocidadX=Velocidad;
         break;
     case 1:
         VelocidadX=0;
-        VelocidadY=-9;
+        VelocidadY=-Velocidad;
         break;
     case 2:
         VelocidadY=0;
-        VelocidadX=-9;
+        VelocidadX=-Velocidad;
         break;
     case 3:
         VelocidadX=0;
-        VelocidadY=9;
+        VelocidadY=Velocidad;
         break;
     default:
         break;
