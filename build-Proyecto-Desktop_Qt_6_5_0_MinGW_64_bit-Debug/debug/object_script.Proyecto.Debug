@@ -1,0 +1,10 @@
+debug/Enemigo.o
+debug/Juego.o
+debug/Jugador.o
+debug/Paredes.o
+debug/main.o
+debug/qrc_Recursos.o
+debug/moc_Enemigo.o
+debug/moc_Juego.o
+debug/moc_Jugador.o
+debug/moc_Paredes.o

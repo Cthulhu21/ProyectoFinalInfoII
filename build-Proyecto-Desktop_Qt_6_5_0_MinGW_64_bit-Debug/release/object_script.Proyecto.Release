@@ -1,0 +1,10 @@
+release/Enemigo.o
+release/Juego.o
+release/Jugador.o
+release/Paredes.o
+release/main.o
+release/qrc_Recursos.o
+release/moc_Enemigo.o
+release/moc_Juego.o
+release/moc_Jugador.o
+release/moc_Paredes.o

@@ -14,6 +14,9 @@ Juego::Juego(QWidget *parent)
     Player = new Jugador;
     Pantalla->addItem(Player);
 
+    Fantasma = new Enemigo;
+    Pantalla->addItem(Fantasma);
+
     Pared = new Paredes;
     Pantalla->addItem(Pared);
 
@@ -51,12 +54,21 @@ void Juego::Actualizar()
 {
     //Mueve al jugador
     {
-        QPointF Posicion=Player->pos();
+        const float PosX_=Player->getPosX(), PosY_=Player->getPosY();
         Player->AplicarMovimiento();
-        if(Player->collidesWithItem(Pared))
+        if(Player->getRectangulo()->collidesWithItem(Pared))
         {
-
-            Player->SetPos(Posicion.rx(),Posicion.ry());
+            Player->SetPos(PosX_,PosY_);
+        }
+    }
+    //Mover a los fantasmas
+    {
+        QPointF Posicion = Fantasma->pos();
+        Fantasma->Mover();
+        if(Fantasma->collidesWithItem(Pared))
+        {
+            Fantasma->SetPos(Posicion.x(), Posicion.y());
+            Fantasma->CambiarDireccion();
         }
     }
 }
@@ -66,5 +78,9 @@ void Juego::ActualizarFrames()
     //Jugador
     {
         Player->SiguienteFrame();
+    }
+    //Enemigo
+    {
+        Fantasma->SiguienteFrame();
     }
 }

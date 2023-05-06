@@ -8,6 +8,7 @@
 
 #include "Jugador.h"
 #include "Paredes.h"
+#include "Enemigo.h"
 
 class Juego: public QGraphicsView
 {
@@ -21,6 +22,7 @@ private:
     void keyPressEvent(QKeyEvent *evento);
     QGraphicsScene *Pantalla;
     Jugador *Player;
+    Enemigo *Fantasma;
     Paredes *Pared;
 
 private slots:
