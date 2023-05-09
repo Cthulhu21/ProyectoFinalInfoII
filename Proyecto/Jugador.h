@@ -17,10 +17,13 @@ public:
     float getPosY() const;
     QGraphicsRectItem *getRectangulo() const;
     ~Jugador();
-private:
+    bool getInvencible() const;
+    void setInvencible(bool newInvencible);
 
+private:
+    bool Invencible;
     const int Velocidad=30;
-    const float Delta=0.01;
+    const float Delta=0.1;
     float VelocidadX;
     float VelocidadY;
     float PosX;

@@ -7,6 +7,7 @@ CONFIG += c++20 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        Comestible.cpp \
         Enemigo.cpp \
         Juego.cpp \
         Jugador.cpp \
@@ -19,6 +20,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    Comestible.h \
     Enemigo.h \
     Juego.h \
     Jugador.h \

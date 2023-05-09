@@ -5,5 +5,6 @@
         <file alias="Sprites">Recursos/Sprites.png</file>
         <file alias="SpritesPacman">Recursos/SpritesPacman.png</file>
         <file alias="Fantasma">Recursos/Fantasma.png</file>
+        <file alias="Comestibles">Recursos/Comestibles.png</file>
     </qresource>
 </RCC>

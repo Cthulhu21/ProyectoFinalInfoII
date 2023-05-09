@@ -9,7 +9,7 @@ Jugador::Jugador(float PosX_, float PosY_, QGraphicsItem *parent)
     PosY=PosY_;
     Rectangulo = new QGraphicsRectItem(0,0,32,31);
     setPos(PosX,PosY);
-
+    Invencible=true;
     CargarSprites();
     FrameActual = 0;
     setPixmap(Sprites[FrameActual]);
@@ -74,6 +74,16 @@ void Jugador::SetPos(float X, float Y)
 Jugador::~Jugador()
 {
 
+}
+
+bool Jugador::getInvencible() const
+{
+    return Invencible;
+}
+
+void Jugador::setInvencible(bool newInvencible)
+{
+    Invencible = newInvencible;
 }
 
 float Jugador::getPosX() const

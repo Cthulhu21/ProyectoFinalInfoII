@@ -58,10 +58,6 @@ QGraphicsRectItem *Enemigo::getRectangulo() const
 void Enemigo::SiguienteFrame()
 {
     setPixmap(Sprites[FrameActual++%Sprites.size()]);
-    /*if(FrameActual>Sprites.size()-1)
-    {
-        FrameActual=0;
-    }*/
 }
 
 Enemigo::~Enemigo()
@@ -71,9 +67,7 @@ Enemigo::~Enemigo()
 
 void Enemigo::CambiarDireccion()
 {
-    //do
     Direccion=rand()%4;
-    //}while(Direccion%4);
     switch(Direccion)
     {
     case 0:

@@ -18,7 +18,7 @@ public:
     void setRectangulo(float X, float Y);
 
 private:
-    const float Velocidad=20;
+    const float Velocidad=50;
     float VelocidadX;
     float VelocidadY;
     const float Delta =0.01;
