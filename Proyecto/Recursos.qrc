@@ -7,4 +7,30 @@
         <file alias="Fantasma">Recursos/Fantasma.png</file>
         <file alias="Comestibles">Recursos/Comestibles.png</file>
     </qresource>
+    <qresource prefix="/Jugador">
+        <file alias="0">Recursos/Jugador/Correr (1).png</file>
+        <file alias="1">Recursos/Jugador/Correr (2).png</file>
+        <file alias="2">Recursos/Jugador/Correr (3).png</file>
+        <file alias="3">Recursos/Jugador/Correr (4).png</file>
+        <file alias="4">Recursos/Jugador/Correr (5).png</file>
+        <file alias="5">Recursos/Jugador/Correr (6).png</file>
+        <file alias="6">Recursos/Jugador/Correr (7).png</file>
+        <file alias="7">Recursos/Jugador/Correr (8).png</file>
+        <file alias="8">Recursos/Jugador/Correr (9).png</file>
+        <file alias="9">Recursos/Jugador/Correr (10).png</file>
+        <file alias="10">Recursos/Jugador/Correr (11).png</file>
+        <file alias="11">Recursos/Jugador/Correr (12).png</file>
+        <file alias="12">Recursos/Jugador/Correr (13).png</file>
+        <file alias="13">Recursos/Jugador/Correr (14).png</file>
+        <file alias="14">Recursos/Jugador/Correr (15).png</file>
+        <file alias="15">Recursos/Jugador/Correr (16).png</file>
+        <file alias="16">Recursos/Jugador/Correr (17).png</file>
+        <file alias="17">Recursos/Jugador/Correr (18).png</file>
+        <file alias="18">Recursos/Jugador/Correr (19).png</file>
+        <file alias="19">Recursos/Jugador/Correr (20).png</file>
+        <file alias="20">Recursos/Jugador/Correr (21).png</file>
+        <file alias="21">Recursos/Jugador/Correr (22).png</file>
+        <file alias="22">Recursos/Jugador/Correr (23).png</file>
+        <file alias="23">Recursos/Jugador/Correr (24).png</file>
+    </qresource>
 </RCC>
