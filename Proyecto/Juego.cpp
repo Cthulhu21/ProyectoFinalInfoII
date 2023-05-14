@@ -31,7 +31,7 @@ Juego::~Juego()
 
 void Juego::keyPressEvent(QKeyEvent *evento)
 {
-    int AceleracionExtra=5000;
+    int AceleracionExtra=1000;
     switch(evento->key())
     {
     case Qt::Key_W:
@@ -39,9 +39,6 @@ void Juego::keyPressEvent(QKeyEvent *evento)
         break;
     case Qt::Key_A:
         Player->AplicarAceleracion(-AceleracionExtra,0);
-        break;
-    case Qt::Key_S:
-        Player->AplicarAceleracion(0,AceleracionExtra);
         break;
     case Qt::Key_D:
         Player->AplicarAceleracion(AceleracionExtra,0);
@@ -78,8 +75,17 @@ void Juego::Actualizar()
     {
         Player->SiguienteFrame();
     }
-    //Mueve al jugador
     {
+        float PosX=Player->getPosX(), PosY=Player->getPosY();
         Player->Mover();
+        if(Player->getPosX()>GetSystemMetrics(SM_CXSCREEN))
+        {
+            Player->SetPos(PosX, Player->getPosY());
+        }
+        else if(Player->getPosY()>GetSystemMetrics(SM_CYSCREEN))
+        {
+            Player->setPos(Player->getPosX(), PosY);
+        }
+
     }
 }

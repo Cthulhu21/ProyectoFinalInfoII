@@ -8,44 +8,37 @@ Jugador::Jugador(float PosX_, float PosY_, QGraphicsItem *parent)
     VelocidadY=0;
     AceleracionX=0;
     AceleracionY=0;
-    VelocidadInicialY=0;
-    C1=VelocidadY-Masa*Gravedad/(KAire*KAire);
 
     PosX=PosX_;
     PosY=PosY_;
-    PosicionInicialY=PosY;
-    C2=PosicionInicialY - C1/KAire;
 
-    Rectangulo = new QGraphicsRectItem(0,0,32,31);
+    Rectangulo = new QGraphicsRectItem(0,0,22,52);
     setPos(PosX,PosY);
     CargarSprites();
     FrameActual = 0;
     setPixmap(Sprites[FrameActual]);
-    //setPixmap(Sprites[0]).transformed(QTransform().scale(0.025,0.025)));
 }
 
 void Jugador::Mover()
 {
-    // Se actualizan los datos de posicion
-
-    /*
-    AceleracionX= AceleracionX - KAire*Delta;
-    AceleracionY= AceleracionY - KAire*Delta;
-    VelocidadX = VelocidadX + AceleracionX*Delta - KAire*Delta;
-    VelocidadY+=AceleracionY*Delta;
-    PosX += VelocidadX*Delta+AceleracionX*0.5*Delta*Delta;
-    PosY += VelocidadY*Delta+AceleracionY*0.5*Delta*Delta;
-    */
-    //C1=VelocidadY-Masa*Gravedad/KAire;
-    if(PosY<900+52)
+    PosX+=VelocidadX*Delta;
+    VelocidadX-=AceleracionX*Delta;
+    if(abs(VelocidadX)<0.1)
     {
-        AceleracionY*=KAire;
-        VelocidadY=VelocidadY+AceleracionY*Delta;
-        PosY=PosY+Delta*VelocidadY+(Gravedad+AceleracionY)*0.5*Delta*Delta;
+        VelocidadX=0;
+        AceleracionX=0;
     }
     AceleracionX*=KAire;
-    VelocidadX=VelocidadX-AceleracionX*Delta;
-    PosX=PosX+Delta*VelocidadX;
+
+    PosY+=VelocidadY*Delta+AceleracionY*0.5*Delta*Delta;
+    VelocidadY-=AceleracionY*Delta;
+    if(abs(VelocidadY)<0.1)
+    {
+        VelocidadY=0;
+        AceleracionY=0;
+    }
+    AceleracionY*=KAire;
+
     SetPos(PosX, PosY);
 }
 
@@ -54,7 +47,9 @@ void Jugador::AplicarAceleracion(float AceleracionX_, float AceleracionY_)
 {
 
     AceleracionX+=AceleracionX_;
+    VelocidadX=AceleracionX*Delta;
     AceleracionY=AceleracionY_;
+    VelocidadY=AceleracionY*Delta;
 }
 
 void Jugador::SetPos(float X, float Y)
@@ -62,7 +57,7 @@ void Jugador::SetPos(float X, float Y)
     this->setPos(X,Y);
     PosX=X;
     PosY=Y;
-    Rectangulo->setRect(X,Y,32,31);
+    Rectangulo->setRect(X,Y,22,52);
 }
 
 Jugador::~Jugador()

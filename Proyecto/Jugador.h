@@ -24,16 +24,10 @@ public:
     ~Jugador();
 
 private:
-    const int Velocidad=30;
     const float Delta=0.1;
     const float KAire=0.95;
     const int Masa=10;
-    const int Gravedad=1000;
 
-    float VelocidadInicialY;
-    float PosicionInicialY;
-
-    float C1, C2;
     float AceleracionX;
     float AceleracionY;
     float VelocidadX;
