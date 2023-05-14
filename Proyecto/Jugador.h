@@ -23,10 +23,14 @@ public:
     QGraphicsRectItem *getRectangulo() const;
     ~Jugador();
 
+    int getMasa() const;
+
 private:
     const float Delta=0.1;
     const float KAire=0.95;
     const int Masa=10;
+    const int AceleracionMaxima=1000;
+    const int Gravedad=30;
 
     float AceleracionX;
     float AceleracionY;

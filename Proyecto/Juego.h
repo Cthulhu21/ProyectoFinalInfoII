@@ -7,6 +7,7 @@
 #include <windows.h>
 
 #include "Jugador.h"
+#include "ZonaGravitacional.h"
 
 class Juego: public QGraphicsView
 {
@@ -22,6 +23,8 @@ private:
 
     QGraphicsScene *Pantalla;
     Jugador *Player;
+    QList<ZonaGravitacional*> *ZonasGravitacionales;
+
     void GameOver();
 
     unsigned int ContadorGlobal;

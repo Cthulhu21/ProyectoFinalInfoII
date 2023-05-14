@@ -9,12 +9,22 @@ Juego::Juego(QWidget *parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setScene(Pantalla);
-    setBackgroundBrush(QBrush(Qt::black));
+    //setBackgroundBrush(QBrush(Qt::black));
 }
 
 void Juego::Jugar()
 {
     ContadorGlobal=0;
+
+    ZonasGravitacionales = new QList<ZonaGravitacional*>;
+    ZonasGravitacionales->append(new ZonaGravitacional(1000,0,400,200,800,200,0.5));
+    ZonasGravitacionales->append(new ZonaGravitacional(1000 ,-2,0,500,1000,20));
+    ZonasGravitacionales->append(new ZonaGravitacional(1000,3.141592/2,-1000,-1000,3000,3000,0));
+    for(int i=0; i<ZonasGravitacionales->size(); i++)
+    {
+        Pantalla->addItem(ZonasGravitacionales->at(i));
+    }
+
 
     Player = new Jugador(810,300);
     Pantalla->addItem(Player);
@@ -87,5 +97,16 @@ void Juego::Actualizar()
             Player->setPos(Player->getPosX(), PosY);
         }
 
+    }
+    {
+        QList<QGraphicsItem*> Items= Player->collidingItems();
+        for(QGraphicsItem *item : Items )
+        {
+            ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
+            if(Zona)
+            {
+                Player->AplicarAceleracion(cos(Zona->getRotacion())*(Zona->getFuerzaGravitacional()/Player->getMasa()),sin(Zona->getRotacion())*(Zona->getFuerzaGravitacional()/Player->getMasa()));
+            }
+        }
     }
 }

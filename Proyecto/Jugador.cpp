@@ -30,7 +30,7 @@ void Jugador::Mover()
     }
     AceleracionX*=KAire;
 
-    PosY+=VelocidadY*Delta+AceleracionY*0.5*Delta*Delta;
+    PosY+=VelocidadY*Delta;//+(Gravedad+AceleracionY)*0.5*Delta*Delta;
     VelocidadY-=AceleracionY*Delta;
     if(abs(VelocidadY)<0.1)
     {
@@ -46,10 +46,16 @@ void Jugador::Mover()
 void Jugador::AplicarAceleracion(float AceleracionX_, float AceleracionY_)
 {
 
-    AceleracionX+=AceleracionX_;
-    VelocidadX=AceleracionX*Delta;
-    AceleracionY=AceleracionY_;
-    VelocidadY=AceleracionY*Delta;
+    if(AceleracionX<AceleracionMaxima)
+    {
+        AceleracionX+=AceleracionX_;
+        VelocidadX=AceleracionX*Delta;
+    }
+    if(AceleracionY<AceleracionMaxima)
+    {
+        AceleracionY+=AceleracionY_;
+        VelocidadY=AceleracionY*Delta;
+    }
 }
 
 void Jugador::SetPos(float X, float Y)
@@ -65,6 +71,11 @@ Jugador::~Jugador()
 
 }
 
+int Jugador::getMasa() const
+{
+    return Masa;
+}
+
 float Jugador::getPosX() const
 {
     return PosX;
@@ -77,7 +88,7 @@ float Jugador::getPosY() const
 
 void Jugador::CargarSprites()
 {
-    for(int i=0; i<24; i++)
+    for(int i=3; i<11; i++)
     {
         QString Ruta=":/Jugador/%1";
         Sprites.append(QPixmap(Ruta.arg(i)));
