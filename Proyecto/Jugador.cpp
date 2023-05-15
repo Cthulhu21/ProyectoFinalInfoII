@@ -6,6 +6,7 @@ Jugador::Jugador(int Masa, QPointF Pos, std::pair<float,float> Vel,
 {
     Pistola = new Arma();
     Pistola->setPos(Pos.x()+15, Pos.y()+10);
+    ObjetoMovible::SetPos(Pos);
 }
 
 Jugador::~Jugador()

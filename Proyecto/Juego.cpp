@@ -5,7 +5,7 @@ Juego::Juego(QWidget *parent)
     //GetSystemMetrics(SM_CXSCREEN);
     Pantalla = new QGraphicsScene;
     PantallaSizeX=GetSystemMetrics(SM_CXSCREEN);
-    PantallaSizeY=GetSystemMetrics(SM_CYSCREEN);
+    PantallaSizeY=GetSystemMetrics(SM_CYSCREEN)-75;
     Pantalla->setSceneRect(0,0,PantallaSizeX,PantallaSizeY);
     setFixedSize(PantallaSizeX,PantallaSizeY);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -34,7 +34,7 @@ void Juego::Jugar()
         Pantalla->addItem(Objetos->at(i));
     }
 
-    Player = new Jugador(10,{1000,500});
+    Player = new Jugador(10,{500,500});
     Pantalla->addItem(Player);
     Player->AgregarArma(Pantalla);
 
@@ -82,20 +82,19 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
 {
     if(Zona)
     {
+        float X0=Objeto->getBordes()->x(), Y0=Objeto->getBordes()->y();
+        float X, Y;
+        CalcularPosicion(Zona, Objeto, &X, &Y);
         Jugador *player= dynamic_cast<Jugador*>(Objeto);
         if(player)
         {
-            float X0=player->x(), Y0=player->y();
-            float X, Y;
-            CalcularPosicion(Zona, player, &X, &Y);
-            if(Borde->contains(*player->getBordes()))
-            {
-                player->SetPos({X,Y});
-            }
-            else
-            {
+            if(!VerificarLimites(Objeto->getBordes()))
                 player->SetPos({X0,Y0});
-            }
+        }
+        else
+        {
+            if(!VerificarLimites(Objeto->getBordes()))
+                Objeto->SetPos({X0,Y0});
         }
     }
 }
@@ -109,7 +108,7 @@ void Juego::GameOver()
 
 void Juego::CalcularPosicion(ZonaGravitacional *Zona, ObjetoMovible *Objeto, float *X_, float *Y_)
 {
-    float PosX=Objeto->x(), PosY=Objeto->y();
+    float PosX=Objeto->getBordes()->x(), PosY=Objeto->getBordes()->y();
     float VelX=Objeto->Velocidad.first, VelY=Objeto->Velocidad.second;
     float AcelX=Objeto->Aceleracion.first, AcelY=Objeto->Aceleracion.second;
     float Fuerza=Zona->getFuerzaGravitacional();
@@ -137,8 +136,16 @@ void Juego::CalcularPosicion(ZonaGravitacional *Zona, ObjetoMovible *Objeto, flo
     }
     Objeto->setAceleracion(AcelX, AcelY);
     Objeto->AumentarVelocidad(VelX, VelY);
+    Objeto->SetPos({PosX, PosY});
     *X_=PosX;
     *Y_=PosY;
+}
+
+bool Juego::VerificarLimites(QRectF *Borde)
+{
+    QGraphicsView *Pantalla_=scene()->views().first();
+    QRectF PantallaRect = Pantalla_->mapToScene(Pantalla_->viewport()->rect()).boundingRect();
+    return PantallaRect.contains(*Borde);
 }
 
 void Juego::mouseMoveEvent(QMouseEvent *event)
@@ -188,13 +195,21 @@ void Juego::Actualizar()
         Player->SiguienteFrame();
     }
     {
-        QList<QGraphicsItem*> Items=Player->collidingItems();
+        QList<QGraphicsItem*> Items=Pantalla->items();
         for(QGraphicsItem *Item : Items)
         {
-            ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(Item);
-            if(Zona)
+            ObjetoMovible *Objeto= dynamic_cast<ObjetoMovible*>(Item);
+            if(Objeto)
             {
-                InteraccionZonas(Zona, Player);
+                QList<QGraphicsItem*> items=Objeto->collidingItems();
+                for(QGraphicsItem *item : items)
+                {
+                    ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
+                    if(Zona)
+                    {
+                        InteraccionZonas(Zona, Objeto);
+                    }
+                }
             }
         }
     }

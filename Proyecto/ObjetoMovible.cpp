@@ -6,11 +6,10 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
 {
     Tipo=Tipo_;
 
-    CargarSprites();
-
     Masa=Masa_;
 
     setPos(Pos);
+    CargarSprites();
 
     Velocidad=Vel;
     Velocidad=Vel;
@@ -82,6 +81,7 @@ void ObjetoMovible::CargarSprites()
         break;
     }
 
+    Bordes->moveTo(x(),y());
     FrameActual=0;
     setPixmap(Sprites.at(FrameActual));
 }

@@ -34,6 +34,7 @@ private:
     void GameOver();
 
     void CalcularPosicion(ZonaGravitacional *Zona, ObjetoMovible *Objeto, float *X, float *Y);
+    bool VerificarLimites(QRectF *Borde);
 
     unsigned int ContadorGlobal;
     int PantallaSizeX;
