@@ -1,9 +1,11 @@
 #ifndef JUGADOR_H
 #define JUGADOR_H
 
+#include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QList>
 #include <math.h>
+#include "Arma.h"
 
 class Jugador:public QObject, public QGraphicsPixmapItem
 {
@@ -16,6 +18,7 @@ public:
     void setAceleracion(float AcelX=0, float AcelY=0);
     void SetPos(float X, float Y);
     void SiguienteFrame();
+    void AgregarArma(QGraphicsScene *Pantalla);
 
     float AceleracionX;
     float AceleracionY;
@@ -29,6 +32,8 @@ public:
 
     int getMasa() const;
 
+    Arma *getPistola() const;
+
 private:
     const float Delta=0.01;
     const float KAire=0.95;
@@ -38,12 +43,12 @@ private:
 
     int Direccion;
 
-
-
     unsigned int FrameActual;
     QList<QPixmap> Sprites;
     void CargarSprites();
     QGraphicsRectItem *Rectangulo;
+
+    Arma *Pistola;
 };
 
 #endif // JUGADOR_H

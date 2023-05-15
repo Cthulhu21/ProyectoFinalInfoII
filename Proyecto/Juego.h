@@ -5,6 +5,7 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <windows.h>
+#include <QMouseEvent>
 
 #include "Jugador.h"
 #include "ZonaGravitacional.h"
@@ -37,6 +38,9 @@ private:
     QRectF *Borde;
 
     const float Delta=0.1;
+
+    void mouseMoveEvent(QMouseEvent *event);
+
 
 private slots:
     void Actualizar();

@@ -17,6 +17,10 @@ Jugador::Jugador(float PosX_, float PosY_, QGraphicsItem *parent)
     CargarSprites();
     FrameActual = 0;
     setPixmap(Sprites[FrameActual]);
+
+    Pistola = new Arma();
+    Pistola->setPos(PosX+15, PosY+10);
+
 }
 
 void Jugador::AumentarVelocidad(float VelX, float VelY)
@@ -39,6 +43,7 @@ void Jugador::SetPos(float X, float Y)
     this->setPos(X,Y);
     PosX=X;
     PosY=Y;
+    Pistola->setPos(X+15, Y+10);
     Rectangulo->setRect(X,Y,22,52);
 }
 
@@ -61,6 +66,11 @@ void Jugador::CargarSprites()
     }
 }
 
+Arma *Jugador::getPistola() const
+{
+    return Pistola;
+}
+
 QGraphicsRectItem *Jugador::getRectangulo() const
 {
     return Rectangulo;
@@ -70,4 +80,9 @@ void Jugador::SiguienteFrame()
 {
     FrameActual%=Sprites.size();
     setPixmap(Sprites[FrameActual++]);
+}
+
+void Jugador::AgregarArma(QGraphicsScene *Pantalla)
+{
+    Pantalla->addItem(Pistola);
 }

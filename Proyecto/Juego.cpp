@@ -12,6 +12,8 @@ Juego::Juego(QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setScene(Pantalla);
     Borde = new QRectF(0,0,Pantalla->sceneRect().width(),Pantalla->sceneRect().height()-120);
+
+    setMouseTracking(true);
 }
 
 void Juego::Jugar()
@@ -28,6 +30,7 @@ void Juego::Jugar()
 
     Player = new Jugador(810,300);
     Pantalla->addItem(Player);
+    Player->AgregarArma(Pantalla);
 
     Timer = new QTimer;
     connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
@@ -108,6 +111,25 @@ void Juego::CalcularPosicion(ZonaGravitacional *Zona, Jugador *Player, float *X,
     Player->AumentarVelocidad(VelX, VelY);
     *X=PosX;
     *Y=PosY;
+}
+
+void Juego::mouseMoveEvent(QMouseEvent *event)
+{
+    QGraphicsView::mouseMoveEvent(event);
+
+    QPointF mousePos = mapToScene(event->pos());
+
+    // Calcular la dirección del mouse con respecto al arma
+    QPointF direction = mousePos - Player->getPistola()->pos();
+
+    // Calcular el ángulo de rotación en radianes
+    qreal angle = std::atan2(direction.y(), direction.x());
+
+    // Convertir el ángulo a grados
+    qreal rotation = qRadiansToDegrees(angle);
+
+    // Rotar el arma
+    Player->getPistola()->setRotation(rotation);
 }
 
 void Juego::Actualizar()
