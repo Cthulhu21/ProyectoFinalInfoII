@@ -28,12 +28,13 @@ private:
     QList<ZonaGravitacional*> *ZonasGravitacionales;
 
     void GameOver();
-    void MoverJugador(ZonaGravitacional *Zona, Jugador *Player);
-    void ValidarPosicion(float X, float Y);
+    void CalcularPosicion(ZonaGravitacional *Zona, Jugador *Player, float *X, float *Y);
 
     unsigned int ContadorGlobal;
     int PantallaSizeX;
     int PantallaSizeY;
+
+    QRectF *Borde;
 
     const float Delta=0.1;
 

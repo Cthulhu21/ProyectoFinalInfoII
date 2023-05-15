@@ -34,16 +34,16 @@ private:
     const float KAire=0.95;
     const int Masa=10;
     const int VelMax=100;
+    const int AceleracionMaxima=10000;
 
     int Direccion;
+
 
 
     unsigned int FrameActual;
     QList<QPixmap> Sprites;
     void CargarSprites();
     QGraphicsRectItem *Rectangulo;
-
-
 };
 
 #endif // JUGADOR_H

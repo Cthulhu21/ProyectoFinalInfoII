@@ -30,6 +30,7 @@ void Jugador::AumentarVelocidad(float VelX, float VelY)
 void Jugador::setAceleracion(float AcelX, float AcelY)
 {
     AceleracionX=AcelX*KAire;
+
     AceleracionY=AcelY*KAire;
 }
 
@@ -50,7 +51,6 @@ int Jugador::getMasa() const
 {
     return Masa;
 }
-
 
 void Jugador::CargarSprites()
 {

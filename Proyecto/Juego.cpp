@@ -11,7 +11,7 @@ Juego::Juego(QWidget *parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setScene(Pantalla);
-    //setBackgroundBrush(QBrush(Qt::black));
+    Borde = new QRectF(0,0,Pantalla->sceneRect().width(),Pantalla->sceneRect().height()-120);
 }
 
 void Juego::Jugar()
@@ -19,9 +19,7 @@ void Juego::Jugar()
     ContadorGlobal=0;
 
     ZonasGravitacionales = new QList<ZonaGravitacional*>;
-    //ZonasGravitacionales->append(new ZonaGravitacional(1000,0,400,200,800,200,0.5));
-    //ZonasGravitacionales->append(new ZonaGravitacional(1000,45,810,400,100,20));
-    ZonasGravitacionales->append(new ZonaGravitacional(100,90,3000,0,3000,3000,0.1));
+    ZonasGravitacionales->append(new ZonaGravitacional(100,90,3000,0,3000,3000,0));
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
         Pantalla->addItem(ZonasGravitacionales->at(i));
@@ -47,11 +45,13 @@ void Juego::keyPressEvent(QKeyEvent *evento)
     switch(evento->key())
     {
     case Qt::Key_W:
-        Player->setAceleracion(0, -AceleracionExtra);
+        Player->setAceleracion(Player->AceleracionX, -AceleracionExtra);
         break;
     case Qt::Key_A:
+        Player->setAceleracion(-AceleracionExtra*0.3,Player->AceleracionY);
         break;
     case Qt::Key_D:
+        Player->setAceleracion(AceleracionExtra*0.3,Player->AceleracionY);
         break;
     case Qt::Key_Space:
         if(Timer->isActive())
@@ -76,7 +76,7 @@ void Juego::GameOver()
     close();
 }
 
-void Juego::MoverJugador(ZonaGravitacional *Zona, Jugador *Player)
+void Juego::CalcularPosicion(ZonaGravitacional *Zona, Jugador *Player, float *X, float *Y)
 {
     float PosX=Player->PosX, PosY=Player->PosY;
     float VelX=Player->VelocidadX, VelY=Player->VelocidadY;
@@ -85,32 +85,29 @@ void Juego::MoverJugador(ZonaGravitacional *Zona, Jugador *Player)
     float FuerzaX=Fuerza*cos(Zona->getRotacion()*PI/180), FuerzaY=Fuerza*sin(Zona->getRotacion()*PI/180);
     float AcelFueX=FuerzaX/Player->getMasa(), AcelFueY=FuerzaY/Player->getMasa();
 
-    if(abs(FuerzaX)<0.1)
-        FuerzaX=0;
-    if(abs(FuerzaY)<0.1)
-        FuerzaY=0;
+    if(abs(AcelFueX)<0.1)
+        AcelFueX=0;
+    if(abs(AcelFueY)<0.1)
+        AcelFueY=0;
 
     PosX+=VelX*Delta+Delta*Delta*0.5*(AcelFueX+AcelX);
     PosY+=VelY*Delta+Delta*Delta*0.5*(AcelFueY+AcelY);
 
-    VelX+=FuerzaX/Player->getMasa()*Delta;
-    VelY+=FuerzaY/Player->getMasa()*Delta;
+    VelX+=AcelFueX*Delta;
+    VelY+=AcelFueY*Delta;
 
+    if(abs(AcelX)<0.1)
+    {
+        AcelX=0;
+    }
+    if(abs(AcelY)<0.1)
+    {
+        AcelY=0;
+    }
     Player->setAceleracion(AcelX,AcelY);
     Player->AumentarVelocidad(VelX, VelY);
-    Player->SetPos(PosX, PosY);
-}
-
-void Juego::ValidarPosicion(float X, float Y)
-{
-    if(Player->PosX>PantallaSizeX)
-    {
-        Player->SetPos(X, Player->PosY);
-    }
-    else if(Player->PosY>PantallaSizeY-120)
-    {
-        Player->SetPos(Player->PosX, Y);
-    }
+    *X=PosX;
+    *Y=PosY;
 }
 
 void Juego::Actualizar()
@@ -129,9 +126,17 @@ void Juego::Actualizar()
             ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(Item);
             if(Zona)
             {
-                float X=Player->PosX, Y=Player->PosY;
-                MoverJugador(Zona, Player);
-                ValidarPosicion(X, Y);
+                float X0=Player->PosX, Y0=Player->PosY;
+                float X, Y;
+                CalcularPosicion(Zona, Player, &X, &Y);
+                if(Borde->contains(X,Y))
+                {
+                    Player->SetPos(X,Y);
+                }
+                else
+                {
+                    Player->SetPos(X0,Y0);
+                }
             }
         }
     }
