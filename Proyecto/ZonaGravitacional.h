@@ -14,7 +14,7 @@ public:
 
     float getRotacion() const;
 
-    private:
+private:
     int FuerzaGravitacional;
     float Rotacion;
 };

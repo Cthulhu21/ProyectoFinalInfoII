@@ -19,43 +19,18 @@ Jugador::Jugador(float PosX_, float PosY_, QGraphicsItem *parent)
     setPixmap(Sprites[FrameActual]);
 }
 
-void Jugador::Mover()
+void Jugador::AumentarVelocidad(float VelX, float VelY)
 {
-    PosX+=VelocidadX*Delta;
-    VelocidadX-=AceleracionX*Delta;
-    if(abs(VelocidadX)<0.1)
-    {
-        VelocidadX=0;
-        AceleracionX=0;
-    }
-    AceleracionX*=KAire;
-
-    PosY+=VelocidadY*Delta;//+(Gravedad+AceleracionY)*0.5*Delta*Delta;
-    VelocidadY-=AceleracionY*Delta;
-    if(abs(VelocidadY)<0.1)
-    {
-        VelocidadY=0;
-        AceleracionY=0;
-    }
-    AceleracionY*=KAire;
-
-    SetPos(PosX, PosY);
+    if(VelocidadX+VelX<=VelMax)
+        VelocidadX+=VelX;
+    if(VelocidadY+VelY<=VelMax)
+        VelocidadY+=VelY;
 }
 
-
-void Jugador::AplicarAceleracion(float AceleracionX_, float AceleracionY_)
+void Jugador::setAceleracion(float AcelX, float AcelY)
 {
-
-    if(AceleracionX<AceleracionMaxima)
-    {
-        AceleracionX+=AceleracionX_;
-        VelocidadX=AceleracionX*Delta;
-    }
-    if(AceleracionY<AceleracionMaxima)
-    {
-        AceleracionY+=AceleracionY_;
-        VelocidadY=AceleracionY*Delta;
-    }
+    AceleracionX=AcelX*KAire;
+    AceleracionY=AcelY*KAire;
 }
 
 void Jugador::SetPos(float X, float Y)
@@ -76,15 +51,6 @@ int Jugador::getMasa() const
     return Masa;
 }
 
-float Jugador::getPosX() const
-{
-    return PosX;
-}
-
-float Jugador::getPosY() const
-{
-    return PosY;
-}
 
 void Jugador::CargarSprites()
 {

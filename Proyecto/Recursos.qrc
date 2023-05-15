@@ -33,4 +33,7 @@
         <file alias="22">Recursos/Jugador/Correr (23).png</file>
         <file alias="23">Recursos/Jugador/Correr (24).png</file>
     </qresource>
+    <qresource prefix="/Flechas">
+        <file alias="Flecha">Recursos/Flecha/Flecha.png</file>
+    </qresource>
 </RCC>

@@ -145,7 +145,8 @@ release/qrc_Recursos.cpp: ../Proyecto/Recursos.qrc \
 		../Proyecto/Recursos/Jugador/Correr\ (12).png \
 		../Proyecto/Recursos/Jugador/Correr\ (11).png \
 		../Proyecto/Recursos/Jugador/Correr\ (13).png \
-		../Proyecto/Recursos/Jugador/Correr\ (5).png
+		../Proyecto/Recursos/Jugador/Correr\ (5).png \
+		../Proyecto/Recursos/Flecha/Flecha.png
 	'D:\Qt\6.5.0\mingw_64\bin\rcc.exe' -name Recursos --no-zstd ../Proyecto/Recursos.qrc -o release/qrc_Recursos.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h

@@ -8,7 +8,11 @@ ZonaGravitacional::ZonaGravitacional(int Fuerza, float Direccion, float X, float
     Rotacion=Direccion;
     setRect(X,Y,Largo, Ancho);
     setOpacity(Opacidad);
+    setTransformOriginPoint(X,Y);
     setRotation(Rotacion);
+    QPixmap Patron(":/Flechas/Flecha");
+    QBrush Brocha(Patron);
+    setBrush(Brocha);
 }
 
 ZonaGravitacional::~ZonaGravitacional()

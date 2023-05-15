@@ -9,6 +9,8 @@
 #include "Jugador.h"
 #include "ZonaGravitacional.h"
 
+#define PI 3.14159265
+
 class Juego: public QGraphicsView
 {
     Q_OBJECT
@@ -26,8 +28,14 @@ private:
     QList<ZonaGravitacional*> *ZonasGravitacionales;
 
     void GameOver();
+    void MoverJugador(ZonaGravitacional *Zona, Jugador *Player);
+    void ValidarPosicion(float X, float Y);
 
     unsigned int ContadorGlobal;
+    int PantallaSizeX;
+    int PantallaSizeY;
+
+    const float Delta=0.1;
 
 private slots:
     void Actualizar();

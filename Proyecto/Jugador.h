@@ -12,25 +12,10 @@ public:
     Jugador(float PosX_, float PosY_, QGraphicsItem *parent = NULL);
 
     void CambiarDireccion(int Tecla);
-    void AplicarAceleracion(float AceleracionX_, float AceleracionY_);
-    void Mover();
-
+    void AumentarVelocidad(float VelX=0, float VelY=0);
+    void setAceleracion(float AcelX=0, float AcelY=0);
     void SetPos(float X, float Y);
     void SiguienteFrame();
-
-    float getPosX() const;
-    float getPosY() const;
-    QGraphicsRectItem *getRectangulo() const;
-    ~Jugador();
-
-    int getMasa() const;
-
-private:
-    const float Delta=0.1;
-    const float KAire=0.95;
-    const int Masa=10;
-    const int AceleracionMaxima=1000;
-    const int Gravedad=30;
 
     float AceleracionX;
     float AceleracionY;
@@ -38,6 +23,18 @@ private:
     float VelocidadY;
     float PosX;
     float PosY;
+
+    QGraphicsRectItem *getRectangulo() const;
+    ~Jugador();
+
+    int getMasa() const;
+
+private:
+    const float Delta=0.01;
+    const float KAire=0.95;
+    const int Masa=10;
+    const int VelMax=100;
+
     int Direccion;
 
 
