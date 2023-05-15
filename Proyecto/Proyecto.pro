@@ -10,6 +10,7 @@ SOURCES += \
         Arma.cpp \
         Juego.cpp \
         Jugador.cpp \
+        ObjetoMovible.cpp \
         ZonaGravitacional.cpp \
         main.cpp
 
@@ -22,6 +23,7 @@ HEADERS += \
     Arma.h \
     Juego.h \
     Jugador.h \
+    ObjetoMovible.h \
     ZonaGravitacional.h
 
 RESOURCES += \

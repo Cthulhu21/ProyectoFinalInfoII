@@ -74,7 +74,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSJugadorENDCLASS[] = {
 };
 
 Q_CONSTINIT const QMetaObject Jugador::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+    QMetaObject::SuperData::link<ObjetoMovible::staticMetaObject>(),
     qt_meta_stringdata_CLASSJugadorENDCLASS.offsetsAndSizes,
     qt_meta_data_CLASSJugadorENDCLASS,
     qt_static_metacall,
@@ -104,14 +104,12 @@ void *Jugador::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_CLASSJugadorENDCLASS.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "QGraphicsPixmapItem"))
-        return static_cast< QGraphicsPixmapItem*>(this);
-    return QObject::qt_metacast(_clname);
+    return ObjetoMovible::qt_metacast(_clname);
 }
 
 int Jugador::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QObject::qt_metacall(_c, _id, _a);
+    _id = ObjetoMovible::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

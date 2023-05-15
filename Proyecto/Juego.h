@@ -9,6 +9,7 @@
 
 #include "Jugador.h"
 #include "ZonaGravitacional.h"
+#include "ObjetoMovible.h"
 
 #define PI 3.14159265
 
@@ -27,9 +28,12 @@ private:
     QGraphicsScene *Pantalla;
     Jugador *Player;
     QList<ZonaGravitacional*> *ZonasGravitacionales;
+    void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto);
+    QList<ObjetoMovible*> *Objetos;
 
     void GameOver();
-    void CalcularPosicion(ZonaGravitacional *Zona, Jugador *Player, float *X, float *Y);
+
+    void CalcularPosicion(ZonaGravitacional *Zona, ObjetoMovible *Objeto, float *X, float *Y);
 
     unsigned int ContadorGlobal;
     int PantallaSizeX;
@@ -40,7 +44,7 @@ private:
     const float Delta=0.1;
 
     void mouseMoveEvent(QMouseEvent *event);
-
+    void mousePresEvent(QMouseEvent *event);
 
 private slots:
     void Actualizar();

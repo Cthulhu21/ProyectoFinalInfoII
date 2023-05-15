@@ -1,10 +1,12 @@
 release/Arma.o
 release/Juego.o
 release/Jugador.o
+release/ObjetoMovible.o
 release/ZonaGravitacional.o
 release/main.o
 release/qrc_Recursos.o
 release/moc_Arma.o
 release/moc_Juego.o
 release/moc_Jugador.o
+release/moc_ObjetoMovible.o
 release/moc_ZonaGravitacional.o

@@ -3,6 +3,7 @@
 Arma::Arma()
 {
     CargarSprite();
+    TipoDeDisparo=Atractivo;
 }
 
 void Arma::CargarSprite()

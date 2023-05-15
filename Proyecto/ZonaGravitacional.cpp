@@ -29,3 +29,4 @@ float ZonaGravitacional::getRotacion() const
 {
     return Rotacion;
 }
+

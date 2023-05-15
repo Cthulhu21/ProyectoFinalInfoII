@@ -27,8 +27,14 @@ void Juego::Jugar()
         Pantalla->addItem(ZonasGravitacionales->at(i));
     }
 
+    Objetos = new QList<ObjetoMovible*>;
+    Objetos->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{1000,500}));
+    for(int i=0; i<Objetos->size(); i++)
+    {
+        Pantalla->addItem(Objetos->at(i));
+    }
 
-    Player = new Jugador(810,300);
+    Player = new Jugador(10,{1000,500});
     Pantalla->addItem(Player);
     Player->AgregarArma(Pantalla);
 
@@ -44,17 +50,17 @@ Juego::~Juego()
 
 void Juego::keyPressEvent(QKeyEvent *evento)
 {
-    int AceleracionExtra=7000;
+    int AceleracionExtra=10000;
     switch(evento->key())
     {
     case Qt::Key_W:
-        Player->setAceleracion(Player->AceleracionX, -AceleracionExtra);
+        Player->setAceleracion(Player->Aceleracion.first,-AceleracionExtra);
         break;
     case Qt::Key_A:
-        Player->setAceleracion(-AceleracionExtra*0.3,Player->AceleracionY);
+        Player->setAceleracion(-AceleracionExtra*0.3,Player->Aceleracion.second);
         break;
     case Qt::Key_D:
-        Player->setAceleracion(AceleracionExtra*0.3,Player->AceleracionY);
+        Player->setAceleracion(AceleracionExtra*0.3,Player->Aceleracion.second);
         break;
     case Qt::Key_Space:
         if(Timer->isActive())
@@ -72,6 +78,28 @@ void Juego::keyPressEvent(QKeyEvent *evento)
     }
 }
 
+void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
+{
+    if(Zona)
+    {
+        Jugador *player= dynamic_cast<Jugador*>(Objeto);
+        if(player)
+        {
+            float X0=player->x(), Y0=player->y();
+            float X, Y;
+            CalcularPosicion(Zona, player, &X, &Y);
+            if(Borde->contains(*player->getBordes()))
+            {
+                player->SetPos({X,Y});
+            }
+            else
+            {
+                player->SetPos({X0,Y0});
+            }
+        }
+    }
+}
+
 void Juego::GameOver()
 {
     Pantalla->clear();
@@ -79,14 +107,14 @@ void Juego::GameOver()
     close();
 }
 
-void Juego::CalcularPosicion(ZonaGravitacional *Zona, Jugador *Player, float *X, float *Y)
+void Juego::CalcularPosicion(ZonaGravitacional *Zona, ObjetoMovible *Objeto, float *X_, float *Y_)
 {
-    float PosX=Player->PosX, PosY=Player->PosY;
-    float VelX=Player->VelocidadX, VelY=Player->VelocidadY;
-    float AcelX=Player->AceleracionX, AcelY=Player->AceleracionY;
+    float PosX=Objeto->x(), PosY=Objeto->y();
+    float VelX=Objeto->Velocidad.first, VelY=Objeto->Velocidad.second;
+    float AcelX=Objeto->Aceleracion.first, AcelY=Objeto->Aceleracion.second;
     float Fuerza=Zona->getFuerzaGravitacional();
     float FuerzaX=Fuerza*cos(Zona->getRotacion()*PI/180), FuerzaY=Fuerza*sin(Zona->getRotacion()*PI/180);
-    float AcelFueX=FuerzaX/Player->getMasa(), AcelFueY=FuerzaY/Player->getMasa();
+    float AcelFueX=FuerzaX/Objeto->getMasa(), AcelFueY=FuerzaY/Objeto->getMasa();
 
     if(abs(AcelFueX)<0.1)
         AcelFueX=0;
@@ -107,10 +135,10 @@ void Juego::CalcularPosicion(ZonaGravitacional *Zona, Jugador *Player, float *X,
     {
         AcelY=0;
     }
-    Player->setAceleracion(AcelX,AcelY);
-    Player->AumentarVelocidad(VelX, VelY);
-    *X=PosX;
-    *Y=PosY;
+    Objeto->setAceleracion(AcelX, AcelY);
+    Objeto->AumentarVelocidad(VelX, VelY);
+    *X_=PosX;
+    *Y_=PosY;
 }
 
 void Juego::mouseMoveEvent(QMouseEvent *event)
@@ -132,6 +160,24 @@ void Juego::mouseMoveEvent(QMouseEvent *event)
     Player->getPistola()->setRotation(rotation);
 }
 
+void Juego::mousePresEvent(QMouseEvent *event)
+{
+    QPointF mousePos = mapToScene(event->pos());
+
+    // Calcular la dirección del mouse con respecto al arma
+    QPointF direction = mousePos - Player->getPistola()->pos();
+
+    // Calcular el ángulo de rotación en radianes
+    qreal angle = std::atan2(direction.y(), direction.x());
+
+    // Convertir el ángulo a grados
+    qreal rotation = qRadiansToDegrees(angle);
+    if(Player->getPistola()->TipoDeDisparo==Disparo::Atractivo)
+    {
+        QPointF PosArma=Player->getPistola()->pos();
+    }
+}
+
 void Juego::Actualizar()
 {
     ContadorGlobal+=1;
@@ -148,17 +194,7 @@ void Juego::Actualizar()
             ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(Item);
             if(Zona)
             {
-                float X0=Player->PosX, Y0=Player->PosY;
-                float X, Y;
-                CalcularPosicion(Zona, Player, &X, &Y);
-                if(Borde->contains(X,Y))
-                {
-                    Player->SetPos(X,Y);
-                }
-                else
-                {
-                    Player->SetPos(X0,Y0);
-                }
+                InteraccionZonas(Zona, Player);
             }
         }
     }
