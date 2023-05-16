@@ -7,7 +7,7 @@ class ObjetoEstatico: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    ObjetoEstatico(QPointF Pos, QPointF Size, float Rotacion, QGraphicsItem *parent = nullptr);
+    ObjetoEstatico(QPointF Pos, QPointF Size, float Rotacion=0, QGraphicsItem *parent = nullptr);
     float Angulo;
     QPointF Size;
     QPixmap *Imagen;

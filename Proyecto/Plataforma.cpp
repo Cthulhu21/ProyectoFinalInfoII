@@ -14,17 +14,16 @@ void Plataforma::CargarSprite()
     switch(ColorPlataforma)
     {
     case Negra:
-        Nombre=":/Plataformas/Blanca";
-
+        Nombre=":/Plataformas/Negra";
         break;
     case Blanca:
-        Nombre=":/Plataformas/Negra";
+        Nombre=":/Plataformas/Blanca";
         break;
     default:
         break;
     }
     *Imagen = QPixmap(Nombre);
-    *Imagen=Imagen->scaled(QSize(Size.x(),Size.y()),Qt::KeepAspectRatio);
+    *Imagen=Imagen->scaled(QSize(Size.x(),Size.y()));
     *Imagen=Imagen->transformed(QTransform().rotate(Angulo));
     setPixmap(*Imagen);
 

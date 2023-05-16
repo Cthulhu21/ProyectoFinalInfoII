@@ -27,6 +27,13 @@ void Juego::Jugar()
         Pantalla->addItem(ZonasGravitacionales->at(i));
     }
 
+    ObjetosEstaticos = new QList<ObjetoEstatico*>;
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{300,600},{1000,20}));
+    for(int i=0; i<ObjetosEstaticos->size(); i++)
+    {
+        Pantalla->addItem(ObjetosEstaticos->at(i));
+    }
+
     Objetos = new QList<ObjetoMovible*>;
     Objetos->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{1000,500}));
     for(int i=0; i<Objetos->size(); i++)

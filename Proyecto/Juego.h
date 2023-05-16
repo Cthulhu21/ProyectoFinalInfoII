@@ -10,6 +10,7 @@
 #include "Jugador.h"
 #include "ZonaGravitacional.h"
 #include "ObjetoMovible.h"
+#include "Plataforma.h"
 
 #define PI 3.14159265
 
@@ -30,6 +31,7 @@ private:
     QList<ZonaGravitacional*> *ZonasGravitacionales;
     void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto);
     QList<ObjetoMovible*> *Objetos;
+    QList<ObjetoEstatico*> *ObjetosEstaticos;
 
     void GameOver();
 
