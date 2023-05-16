@@ -4,7 +4,7 @@ Juego::Juego(QWidget *parent)
 {
     //GetSystemMetrics(SM_CXSCREEN);
     Pantalla = new QGraphicsScene;
-    PantallaSizeX=GetSystemMetrics(SM_CXSCREEN);
+    PantallaSizeX=GetSystemMetrics(SM_CXSCREEN)-10;
     PantallaSizeY=GetSystemMetrics(SM_CYSCREEN)-75;
     Pantalla->setSceneRect(0,0,PantallaSizeX,PantallaSizeY);
     setFixedSize(PantallaSizeX,PantallaSizeY);
@@ -28,7 +28,10 @@ void Juego::Jugar()
     }
 
     ObjetosEstaticos = new QList<ObjetoEstatico*>;
-    ObjetosEstaticos->append(new Plataforma(Color::Negra,{300,600},{1000,20}));
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,0},{static_cast<qreal>(PantallaSizeX),20}));//Arriba
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{static_cast<qreal>(PantallaSizeX),0},{static_cast<qreal>(PantallaSizeY),20},90));//Derecha
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,static_cast<qreal>(PantallaSizeY)},{static_cast<qreal>(PantallaSizeX),20}));//Abajo
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,0},{static_cast<qreal>(PantallaSizeY),20},90));//Izquierda
     for(int i=0; i<ObjetosEstaticos->size(); i++)
     {
         Pantalla->addItem(ObjetosEstaticos->at(i));
