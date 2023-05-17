@@ -177,7 +177,7 @@ void Juego::mouseMoveEvent(QMouseEvent *event)
     Player->getPistola()->setRotation(rotation);
 }
 
-void Juego::mousePresEvent(QMouseEvent *event)
+void Juego::mousePressEvent(QMouseEvent *event)
 {
     QPointF mousePos = mapToScene(event->pos());
 

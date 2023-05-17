@@ -15,6 +15,7 @@ class Arma: public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Arma();
+    ~Arma();
     Disparo TipoDeDisparo;
 
 private:

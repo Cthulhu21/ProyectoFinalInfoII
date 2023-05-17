@@ -19,8 +19,9 @@ class Juego: public QGraphicsView
     Q_OBJECT
 public:
     Juego(QWidget *parent = NULL );
-    void Jugar();
     ~Juego();
+    void Jugar();
+
 private:
     QTimer *Timer;
 
@@ -47,7 +48,7 @@ private:
     const float Delta=0.1;
 
     void mouseMoveEvent(QMouseEvent *event);
-    void mousePresEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 
 private slots:
     void Actualizar();
