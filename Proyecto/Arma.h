@@ -7,7 +7,7 @@
 enum Disparo
 {
     Atractivo,
-    Respulsivo
+    Repulsivo
 };
 
 class Arma: public QObject, public QGraphicsPixmapItem
