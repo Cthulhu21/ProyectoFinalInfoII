@@ -8,7 +8,5 @@ ObjetoEstatico::ObjetoEstatico(QPointF Pos, QPointF Size_,float Rotacion , QGrap
 
     Angulo=Rotacion;
 
-    Borde = new QRectF;
-
     Imagen = new QPixmap;
 }

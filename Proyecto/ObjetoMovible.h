@@ -15,12 +15,11 @@ class ObjetoMovible:public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     ObjetoMovible(TipoDeObjeto Tipo,int Masa_=10, QPointF Pos={0,0},QPointF Vel={0,0}, QPointF Acel={0,0}, float VelMax=300, float Fric=0.95, QGraphicsItem *parent=nullptr);
+    ~ObjetoMovible();
 
     QPointF *Posicion;
     QPointF *Velocidad;
     QPointF *Aceleracion;
-    QRectF *getBordes() const;
-    QGraphicsRectItem *Rectangulo;
 
     void AumentarVelocidad(float VelX, float VelY);
     void setAceleracion(float AcelX, float AcelY);
@@ -28,7 +27,6 @@ public:
     void SiguienteFrame();
 
     int getMasa() const;
-
 
 
 private:
@@ -40,8 +38,6 @@ private:
 
 
     QPointF *Size;
-
-    QRectF *Bordes;
 
     QList<QPixmap> Sprites;
     void CargarSprites();

@@ -34,6 +34,7 @@ private:
     void GameOver();
     void InteraccionArma();
     bool VerificarLimites(QRectF *Borde);
+    void RotarArma();
 
     unsigned int ContadorGlobal;
     int PantallaSizeX;

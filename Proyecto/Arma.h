@@ -6,6 +6,7 @@
 #include <ZonaGravitacional.h>
 #include <QGraphicsScene>
 #include <math.h>
+#include <QCursor>
 
 #define PI 3.14159265
 

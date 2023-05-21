@@ -11,7 +11,6 @@ public:
     float Angulo;
     QPointF Size;
     QPixmap *Imagen;
-    QRectF *Borde;
 };
 
 #endif // OBJETOESTATICO_H

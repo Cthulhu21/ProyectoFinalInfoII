@@ -9,17 +9,24 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
     Masa=Masa_;
 
     setPos(Pos);
+
+    Size = new QPointF();
     CargarSprites();
 
     Posicion= new QPointF(Pos);
     Velocidad = new QPointF(Vel);
     Aceleracion= new QPointF(Acel);
 
-    Size = new QPointF();
+
 
     VelocidadMax=VelMax;
 
     Friccion=Fric;
+}
+
+ObjetoMovible::~ObjetoMovible()
+{
+
 }
 
 
@@ -27,8 +34,6 @@ void ObjetoMovible::SetPos(QPointF Pos)
 {
     *Posicion=Pos;
     setPos(Pos);
-    Bordes->moveTo(Pos);
-    //Bordes = new QRectF(x(),y(),Size[0], Size[1]);
 }
 
 void ObjetoMovible::SiguienteFrame()
@@ -42,14 +47,8 @@ int ObjetoMovible::getMasa() const
     return Masa;
 }
 
-QRectF *ObjetoMovible::getBordes() const
-{
-    return Bordes;
-}
-
 void ObjetoMovible::CargarSprites()
 {
-    Bordes = new QRectF();
     switch(Tipo)
     {
     case Controlable:
@@ -57,28 +56,19 @@ void ObjetoMovible::CargarSprites()
         for(int i=3; i<11; i++)
         {
             QString Ruta=":/Jugador/%1";
-            QPixmap *Map = new QPixmap((Ruta.arg(i)));
-            QRectF RectSprite = Map->rect();
+            QPixmap *Map = new QPixmap((Ruta.arg(i)));;
             Sprites.append(QPixmap(*Map));
-            if(Bordes->isEmpty())
-            {
-                *Bordes = RectSprite;
-            }
-            else
-            {
-                *Bordes = RectSprite.united(RectSprite);
-            }
+
         }
+        *Size = {25,55};
         break;
     case Cubo:
         Sprites.append(QPixmap(":/Imagenes/Cubo"));
-        Bordes = new QRectF(x(),y(),29,30);
+        *Size={30,31};
         break;
     default:
         break;
     }
-
-    Bordes->moveTo(x(),y());
     FrameActual=0;
     setPixmap(Sprites.at(FrameActual));
 }

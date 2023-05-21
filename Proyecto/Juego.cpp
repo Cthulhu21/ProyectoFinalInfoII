@@ -131,13 +131,6 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
             *Objeto->Velocidad={0,0};
         }
         Objeto->SetPos(*Objeto->Posicion);
-        /*Jugador *player = dynamic_cast<Jugador*>(Objeto);
-        if(player)
-        {
-            player->SetPos(*player->Posicion);
-        }
-        else
-            Objeto->SetPos(*Objeto->Posicion);*/
     }
 }
 
@@ -170,21 +163,7 @@ void Juego::InteraccionArma()
 
 void Juego::mouseMoveEvent(QMouseEvent *event)
 {
-    QGraphicsView::mouseMoveEvent(event);
-
-    QPointF mousePos = mapToScene(event->pos());
-
-    // Calcular la dirección del mouse con respecto al arma
-    QPointF direction = mousePos - Player->getPistola()->pos();
-
-    // Calcular el ángulo de rotación en radianes
-    qreal angle = std::atan2(direction.y(), direction.x());
-
-    // Convertir el ángulo a grados
-    qreal rotation = qRadiansToDegrees(angle);
-
-    // Rotar el arma
-    Player->getPistola()->Rotar(rotation);
+    Player->RotarArma();
 }
 
 void Juego::mousePressEvent(QMouseEvent *event)

@@ -8,6 +8,11 @@ Plataforma::Plataforma(Color Color_, QPointF Pos, QPointF Size, float Rotacion, 
     CargarSprite();
 }
 
+Plataforma::~Plataforma()
+{
+
+}
+
 void Plataforma::CargarSprite()
 {
     QString Nombre;
@@ -26,6 +31,4 @@ void Plataforma::CargarSprite()
     *Imagen=Imagen->scaled(QSize(Size.x(),Size.y()));
     *Imagen=Imagen->transformed(QTransform().rotate(Angulo));
     setPixmap(*Imagen);
-
-    *Borde =QRectF(x(),y(),Size.x(),Size.y());
 }
