@@ -11,3 +11,8 @@ Juego::Juego(QWidget *parent)
     setScene(Pantalla);
     setBackgroundBrush(QBrush(Qt::white));
 }
+
+void Juego::Jugar()
+{
+
+}

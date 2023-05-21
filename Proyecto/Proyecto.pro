@@ -8,6 +8,7 @@ CONFIG += c++20 cmdline
 
 SOURCES += \
         Juego.cpp \
+        Jugador.cpp \
         ObjetoMovible.cpp \
         main.cpp
 
@@ -18,6 +19,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Juego.h \
+    Jugador.h \
     ObjetoMovible.h
 
 RESOURCES += \

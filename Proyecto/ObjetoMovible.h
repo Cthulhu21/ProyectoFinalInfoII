@@ -29,8 +29,6 @@ public:
 
     int getMasa() const;
 
-
-
 private:
 
     TipoDeObjeto Tipo;

@@ -6,14 +6,19 @@
 #include <QKeyEvent>
 #include <windows.h>
 
-#include "ObjetoMovible.h"
+#include "Jugador.h"
 
 class Juego: public QGraphicsView
 {
     Q_OBJECT
 public:
-    Juego(QWidget *parent = NULL );
+    Juego(QWidget *parent = nullptr);
+
     QGraphicsScene *Pantalla;
+    void Jugar();
+
+private:
+    Jugador *Player;
 };
 
 #endif // JUEGO_H
