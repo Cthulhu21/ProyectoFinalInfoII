@@ -1,6 +1,5 @@
 #include "ObjetoEstatico.h"
 
-
 ObjetoEstatico::ObjetoEstatico(QPointF Pos, QPointF Size_,float Rotacion , QGraphicsItem *parent)
 {
     setPos(Pos);

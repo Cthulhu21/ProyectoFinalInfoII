@@ -82,11 +82,3 @@ void ObjetoMovible::CargarSprites()
     FrameActual=0;
     setPixmap(Sprites.at(FrameActual));
 }
-
-void ObjetoMovible::AumentarVelocidad(float VelX, float VelY)
-{
-}
-
-void ObjetoMovible::setAceleracion(float AcelX, float AcelY)
-{
-}

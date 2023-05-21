@@ -18,14 +18,10 @@ class Juego: public QGraphicsView
 {
     Q_OBJECT
 public:
-<<<<<<< Updated upstream
-    Juego(QWidget *parent = NULL );
-=======
     Juego(QWidget *parent = nullptr );
     ~Juego();
->>>>>>> Stashed changes
     void Jugar();
-    ~Juego();
+
 private:
     QTimer *Timer;
     QGraphicsScene *Pantalla;
@@ -49,12 +45,8 @@ private:
 
     void keyPressEvent(QKeyEvent *evento);
     void mouseMoveEvent(QMouseEvent *event);
-<<<<<<< Updated upstream
-    void mousePresEvent(QMouseEvent *event);
-=======
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
->>>>>>> Stashed changes
 
 private slots:
     void Actualizar();

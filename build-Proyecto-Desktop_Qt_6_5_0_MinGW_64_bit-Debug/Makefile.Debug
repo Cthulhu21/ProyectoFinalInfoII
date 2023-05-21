@@ -318,6 +318,14 @@ debug/moc_Arma.cpp: ../Proyecto/Arma.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qrgba64.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qimage.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpixelformat.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsRectItem \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsScene \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfont.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpen.h \
 		debug/moc_predefs.h \
 		../../../../Qt/6.5.0/mingw_64/bin/moc.exe
 	'D:\Qt\6.5.0\mingw_64\bin\moc.exe' $(DEFINES) --include 'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/build-Proyecto-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/debug/moc_predefs.h' -ID:/Qt/6.5.0/mingw_64/mkspecs/win32-g++ -I'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/Proyecto' -ID:/Qt/6.5.0/mingw_64/include -ID:/Qt/6.5.0/mingw_64/include/QtWidgets -ID:/Qt/6.5.0/mingw_64/include/QtGui -ID:/Qt/6.5.0/mingw_64/include/QtCore -I. -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -ID:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ../Proyecto/Arma.h -o debug/moc_Arma.cpp
@@ -649,6 +657,9 @@ debug/moc_Jugador.cpp: ../Proyecto/Jugador.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/q20memory.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainterpath.h \
 		../Proyecto/Arma.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsRectItem \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
 		debug/moc_predefs.h \
 		../../../../Qt/6.5.0/mingw_64/bin/moc.exe
 	'D:\Qt\6.5.0\mingw_64\bin\moc.exe' $(DEFINES) --include 'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/build-Proyecto-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/debug/moc_predefs.h' -ID:/Qt/6.5.0/mingw_64/mkspecs/win32-g++ -I'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/Proyecto' -ID:/Qt/6.5.0/mingw_64/include -ID:/Qt/6.5.0/mingw_64/include/QtWidgets -ID:/Qt/6.5.0/mingw_64/include/QtGui -ID:/Qt/6.5.0/mingw_64/include/QtCore -I. -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -ID:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ../Proyecto/Jugador.h -o debug/moc_Jugador.cpp
@@ -1346,7 +1357,15 @@ debug/Arma.o: ../Proyecto/Arma.cpp ../Proyecto/Arma.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qrgb.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qrgba64.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qimage.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpixelformat.h
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpixelformat.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsRectItem \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsScene \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfont.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/Arma.o ../Proyecto/Arma.cpp
 
 debug/Juego.o: ../Proyecto/Juego.cpp ../Proyecto/Juego.h \
@@ -1673,7 +1692,10 @@ debug/Jugador.o: ../Proyecto/Jugador.cpp ../Proyecto/Jugador.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/qvarlengtharray.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtCore/q20memory.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainterpath.h \
-		../Proyecto/Arma.h
+		../Proyecto/Arma.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsRectItem \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/Jugador.o ../Proyecto/Jugador.cpp
 
 debug/ObjetoEstatico.o: ../Proyecto/ObjetoEstatico.cpp ../Proyecto/ObjetoEstatico.h \

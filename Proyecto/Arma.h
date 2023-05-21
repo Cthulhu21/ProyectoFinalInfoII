@@ -20,6 +20,7 @@ class Arma: public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Arma();
+    ~Arma();
     Disparo TipoDeDisparo;
     bool Activa;
     void CrearZona(QGraphicsScene *Escena);
