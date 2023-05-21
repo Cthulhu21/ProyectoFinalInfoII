@@ -8,6 +8,7 @@
 #include <QMouseEvent>
 
 #include "ObjetoEstatico.h"
+#include "Plataforma.h"
 
 #define PI 3.14159265
 

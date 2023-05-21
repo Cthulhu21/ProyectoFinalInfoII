@@ -18,6 +18,15 @@ void Juego::Jugar()
     ContadorGlobal=0;
 
     ObjetosEstaticos = new QList<ObjetoEstatico*>;
+    ObjetosEstaticos = new QList<ObjetoEstatico*>;
+    //Arriba
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,0},{static_cast<qreal>(PantallaSizeX),20}));
+    //Derecha
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{static_cast<qreal>(PantallaSizeX),0},{static_cast<qreal>(PantallaSizeY),20},90));
+    //Abajo
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,static_cast<qreal>(PantallaSizeY)-10},{static_cast<qreal>(PantallaSizeX),20}));
+    //Izquierda
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,0},{static_cast<qreal>(PantallaSizeY),20},90));
     for(int i=0; i<ObjetosEstaticos->size(); i++)
     {
         Pantalla->addItem(ObjetosEstaticos->at(i));
