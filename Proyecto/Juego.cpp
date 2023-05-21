@@ -14,5 +14,6 @@ Juego::Juego(QWidget *parent)
 
 void Juego::Jugar()
 {
-
+    Player = new Jugador(10,{500,500});
+    Pantalla->addItem(Player);
 }
