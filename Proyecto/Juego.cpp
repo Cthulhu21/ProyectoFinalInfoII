@@ -3,7 +3,7 @@
 Juego::Juego(QWidget *parent)
 {
     Pantalla = new QGraphicsScene;
-    PantallaSizeX=GetSystemMetrics(SM_CXSCREEN);
+    PantallaSizeX=GetSystemMetrics(SM_CXSCREEN)-10;
     PantallaSizeY=GetSystemMetrics(SM_CYSCREEN)-75;
     Pantalla->setSceneRect(0,0,PantallaSizeX,PantallaSizeY);
     setFixedSize(PantallaSizeX,PantallaSizeY);
@@ -26,8 +26,6 @@ void Juego::Jugar()
         Pantalla->addItem(ZonasGravitacionales->at(i));
     }
 
-<<<<<<< Updated upstream
-=======
     ObjetosEstaticos = new QList<ObjetoEstatico*>;
     ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,0},{static_cast<qreal>(PantallaSizeX),20}));//Arriba
     ObjetosEstaticos->append(new Plataforma(Color::Negra,{static_cast<qreal>(PantallaSizeX),0},{static_cast<qreal>(PantallaSizeY),20},90));//Derecha
@@ -38,7 +36,6 @@ void Juego::Jugar()
         Pantalla->addItem(ObjetosEstaticos->at(i));
     }
 
->>>>>>> Stashed changes
     Objetos = new QList<ObjetoMovible*>;
     Objetos->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{1000,500}));
     for(int i=0; i<Objetos->size(); i++)
@@ -190,7 +187,7 @@ void Juego::mouseMoveEvent(QMouseEvent *event)
     Player->getPistola()->Rotar(rotation);
 }
 
-void Juego::mousePresEvent(QMouseEvent *event)
+void Juego::mousePressEvent(QMouseEvent *event)
 {
     if(event->button()==Qt::LeftButton)
     {

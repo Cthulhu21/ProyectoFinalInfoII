@@ -40,4 +40,8 @@
     <qresource prefix="/Armas">
         <file alias="1">Recursos/DefineSprite_1340/1.png</file>
     </qresource>
+    <qresource prefix="/Plataformas">
+        <file alias="Blanca">Recursos/DefineSprite_220/1.png</file>
+        <file alias="Negra">Recursos/DefineSprite_1706/1.png</file>
+    </qresource>
 </RCC>
