@@ -29,9 +29,12 @@ public:
 
     ZonaGravitacional *getRangoArma() const;
 
+    QPointF getSize() const;
+
 private:
     void CargarSprite();
     ZonaGravitacional *RangoArma;
+    QPointF Size;
 };
 
 #endif // ARMA_H
