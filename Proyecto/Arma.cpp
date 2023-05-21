@@ -18,7 +18,7 @@ void Arma::CrearZona(QGraphicsScene *Escena)
     if(!Activa)
     {
         Activa=true;
-        RangoArma = new ZonaGravitacional(1000,0, 180, {Size.x(),Size.y()/2}, 1000, 20);
+        RangoArma = new ZonaGravitacional(1000, 0, 180, {Size.x(),Size.y()/2}, 1000, 20);
         RangoArma->setParentItem(this);
         Escena->addItem(RangoArma);
     }
