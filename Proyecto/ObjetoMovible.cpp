@@ -1,7 +1,7 @@
 #include "ObjetoMovible.h"
 
 ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
-                             std::pair<float,float> Vel, std::pair<float,float> Acel,
+                             QPointF Vel,QPointF Acel,
                              float VelMax, float Fric, QGraphicsItem *parent)
 {
     Tipo=Tipo_;
@@ -11,24 +11,21 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
     setPos(Pos);
     CargarSprites();
 
-    Velocidad=Vel;
-    Velocidad=Vel;
+    Posicion= new QPointF(Pos);
+    Velocidad = new QPointF(Vel);
+    Aceleracion= new QPointF(Acel);
 
-    Aceleracion=Acel;
-    Aceleracion=Acel;
-
-    Size[0]=0;
-    Size[1]=0;
+    Size = new QPointF();
 
     VelocidadMax=VelMax;
 
     Friccion=Fric;
-
 }
 
 
 void ObjetoMovible::SetPos(QPointF Pos)
 {
+    *Posicion=Pos;
     setPos(Pos);
     Bordes->moveTo(Pos);
     //Bordes = new QRectF(x(),y(),Size[0], Size[1]);
@@ -88,15 +85,8 @@ void ObjetoMovible::CargarSprites()
 
 void ObjetoMovible::AumentarVelocidad(float VelX, float VelY)
 {
-    if(Velocidad.first+VelX<=VelocidadMax)
-        Velocidad.first+=VelX;
-    if(Velocidad.second+VelY<=VelocidadMax)
-        Velocidad.second+=VelY;
 }
 
 void ObjetoMovible::setAceleracion(float AcelX, float AcelY)
 {
-    Aceleracion.first=AcelX*Friccion;
-
-    Aceleracion.second=AcelY*Friccion;
 }

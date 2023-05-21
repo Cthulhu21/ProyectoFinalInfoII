@@ -17,14 +17,16 @@ class Juego: public QGraphicsView
 {
     Q_OBJECT
 public:
+<<<<<<< Updated upstream
     Juego(QWidget *parent = NULL );
+=======
+    Juego(QWidget *parent = nullptr );
+    ~Juego();
+>>>>>>> Stashed changes
     void Jugar();
     ~Juego();
 private:
     QTimer *Timer;
-
-    void keyPressEvent(QKeyEvent *evento);
-
     QGraphicsScene *Pantalla;
     Jugador *Player;
     QList<ZonaGravitacional*> *ZonasGravitacionales;
@@ -32,8 +34,7 @@ private:
     QList<ObjetoMovible*> *Objetos;
 
     void GameOver();
-
-    void CalcularPosicion(ZonaGravitacional *Zona, ObjetoMovible *Objeto, float *X, float *Y);
+    void InteraccionArma();
     bool VerificarLimites(QRectF *Borde);
 
     unsigned int ContadorGlobal;
@@ -44,8 +45,14 @@ private:
 
     const float Delta=0.1;
 
+    void keyPressEvent(QKeyEvent *evento);
     void mouseMoveEvent(QMouseEvent *event);
+<<<<<<< Updated upstream
     void mousePresEvent(QMouseEvent *event);
+=======
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+>>>>>>> Stashed changes
 
 private slots:
     void Actualizar();

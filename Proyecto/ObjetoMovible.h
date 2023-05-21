@@ -14,9 +14,13 @@ class ObjetoMovible:public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    ObjetoMovible(TipoDeObjeto Tipo,int Masa_=10, QPointF Pos={0,0},std::pair<float,float> Vel={0,0},std::pair<float,float> Acel={0,0}, float VelMax=300, float Fric=0.95, QGraphicsItem *parent=nullptr);
-    std::pair<float,float> Velocidad;
-    std::pair<float,float> Aceleracion;
+    ObjetoMovible(TipoDeObjeto Tipo,int Masa_=10, QPointF Pos={0,0},QPointF Vel={0,0}, QPointF Acel={0,0}, float VelMax=300, float Fric=0.95, QGraphicsItem *parent=nullptr);
+
+    QPointF *Posicion;
+    QPointF *Velocidad;
+    QPointF *Aceleracion;
+    QRectF *getBordes() const;
+    QGraphicsRectItem *Rectangulo;
 
     void AumentarVelocidad(float VelX, float VelY);
     void setAceleracion(float AcelX, float AcelY);
@@ -25,7 +29,7 @@ public:
 
     int getMasa() const;
 
-    QRectF *getBordes() const;
+
 
 private:
 
@@ -35,7 +39,7 @@ private:
     float Friccion;
 
 
-    int Size[2];
+    QPointF *Size;
 
     QRectF *Bordes;
 
