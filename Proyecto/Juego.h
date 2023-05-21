@@ -6,28 +6,14 @@
 #include <QKeyEvent>
 #include <windows.h>
 
-#include "Jugador.h"
+#include "ObjetoMovible.h"
 
 class Juego: public QGraphicsView
 {
     Q_OBJECT
 public:
     Juego(QWidget *parent = NULL );
-    void Jugar();
-    ~Juego();
-private:
-    QTimer *Timer;
-
-    void keyPressEvent(QKeyEvent *evento);
-
     QGraphicsScene *Pantalla;
-    Jugador *Player;
-    void GameOver();
-
-    unsigned int ContadorGlobal;
-
-private slots:
-    void Actualizar();
 };
 
 #endif // JUEGO_H
