@@ -8,7 +8,7 @@ CONFIG += c++20 cmdline
 
 SOURCES += \
         Juego.cpp \
-        Jugador.cpp \
+        ObjetoMovible.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -18,7 +18,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Juego.h \
-    Jugador.h
+    ObjetoMovible.h
 
 RESOURCES += \
     Recursos.qrc
