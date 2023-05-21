@@ -17,7 +17,6 @@ public:
     void AgregarArma(QGraphicsScene *Pantalla);
 
     Arma *getPistola() const;
-    void setPosPistola(float x, float y);
     void SetPos(QPointF Pos) override;
     void Disparar(QGraphicsScene *Escena);
 

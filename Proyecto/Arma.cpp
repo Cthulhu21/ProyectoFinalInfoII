@@ -17,7 +17,8 @@ void Arma::CrearZona(QGraphicsScene *Escena)
     if(!Activa)
     {
         Activa=true;
-        RangoArma = new ZonaGravitacional(1000, rotation(), pos(), 1000, 20);
+        RangoArma = new ZonaGravitacional(1000, 0,{0,0}, 1000, 20);
+        RangoArma->setParentItem(this);
         Escena->addItem(RangoArma);
     }
     else
@@ -31,19 +32,11 @@ void Arma::CrearZona(QGraphicsScene *Escena)
 void Arma::Rotar(qreal Angulo)
 {
     setRotation(Angulo);
-    if(Activa)
-    {
-        RangoArma->setRotation(Angulo);
-    }
 }
 
 void Arma::SetPos(QPointF Pos)
 {
     setPos(Pos);
-    if(Activa)
-    {
-        RangoArma->setPos({0,0});
-    }
  }
 
 void Arma::CargarSprite()
