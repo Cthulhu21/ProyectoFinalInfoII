@@ -7,10 +7,7 @@
 #include <windows.h>
 #include <QMouseEvent>
 
-#include "Jugador.h"
-#include "ZonaGravitacional.h"
-#include "ObjetoMovible.h"
-#include "Plataforma.h"
+#include "ObjetoEstatico.h"
 
 #define PI 3.14159265
 
@@ -25,15 +22,9 @@ public:
 private:
     QTimer *Timer;
     QGraphicsScene *Pantalla;
-    Jugador *Player;
-    QList<ZonaGravitacional*> *ZonasGravitacionales;
-    void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto);
-    QList<ObjetoMovible*> *Objetos;
     QList<ObjetoEstatico*> *ObjetosEstaticos;
 
     void GameOver();
-    void InteraccionArma();
-    bool VerificarLimites(QRectF *Borde);
 
     unsigned int ContadorGlobal;
     int PantallaSizeX;
@@ -42,11 +33,6 @@ private:
     QRectF *Borde;
 
     const float Delta=0.1;
-
-    void keyPressEvent(QKeyEvent *evento);
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
 
 private slots:
     void Actualizar();
