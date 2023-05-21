@@ -20,7 +20,7 @@ void Juego::Jugar()
     ContadorGlobal=0;
 
     ZonasGravitacionales = new QList<ZonaGravitacional*>;
-    ZonasGravitacionales->append(new ZonaGravitacional(100,90,{3000,0},3000,3000,0));
+    ZonasGravitacionales->append(new ZonaGravitacional(100,0,90,{0,0},3000,3000,0));
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
         Pantalla->addItem(ZonasGravitacionales->at(i));
@@ -95,7 +95,7 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
 
         float magnitudFuerza = Zona->getFuerzaGravitacional();
 
-        float anguloRadianes = Zona->getRotacion() * (M_PI / 180.0);
+        float anguloRadianes = Zona->getDireccionFuerza() * (M_PI / 180.0);
 
         float fuerzaHorizontal = magnitudFuerza * cos(anguloRadianes);
         float fuerzaVertical = magnitudFuerza * sin(anguloRadianes);
