@@ -18,6 +18,7 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
     Aceleracion= new QPointF(Acel);
 
 
+    ObjetoPegado=false;
 
     VelocidadMax=VelMax;
 

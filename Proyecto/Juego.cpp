@@ -21,6 +21,7 @@ void Juego::Jugar()
 
     ZonasGravitacionales = new QList<ZonaGravitacional*>;
     ZonasGravitacionales->append(new ZonaGravitacional(100,0,90,{0,0},3000,3000,0));
+    ZonasGravitacionales->append(new ZonaGravitacional(1000,0,-90,{700,0},100,1500,0.5));
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
         Pantalla->addItem(ZonasGravitacionales->at(i));
@@ -92,28 +93,40 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
     if(!(Zona==Player->getPistola()->getRangoArma() and Objeto==Player))
     {
         QPointF Pos0 = Objeto->pos();
+        {
+            float magnitudFuerza = Zona->getFuerzaGravitacional();
 
-        float magnitudFuerza = Zona->getFuerzaGravitacional();
+            float anguloRadianes = Zona->getDireccionFuerza() * (M_PI / 180.0);
 
-        float anguloRadianes = Zona->getDireccionFuerza() * (M_PI / 180.0);
+            float fuerzaHorizontal = magnitudFuerza * cos(anguloRadianes);
+            float fuerzaVertical = magnitudFuerza * sin(anguloRadianes);
+            if(abs(fuerzaHorizontal)<0.1)
+                fuerzaHorizontal=0;
+            if(abs(fuerzaVertical)<0.1)
+                fuerzaVertical=0;
 
-        float fuerzaHorizontal = magnitudFuerza * cos(anguloRadianes);
-        float fuerzaVertical = magnitudFuerza * sin(anguloRadianes);
-        if(abs(fuerzaHorizontal)<0.1)
-            fuerzaHorizontal=0;
-        if(abs(fuerzaVertical)<0.1)
-            fuerzaVertical=0;
+            float aceleracionHorizontal = fuerzaHorizontal / Objeto->getMasa();
+            float aceleracionVertical = fuerzaVertical / Objeto->getMasa();
 
-        float aceleracionHorizontal = fuerzaHorizontal / Objeto->getMasa();
-        float aceleracionVertical = fuerzaVertical / Objeto->getMasa();
+            Objeto->Velocidad->setX(Objeto->Velocidad->x() + aceleracionHorizontal * Delta);
+            Objeto->Velocidad->setY(Objeto->Velocidad->y() + aceleracionVertical * Delta);
 
-        Objeto->Velocidad->setX(Objeto->Velocidad->x() + aceleracionHorizontal * Delta);
-        Objeto->Velocidad->setY(Objeto->Velocidad->y() + aceleracionVertical * Delta);
+            QPointF desplazamiento = *Objeto->Velocidad * Delta;
+            Objeto->Posicion->setX(Objeto->Posicion->x() + desplazamiento.x());
+            Objeto->Posicion->setY(Objeto->Posicion->y() + desplazamiento.y());
+        }
 
-        QPointF desplazamiento = *Objeto->Velocidad * Delta;
-        Objeto->Posicion->setX(Objeto->Posicion->x() + desplazamiento.x());
-        Objeto->Posicion->setY(Objeto->Posicion->y() + desplazamiento.y());
-
+        ObjetoMovible *Objeto_ = dynamic_cast<ObjetoMovible*>(Objeto);
+        if(Objeto_ and Objeto!=Player)
+        {
+            if(Objeto->collidesWithItem(Player->getPistola()))
+            {
+                Objeto_->ObjetoPegado=true;
+                Objeto_->setParentItem(Player->getPistola());
+                //Objeto_->SetPos({100,100});
+                *Objeto_->Posicion={Player->getPistola()->getSize()};
+            }
+        }
         QList<QGraphicsItem*> Items=Objeto->collidingItems();
         bool Colision=false;
         for(QGraphicsItem * Item : Items)
@@ -178,7 +191,7 @@ void Juego::mouseReleaseEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)
     {
-        //Player->Disparar(Pantalla);
+        Player->Disparar(Pantalla);
     }
 }
 

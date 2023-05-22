@@ -24,6 +24,7 @@ public:
     ~Arma();
     Disparo TipoDeDisparo;
     bool Activa;
+
     void CrearZona(QGraphicsScene *Escena);
     void Rotar(qreal Angulo);
     void SetPos(QPointF Pos);
