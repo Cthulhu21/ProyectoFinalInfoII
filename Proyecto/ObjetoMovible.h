@@ -22,14 +22,10 @@ public:
     QPointF *Aceleracion;
     bool ObjetoPegado;
 
-    void AumentarVelocidad(float VelX, float VelY);
-    void setAceleracion(float AcelX, float AcelY);
     virtual void SetPos(QPointF Pos);
     void SiguienteFrame();
 
     int getMasa() const;
-
-
 private:
 
     TipoDeObjeto Tipo;

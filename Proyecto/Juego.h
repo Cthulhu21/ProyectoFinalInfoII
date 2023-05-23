@@ -32,9 +32,7 @@ private:
     QList<ObjetoEstatico*> *ObjetosEstaticos;
 
     void GameOver();
-    void InteraccionArma();
-    bool VerificarLimites(QRectF *Borde);
-    void RotarArma();
+    void MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2);
 
     unsigned int ContadorGlobal;
     int PantallaSizeX;

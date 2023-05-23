@@ -13,7 +13,7 @@ ZonaGravitacional::ZonaGravitacional(int Fuerza, float Rotacion_, float Direccio
     setTransformOriginPoint(Pos);
     setRotation(Rotacion);
 
-    QPixmap Patron(":/Flechas/Flecha");
+    QPixmap Patron= QPixmap(":/Flechas/Flecha").scaled(50,50);
     Patron =Patron.transformed(QTransform().rotate(DireccionFuerza));
     QBrush Brocha(Patron);
     setBrush(Brocha);
@@ -28,9 +28,3 @@ int ZonaGravitacional::getFuerzaGravitacional() const
 {
     return FuerzaGravitacional;
 }
-
-float ZonaGravitacional::getDireccionFuerza() const
-{
-    return DireccionFuerza;
-}
-

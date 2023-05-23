@@ -54,7 +54,7 @@ void ObjetoMovible::CargarSprites()
     {
     case Controlable:
 
-        for(int i=3; i<11; i++)
+        for(int i=3; i<4; i++)
         {
             QString Ruta=":/Jugador/%1";
             QPixmap *Map = new QPixmap((Ruta.arg(i)));;
