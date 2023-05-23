@@ -10,7 +10,6 @@ Juego::Juego(QWidget *parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setScene(Pantalla);
-    Borde = new QRectF(0,0,Pantalla->sceneRect().width(),Pantalla->sceneRect().height()-120);
 
     setMouseTracking(true);
 }
@@ -53,12 +52,16 @@ void Juego::Jugar()
 
     Timer = new QTimer;
     connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
-
 }
 
 Juego::~Juego()
 {
-
+    delete Timer;
+    delete Pantalla;
+    delete Player;
+    delete ZonasGravitacionales;
+    delete Objetos;
+    delete ObjetosEstaticos;
 }
 
 void Juego::keyPressEvent(QKeyEvent *evento)
@@ -121,10 +124,10 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
 
         //Colisión en Y
         Objeto->SetPos({Pos0.x(), SiguientePos.y()});
-        QList<QGraphicsItem*> Colisiones=Objeto->collidingItems();
+        QList<QGraphicsItem*> *Colisiones=new QList<QGraphicsItem*>(Objeto->collidingItems());
         QList<ObjetoMovible*> *Movibles = new QList<ObjetoMovible*>;
         QList<ObjetoEstatico*> *Estaticos = new QList<ObjetoEstatico*>;
-        for(QGraphicsItem *Item : Colisiones)
+        for(QGraphicsItem *Item : *Colisiones)
         {
             if(dynamic_cast<ObjetoMovible*>(Item))
             {
@@ -152,10 +155,10 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
         //Colisión en X
         Objeto->SetPos({SiguientePos.x(), Objeto->Posicion->y()});
 
-        Colisiones=Objeto->collidingItems();
+        Colisiones=new QList<QGraphicsItem*>(Objeto->collidingItems());
         Movibles = new QList<ObjetoMovible*>;
         Estaticos = new QList<ObjetoEstatico*>;
-        for(QGraphicsItem *Item : Colisiones)
+        for(QGraphicsItem *Item : *Colisiones)
         {
             if(dynamic_cast<ObjetoMovible*>(Item))
             {
@@ -189,6 +192,9 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
         {
             Objeto->Velocidad->setY(0);
         }
+        delete Colisiones;
+        delete Movibles;
+        delete Estaticos;
     }
 }
 

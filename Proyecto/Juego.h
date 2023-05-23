@@ -37,9 +37,6 @@ private:
     unsigned int ContadorGlobal;
     int PantallaSizeX;
     int PantallaSizeY;
-
-    QRectF *Borde;
-
     const float Delta=0.1;
 
     void keyPressEvent(QKeyEvent *evento);
