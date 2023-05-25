@@ -20,12 +20,12 @@ void Juego::Jugar()
     ContadorGlobal=0;
 
     ZonasGravitacionales = new QList<ZonaGravitacional*>;
-    ZonasGravitacionales->append(new ZonaGravitacional(100,0,90,{0,0},3000,3000,0));
+    ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));
     /*ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{500,0},100,1500,0.5));
     ZonasGravitacionales->append(new ZonaGravitacional(1000,0,-90,{700,0},100,1500,0.5));
     ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{1500,0},100,1500,0.5));*/
 
-    ZonasGravitacionales->append(new ZonaRadial({700,700}, 100, ZonaRadial::Interaccion::Atractivo, 50, 0.5));
+    ZonasGravitacionales->append(new ZonaRadial({700,700}, 100, ZonaRadial::Interaccion::Atractivo, 500, 0.5));
 
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
@@ -273,7 +273,7 @@ void Juego::Actualizar()
                 QList<QGraphicsItem*> items=Objeto->collidingItems();
                 for(QGraphicsItem *item : items)
                 {
-                    ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
+                     ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
                     if(Zona)
                         InteraccionZonas(Zona, Objeto);
                 }

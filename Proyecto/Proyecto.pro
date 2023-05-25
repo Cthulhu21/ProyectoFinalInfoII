@@ -15,6 +15,7 @@ SOURCES += \
         Plataforma.cpp \
         ZonaGravitacional.cpp \
         ZonaRadial.cpp \
+        ZonaRecta.cpp \
         main.cpp
 
 # Default rules for deployment.
@@ -30,7 +31,8 @@ HEADERS += \
     ObjetoMovible.h \
     Plataforma.h \
     ZonaGravitacional.h \
-    ZonaRadial.h
+    ZonaRadial.h \
+    ZonaRecta.h
 
 RESOURCES += \
     Recursos.qrc

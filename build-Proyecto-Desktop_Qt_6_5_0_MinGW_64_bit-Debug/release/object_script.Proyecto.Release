@@ -6,6 +6,7 @@ release/ObjetoMovible.o
 release/Plataforma.o
 release/ZonaGravitacional.o
 release/ZonaRadial.o
+release/ZonaRecta.o
 release/main.o
 release/qrc_Recursos.o
 release/moc_Arma.o

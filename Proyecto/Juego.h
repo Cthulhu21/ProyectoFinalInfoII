@@ -12,6 +12,7 @@
 #include "ObjetoMovible.h"
 #include "Plataforma.h"
 #include "ZonaRadial.h"
+#include "ZonaRecta.h"
 
 #define PI 3.14159265
 

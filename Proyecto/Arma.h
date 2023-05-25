@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
-#include <ZonaGravitacional.h>
+#include <ZonaRecta.h>
 #include <QGraphicsScene>
 #include <math.h>
 #include <QCursor>
@@ -29,13 +29,13 @@ public:
     void Rotar(qreal Angulo);
     void SetPos(QPointF Pos);
 
-    ZonaGravitacional *getRangoArma() const;
+    ZonaRecta *getRangoArma() const;
 
     QPointF getSize() const;
 
 private:
     void CargarSprite();
-    ZonaGravitacional *RangoArma;
+    ZonaRecta *RangoArma;
     QPointF Size;
 };
 

@@ -6,6 +6,7 @@ debug/ObjetoMovible.o
 debug/Plataforma.o
 debug/ZonaGravitacional.o
 debug/ZonaRadial.o
+debug/ZonaRecta.o
 debug/main.o
 debug/qrc_Recursos.o
 debug/moc_Arma.o

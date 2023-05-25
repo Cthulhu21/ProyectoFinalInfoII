@@ -1,7 +1,7 @@
 #include "ZonaRadial.h"
 
 ZonaRadial::ZonaRadial(QPointF Posicion, float Fuerza_, Interaccion TipoRadial_, float Radio_,float Opacidad, QGraphicsObject *parent):
-    ZonaGravitacional(Fuerza_, 0, 90, Posicion, 0, 0, Opacidad,TipoDeZona::Radial)
+    ZonaGravitacional(Fuerza_, 0, 90, Posicion, {0, 0}, Opacidad,TipoDeZona::Radial)
 {
     setPos(Posicion);
     TipoDeInteraccion = TipoRadial_;
