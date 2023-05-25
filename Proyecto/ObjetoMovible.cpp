@@ -11,7 +11,6 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
     setPos(Pos);
 
     Size = new QPointF();
-    CargarSprites();
 
     Posicion= new QPointF(Pos);
     Velocidad = new QPointF(Vel);
@@ -23,6 +22,8 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
     VelocidadMax=VelMax;
 
     Friccion=Fric;
+
+    CargarSprites();
 }
 
 ObjetoMovible::~ObjetoMovible()
@@ -39,8 +40,18 @@ void ObjetoMovible::SetPos(QPointF Pos)
 
 void ObjetoMovible::SiguienteFrame()
 {
-    FrameActual%=Sprites.size();
     setPixmap(Sprites[FrameActual++]);
+    FrameActual%=Sprites.size();
+}
+
+QRectF ObjetoMovible::boundingRect() const
+{
+    return QRectF(QPointF(), *Size);
+}
+
+void ObjetoMovible::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    painter->drawPixmap(QPointF(), Sprites.at(FrameActual));
 }
 
 int ObjetoMovible::getMasa() const
@@ -61,7 +72,7 @@ void ObjetoMovible::CargarSprites()
             Sprites.append(QPixmap(*Map));
 
         }
-        *Size = {25,55};
+        *Size = {30,55};
         break;
     case Cubo:
         Sprites.append(QPixmap(":/Imagenes/Cubo"));
