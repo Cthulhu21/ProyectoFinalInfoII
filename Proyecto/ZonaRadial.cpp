@@ -40,7 +40,7 @@ QPointF ZonaRadial::PuntaFlecha(float angle) const
 
 QPointF ZonaRadial::PuntoFlecha(float angle) const
 {
-    float x = Radio*0.1 * qCos(qDegreesToRadians(angle));
-    float y = Radio*0.1 * qSin(qDegreesToRadians(angle));
+    float x = Radio*0.8 * qCos(qDegreesToRadians(angle));
+    float y = Radio*0.8 * qSin(qDegreesToRadians(angle));
     return QPointF(x, y);
 }

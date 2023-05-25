@@ -29,6 +29,7 @@ private:
     Jugador *Player;
     QList<ZonaGravitacional*> *ZonasGravitacionales;
     void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto);
+    void InteraccionRadial(ZonaRadial *Zona, ObjetoMovible *Objeto);
     QList<ObjetoMovible*> *Objetos;
     QList<ObjetoEstatico*> *ObjetosEstaticos;
 
