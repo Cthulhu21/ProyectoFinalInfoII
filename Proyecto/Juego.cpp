@@ -66,17 +66,16 @@ Juego::~Juego()
 
 void Juego::keyPressEvent(QKeyEvent *evento)
 {
-    int AceleracionExtra=10000;
     switch(evento->key())
     {
     case Qt::Key_W:
-        //Player->setAceleracion(Player->Aceleracion.first,-AceleracionExtra);
+        Player->Velocidad->setY(-50);
         break;
     case Qt::Key_A:
-        //Player->setAceleracion(-AceleracionExtra*0.3,Player->Aceleracion.second);
+        Player->Velocidad->setX(-50);
         break;
     case Qt::Key_D:
-        //Player->setAceleracion(AceleracionExtra*0.3,Player->Aceleracion->second);
+        Player->Velocidad->setX(50);
         break;
     case Qt::Key_Space:
         if(Timer->isActive())
@@ -138,20 +137,24 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
                 Estaticos->append(dynamic_cast<ObjetoEstatico*>(Item));
             }
         }
-        for(ObjetoMovible *Movible : *Movibles)
+        if(!Movibles->empty())
+            MomentoEnergia(Objeto, Movibles->at(0));
+        //for(ObjetoMovible *Movible : *Movibles)
         {
-            MomentoEnergia(Objeto, Movible);
+
         }
-        for(ObjetoEstatico *Estatico : *Estaticos)
+        if(!Estaticos->empty())
         {
-            float k=0.5;
+            float k=0.1;
             if(Objeto!=Player)
             {
-                k=0.9;
+                k=0.1;
             }
             Objeto->Velocidad->setY(Objeto->Velocidad->y()*-k);
             Objeto->Posicion->setY(Pos0.y());
         }
+        //for(ObjetoEstatico *Estatico : *Estaticos)
+
         //Colisión en X
         Objeto->SetPos({SiguientePos.x(), Objeto->Posicion->y()});
 
@@ -169,20 +172,25 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
                 Estaticos->append(dynamic_cast<ObjetoEstatico*>(Item));
             }
         }
-        for(ObjetoMovible *Movible : *Movibles)
+        if(!Movibles->empty())
+            MomentoEnergia(Objeto, Movibles->at(0));
+        //for(ObjetoMovible *Movible : *Movibles)
         {
-            MomentoEnergia(Objeto, Movible);
+
         }
-        for(ObjetoEstatico *Estatico : *Estaticos)
+        if(!Estaticos->empty())
         {
-            float k=0.5;
+            float k=0.1;
             if(Objeto!=Player)
             {
-                k=0.9;
+                k=0.1;
             }
             Objeto->Velocidad->setX(Objeto->Velocidad->x()*-k);
             Objeto->Posicion->setX(Pos0.x());
         }
+        //for(ObjetoEstatico *Estatico : *Estaticos)
+
+        Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
         *Objeto->Velocidad*=0.995;
         if(abs(Objeto->Velocidad->x())<0.1)
         {
@@ -271,9 +279,7 @@ void Juego::Actualizar()
                 {
                     ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
                     if(Zona)
-                    {
                         InteraccionZonas(Zona, Objeto);
-                    }
                 }
             }
         }

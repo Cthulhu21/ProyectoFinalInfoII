@@ -21,7 +21,7 @@ Arma *Jugador::getPistola() const
 void Jugador::SetPos(QPointF Pos)
 {
     ObjetoMovible::SetPos(Pos);
-    Pos.setX(Pos.x()+15);
+    Pos.setX(Pos.x()+20);
     Pos.setY(Pos.y()+10);
     Pistola->SetPos(Pos);
     RotarArma();
