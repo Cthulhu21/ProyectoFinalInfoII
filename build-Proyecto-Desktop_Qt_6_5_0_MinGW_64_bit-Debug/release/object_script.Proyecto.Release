@@ -1,5 +1,4 @@
 release/Arma.o
-release/Cubo.o
 release/Juego.o
 release/Jugador.o
 release/ObjetoEstatico.o
@@ -10,7 +9,6 @@ release/ZonaRadial.o
 release/main.o
 release/qrc_Recursos.o
 release/moc_Arma.o
-release/moc_Cubo.o
 release/moc_Juego.o
 release/moc_Jugador.o
 release/moc_ObjetoEstatico.o

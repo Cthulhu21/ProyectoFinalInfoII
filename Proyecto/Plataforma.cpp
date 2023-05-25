@@ -28,7 +28,7 @@ void Plataforma::CargarSprite()
         break;
     }
     *Imagen = QPixmap(Nombre);
-    QSize Escala={static_cast<int>(Size->x()),static_cast<int>(Size->y())};
-    *Imagen=Imagen->scaled(Escala);
+    *Imagen=Imagen->scaled(QSize(Size.x(),Size.y()));
+    *Imagen=Imagen->transformed(QTransform().rotate(Angulo));
     setPixmap(*Imagen);
 }

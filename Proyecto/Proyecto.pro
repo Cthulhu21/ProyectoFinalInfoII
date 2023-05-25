@@ -8,7 +8,6 @@ CONFIG += c++20 cmdline
 
 SOURCES += \
         Arma.cpp \
-        Cubo.cpp \
         Juego.cpp \
         Jugador.cpp \
         ObjetoEstatico.cpp \
@@ -25,7 +24,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     Arma.h \
-    Cubo.h \
     Juego.h \
     Jugador.h \
     ObjetoEstatico.h \

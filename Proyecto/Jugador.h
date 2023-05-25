@@ -24,8 +24,8 @@ public:
 
 private:
 
+
     Arma *Pistola;
-    void CargarSprites() override;
 };
 
 #endif // JUGADOR_H

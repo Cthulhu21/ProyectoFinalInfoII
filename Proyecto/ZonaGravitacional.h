@@ -20,7 +20,6 @@ public:
     float DireccionFuerza;
     TipoDeZona ZonaTipo;
 
-
 private:
     int FuerzaGravitacional;
     float Rotacion;
