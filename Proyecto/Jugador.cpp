@@ -2,7 +2,7 @@
 
 Jugador::Jugador(int Masa, QPointF Pos, QPointF Vel,
                   QPointF Acel, float VelMax, float Fric, QGraphicsItem *parent)
-                :ObjetoMovible(TipoDeObjeto::Controlable, Masa, Pos, Vel, Acel, VelMax, Fric,parent )
+    :ObjetoMovible(Masa, Pos, {30,35}, Vel, Acel, VelMax, Fric, parent )
 {
     Pistola = new Arma();
     Jugador::SetPos(Pos);
@@ -54,4 +54,14 @@ void Jugador::RotarArma()
 
     // Rotar el arma
     Pistola->Rotar(rotation);
+}
+
+void Jugador::CargarSprites()
+{
+    for(int i=3; i<4; i++)//11 para el sprite completo
+    {
+        QString Ruta=":/Jugador/%1";
+        QPixmap *Map = new QPixmap((Ruta.arg(i)));;
+        Sprites->append(new QPixmap(*Map));
+    }
 }

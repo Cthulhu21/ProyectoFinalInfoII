@@ -32,21 +32,21 @@ void Juego::Jugar()
         Pantalla->addItem(ZonasGravitacionales->at(i));
     }
 
-    ObjetosEstaticos = new QList<ObjetoEstatico*>;
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX / 2, 0), QPointF(PantallaSizeX, 20))); // Pared superior
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX, PantallaSizeY / 2), QPointF(20, PantallaSizeY), 90)); // Pared derecha
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX / 2, PantallaSizeY - 20), QPointF(PantallaSizeX, 20))); // Pared inferior
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, PantallaSizeY / 2), QPointF(20, PantallaSizeY), 90)); // Pared izquierda
+    /*ObjetosEstaticos = new QList<ObjetoEstatico*>;
+    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(PantallaSizeX, 20))); // Pared superior
+    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX-20,0), QPointF(20, 2000))); // Pared derecha
+    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, PantallaSizeY - 20), QPointF(PantallaSizeX, 20))); // Pared inferior
+    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(20, 2000))); // Pared izquierda
 
 
     for(int i=0; i<ObjetosEstaticos->size(); i++)
     {
         Pantalla->addItem(ObjetosEstaticos->at(i));
-    }
+    }*/
 
     Objetos = new QList<ObjetoMovible*>;
-    Objetos->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{500,500}));
-    Objetos->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{1500,500}));
+    Objetos->append(new Cubo({500,300}));
+    Objetos->append(new Cubo({300,300}));
     for(int i=0; i<Objetos->size(); i++)
     {
         Pantalla->addItem(Objetos->at(i));

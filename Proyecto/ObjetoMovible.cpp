@@ -1,20 +1,19 @@
 #include "ObjetoMovible.h"
 
-ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
-                             QPointF Vel,QPointF Acel,
+ObjetoMovible::ObjetoMovible(int Masa_, QPointF Pos,
+                             QPointF Size_, QPointF Vel,QPointF Acel,
                              float VelMax, float Fric, QGraphicsItem *parent)
 {
-    Tipo=Tipo_;
-
     Masa=Masa_;
 
     setPos(Pos);
 
-    Size = new QPointF();
+    Size = new QPointF(Size_);
 
     Posicion= new QPointF(Pos);
     Velocidad = new QPointF(Vel);
     Aceleracion= new QPointF(Acel);
+    Sprites = new QList<QPixmap*>;
 
 
     ObjetoPegado=false;
@@ -22,13 +21,15 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
     VelocidadMax=VelMax;
 
     Friccion=Fric;
-
-    CargarSprites();
+    FrameActual=0;
 }
 
 ObjetoMovible::~ObjetoMovible()
 {
-
+    delete Size;
+    delete Posicion;
+    delete Velocidad;
+    delete Aceleracion;
 }
 
 
@@ -40,8 +41,9 @@ void ObjetoMovible::SetPos(QPointF Pos)
 
 void ObjetoMovible::SiguienteFrame()
 {
-    setPixmap(Sprites[FrameActual++]);
-    FrameActual%=Sprites.size();
+
+    setPixmap(*Sprites->at(FrameActual++));
+    FrameActual%=Sprites->size();
 }
 
 QRectF ObjetoMovible::boundingRect() const
@@ -51,7 +53,8 @@ QRectF ObjetoMovible::boundingRect() const
 
 void ObjetoMovible::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->drawPixmap(QPointF(), Sprites.at(FrameActual));
+    if(!Sprites->isEmpty())
+        painter->drawPixmap(QPointF(), *Sprites->at(FrameActual));
 }
 
 int ObjetoMovible::getMasa() const
@@ -61,26 +64,5 @@ int ObjetoMovible::getMasa() const
 
 void ObjetoMovible::CargarSprites()
 {
-    switch(Tipo)
-    {
-    case Controlable:
 
-        for(int i=3; i<4; i++)//11 para el sprite completo
-        {
-            QString Ruta=":/Jugador/%1";
-            QPixmap *Map = new QPixmap((Ruta.arg(i)));;
-            Sprites.append(QPixmap(*Map));
-
-        }
-        *Size = {30,55};
-        break;
-    case Cubo:
-        Sprites.append(QPixmap(":/Imagenes/Cubo"));
-        *Size={30,31};
-        break;
-    default:
-        break;
-    }
-    FrameActual=0;
-    setPixmap(Sprites.at(FrameActual));
 }
