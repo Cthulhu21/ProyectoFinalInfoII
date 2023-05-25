@@ -11,6 +11,7 @@
 #include "ZonaGravitacional.h"
 #include "ObjetoMovible.h"
 #include "Plataforma.h"
+#include "ZonaRadial.h"
 
 #define PI 3.14159265
 

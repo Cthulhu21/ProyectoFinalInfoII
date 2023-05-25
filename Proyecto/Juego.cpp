@@ -19,10 +19,13 @@ void Juego::Jugar()
     ContadorGlobal=0;
 
     ZonasGravitacionales = new QList<ZonaGravitacional*>;
-    ZonasGravitacionales->append(new ZonaGravitacional(100,0,90,{0,0},3000,3000,0));
-    ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{500,0},100,1500,0.5));
+    //ZonasGravitacionales->append(new ZonaGravitacional(100,0,90,{0,0},3000,3000,0));
+    /*ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{500,0},100,1500,0.5));
     ZonasGravitacionales->append(new ZonaGravitacional(1000,0,-90,{700,0},100,1500,0.5));
-    ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{1500,0},100,1500,0.5));
+    ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{1500,0},100,1500,0.5));*/
+
+    ZonasGravitacionales->append(new ZonaRadial({700,700},1,ZonaRadial::Interaccion::Atractivo));
+
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
         Pantalla->addItem(ZonasGravitacionales->at(i));
@@ -139,10 +142,7 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
         }
         if(!Movibles->empty())
             MomentoEnergia(Objeto, Movibles->at(0));
-        //for(ObjetoMovible *Movible : *Movibles)
-        {
 
-        }
         if(!Estaticos->empty())
         {
             float k=0.1;
@@ -153,7 +153,6 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
             Objeto->Velocidad->setY(Objeto->Velocidad->y()*-k);
             Objeto->Posicion->setY(Pos0.y());
         }
-        //for(ObjetoEstatico *Estatico : *Estaticos)
 
         //Colisión en X
         Objeto->SetPos({SiguientePos.x(), Objeto->Posicion->y()});
@@ -174,10 +173,6 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
         }
         if(!Movibles->empty())
             MomentoEnergia(Objeto, Movibles->at(0));
-        //for(ObjetoMovible *Movible : *Movibles)
-        {
-
-        }
         if(!Estaticos->empty())
         {
             float k=0.1;
@@ -188,8 +183,6 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
             Objeto->Velocidad->setX(Objeto->Velocidad->x()*-k);
             Objeto->Posicion->setX(Pos0.x());
         }
-        //for(ObjetoEstatico *Estatico : *Estaticos)
-
         Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
         *Objeto->Velocidad*=0.995;
         if(abs(Objeto->Velocidad->x())<0.1)

@@ -1,6 +1,6 @@
 #include "ZonaGravitacional.h"
 
-ZonaGravitacional::ZonaGravitacional(int Fuerza, float Rotacion_, float DireccionFuerza_, QPointF Pos, float Largo, float Ancho,float Opacidad, QGraphicsItem *parent)
+ZonaGravitacional::ZonaGravitacional(int Fuerza, float Rotacion_, float DireccionFuerza_, QPointF Pos, float Largo, float Ancho,float Opacidad, TipoDeZona Tipo, QGraphicsItem *parent)
 {
     setBrush(QBrush(QColor(Qt::magenta)));
 
@@ -13,10 +13,10 @@ ZonaGravitacional::ZonaGravitacional(int Fuerza, float Rotacion_, float Direccio
     setTransformOriginPoint(Pos);
     setRotation(Rotacion);
 
-    QPixmap Patron= QPixmap(":/Flechas/Flecha").scaled(25,25);
-    Patron =Patron.transformed(QTransform().rotate(DireccionFuerza));
-    QBrush Brocha(Patron);
-    setBrush(Brocha);
+    ZonaTipo=Tipo;
+
+    CargarSprite();
+
 }
 
 ZonaGravitacional::~ZonaGravitacional()
@@ -27,4 +27,12 @@ ZonaGravitacional::~ZonaGravitacional()
 int ZonaGravitacional::getFuerzaGravitacional() const
 {
     return FuerzaGravitacional;
+}
+
+void ZonaGravitacional::CargarSprite()
+{
+    QPixmap Patron= QPixmap(":/Flechas/Flecha").scaled(25,25);
+    Patron =Patron.transformed(QTransform().rotate(DireccionFuerza));
+    QBrush Brocha(Patron);
+    setBrush(Brocha);
 }

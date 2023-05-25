@@ -5,6 +5,7 @@ debug/ObjetoEstatico.o
 debug/ObjetoMovible.o
 debug/Plataforma.o
 debug/ZonaGravitacional.o
+debug/ZonaRadial.o
 debug/main.o
 debug/qrc_Recursos.o
 debug/moc_Arma.o
@@ -14,3 +15,4 @@ debug/moc_ObjetoEstatico.o
 debug/moc_ObjetoMovible.o
 debug/moc_Plataforma.o
 debug/moc_ZonaGravitacional.o
+debug/moc_ZonaRadial.o
