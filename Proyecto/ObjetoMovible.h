@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
-#include <QPainter>
 
 enum TipoDeObjeto
 {
@@ -25,8 +24,6 @@ public:
 
     virtual void SetPos(QPointF Pos);
     void SiguienteFrame();
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
 
     int getMasa() const;
 private:

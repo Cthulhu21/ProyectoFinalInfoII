@@ -2,7 +2,6 @@
 #define OBJETOESTATICO_H
 
 #include <QGraphicsPixmapItem>
-#include <QPainter>
 
 class ObjetoEstatico: public QObject, public QGraphicsPixmapItem
 {

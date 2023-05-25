@@ -10,7 +10,6 @@ Juego::Juego(QWidget *parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setScene(Pantalla);
-    setAutoFillBackground(false);
 
     setMouseTracking(true);
 }
@@ -25,7 +24,7 @@ void Juego::Jugar()
     ZonasGravitacionales->append(new ZonaGravitacional(1000,0,-90,{700,0},100,1500,0.5));
     ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{1500,0},100,1500,0.5));*/
 
-    ZonasGravitacionales->append(new ZonaRadial({700,700}, 100, ZonaRadial::Interaccion::Atractivo, 50, 0.5));
+    ZonasGravitacionales->append(new ZonaRadial({700,700},1,ZonaRadial::Interaccion::Atractivo));
 
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
@@ -33,12 +32,10 @@ void Juego::Jugar()
     }
 
     ObjetosEstaticos = new QList<ObjetoEstatico*>;
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX / 2, 0), QPointF(PantallaSizeX, 20))); // Pared superior
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX, PantallaSizeY / 2), QPointF(20, PantallaSizeY), 90)); // Pared derecha
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX / 2, PantallaSizeY - 20), QPointF(PantallaSizeX, 20))); // Pared inferior
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, PantallaSizeY / 2), QPointF(20, PantallaSizeY), 90)); // Pared izquierda
-
-
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,0},{static_cast<qreal>(PantallaSizeX),20}));//Arriba
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{static_cast<qreal>(PantallaSizeX),0},{static_cast<qreal>(PantallaSizeY),20},90));//Derecha
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,static_cast<qreal>(PantallaSizeY)-100},{static_cast<qreal>(PantallaSizeX),20}));//Abajo
+    ObjetosEstaticos->append(new Plataforma(Color::Negra,{0,0},{static_cast<qreal>(PantallaSizeY),20},90));//Izquierda
     for(int i=0; i<ObjetosEstaticos->size(); i++)
     {
         Pantalla->addItem(ObjetosEstaticos->at(i));
