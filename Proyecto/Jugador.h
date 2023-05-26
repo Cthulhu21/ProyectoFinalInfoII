@@ -20,6 +20,7 @@ public:
     Arma *getPistola() const;
     void SetPos(QPointF Pos) override;
     void Disparar(QGraphicsScene *Escena);
+    void DispararObjeto();
     void RotarArma();
 
 private:

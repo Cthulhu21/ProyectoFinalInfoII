@@ -25,8 +25,8 @@ void Juego::Jugar()
     ZonasGravitacionales->append(new ZonaGravitacional(1000,0,-90,{700,0},100,1500,0.5));
     ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{1500,0},100,1500,0.5));*/
 
-    ZonasGravitacionales->append(new ZonaRadial({700,700}, 500, ZonaRadial::Interaccion::Repulsivo, 150, 0.3));
-    ZonasGravitacionales->append(new ZonaRadial({1500,800}, 500, ZonaRadial::Interaccion::Atractivo, 150, 0.3));
+    ZonasGravitacionales->append(new ZonaRadial({700,700}, 1000, ZonaRadial::Interaccion::Repulsivo, 150, 0.3));
+    ZonasGravitacionales->append(new ZonaRadial({1100,400}, 1000, ZonaRadial::Interaccion::Atractivo, 150, 0.3));
 
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
@@ -53,7 +53,7 @@ void Juego::Jugar()
         Pantalla->addItem(Objetos->at(i));
     }
 
-    Player = new Jugador(10,{1000,500});
+    Player = new Jugador(10,{30,800});
     Pantalla->addItem(Player);
     Player->AgregarArma(Pantalla);
 
@@ -226,7 +226,10 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
         Objeto->Posicion->setX(Pos0.x());
     }
 
-    Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
+    if(Objeto==Player)
+        Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
+    else
+        Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.995);
     *Objeto->Velocidad*=0.995;
     if(abs(Objeto->Velocidad->x())<0.1)
     {
@@ -248,7 +251,6 @@ void Juego::PegarObjetoAArma(ObjetoMovible *Objeto)
     Player->Disparar(Pantalla);
     Player->getPistola()->MoviblePegado=true;
 }
-
 
 void Juego::GameOver()
 {
@@ -293,6 +295,8 @@ void Juego::mousePressEvent(QMouseEvent *event)
     case Qt::LeftButton:
         Player->Disparar(Pantalla);
         break;
+    case Qt::RightButton:
+        Player->DispararObjeto();
     default:
         break;
     }

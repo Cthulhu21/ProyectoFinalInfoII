@@ -36,8 +36,11 @@ public:
 
     QPointF getSize() const;
 
-    void setObjetoPegado(ObjetoMovible *newObjetoPegado);
+
     void MoverObjetoPegado();
+
+    void setObjetoPegado(ObjetoMovible *newObjetoPegado);
+    ObjetoMovible *getObjetoPegado() const;
 
 private:
     void CargarSprite();
