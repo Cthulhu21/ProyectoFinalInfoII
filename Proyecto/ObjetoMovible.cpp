@@ -24,7 +24,19 @@ ObjetoMovible::ObjetoMovible(TipoDeObjeto Tipo_, int Masa_, QPointF Pos,
     Friccion=Fric;
 
     CargarSprites();
+    setParentItem(parent);
 }
+
+ObjetoMovible::ObjetoMovible(const ObjetoMovible &Otro):
+    ObjetoMovible(Otro.Tipo, Otro.Masa, *Otro.Posicion, *Otro.Velocidad, *Otro.Aceleracion, Otro.VelocidadMax, Otro.Friccion)
+{
+}
+
+ObjetoMovible::ObjetoMovible()
+{
+
+}
+
 
 ObjetoMovible::~ObjetoMovible()
 {
@@ -57,6 +69,16 @@ void ObjetoMovible::paint(QPainter *painter, const QStyleOptionGraphicsItem *, Q
 int ObjetoMovible::getMasa() const
 {
     return Masa;
+}
+
+TipoDeObjeto ObjetoMovible::getTipo() const
+{
+    return Tipo;
+}
+
+QPointF *ObjetoMovible::getSize() const
+{
+    return Size;
 }
 
 void ObjetoMovible::CargarSprites()

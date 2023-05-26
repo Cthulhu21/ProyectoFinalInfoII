@@ -102,120 +102,151 @@ void Juego::keyPressEvent(QKeyEvent *evento)
 
 void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
 {
-
-    if(!(Zona==Player->getPistola()->getRangoArma() and Objeto==Player))
+    if(Objeto->ObjetoPegado)
     {
-        QPointF Pos0 = Objeto->pos();
-
-        float MagnitudFuerza = Zona->getFuerzaGravitacional();
-        float AnguloRadianes = Zona->DireccionFuerza * (M_PI / 180.0);
-        ZonaRadial *Radial =dynamic_cast<ZonaRadial*>(Zona);
-        if(Radial)
-        {
-            QPointF Centro = Radial->getCentro();
-            QPointF Direccion = Centro - Pos0;
-            AnguloRadianes= atan2(Direccion.y(), Direccion.x());
-            if(Radial->TipoDeInteraccion==ZonaRadial::Interaccion::Repulsivo)
-            {
-               Direccion = Pos0-Centro;
-               AnguloRadianes= atan2(Direccion.y(), Direccion.x());
-            }
-
-        }
-
-        float FuerzaHorizontal = MagnitudFuerza * cos(AnguloRadianes);
-        float FuerzaVertical = MagnitudFuerza * sin(AnguloRadianes);
-        if(abs(FuerzaHorizontal)<0.1)
-            FuerzaHorizontal=0;
-        if(abs(FuerzaVertical)<0.1)
-            FuerzaVertical=0;
-
-        float AceleracionHorizontal = FuerzaHorizontal / Objeto->getMasa();
-        float AceleracionVertical = FuerzaVertical / Objeto->getMasa();
-
-        Objeto->Velocidad->setX(Objeto->Velocidad->x() + AceleracionHorizontal * Delta);
-        Objeto->Velocidad->setY(Objeto->Velocidad->y() + AceleracionVertical * Delta);
-
-        QPointF Desplazamiento = *Objeto->Velocidad * Delta;
-        QPointF SiguientePos=Pos0+Desplazamiento;
-
-        Objeto->Posicion->setX(Objeto->Posicion->x() + Desplazamiento.x());
-        Objeto->Posicion->setY(Objeto->Posicion->y() + Desplazamiento.y());
-
-        //Colisión en Y
-        Objeto->SetPos({Pos0.x(), SiguientePos.y()});
-        QList<QGraphicsItem*> *Colisiones=new QList<QGraphicsItem*>(Objeto->collidingItems());
-        QList<ObjetoMovible*> *Movibles = new QList<ObjetoMovible*>;
-        QList<ObjetoEstatico*> *Estaticos = new QList<ObjetoEstatico*>;
-        for(QGraphicsItem *Item : *Colisiones)
-        {
-            if(dynamic_cast<ObjetoMovible*>(Item))
-            {
-                Movibles->append(dynamic_cast<ObjetoMovible*>(Item));
-            }
-            else if(dynamic_cast<ObjetoEstatico*>(Item))
-            {
-                Estaticos->append(dynamic_cast<ObjetoEstatico*>(Item));
-            }
-        }
-        if(!Movibles->empty())
-            MomentoEnergia(Objeto, Movibles->at(0));
-
-        if(!Estaticos->empty())
-        {
-            float k=0.1;
-            if(Objeto!=Player)
-            {
-                k=0.1;
-            }
-            Objeto->Velocidad->setY(Objeto->Velocidad->y()*-k);
-            Objeto->Posicion->setY(Pos0.y());
-        }
-
-        //Colisión en X
-        Objeto->SetPos({SiguientePos.x(), Objeto->Posicion->y()});
-
-        Colisiones=new QList<QGraphicsItem*>(Objeto->collidingItems());
-        Movibles = new QList<ObjetoMovible*>;
-        Estaticos = new QList<ObjetoEstatico*>;
-        for(QGraphicsItem *Item : *Colisiones)
-        {
-            if(dynamic_cast<ObjetoMovible*>(Item))
-            {
-                Movibles->append(dynamic_cast<ObjetoMovible*>(Item));
-            }
-            else if(dynamic_cast<ObjetoEstatico*>(Item))
-            {
-                Estaticos->append(dynamic_cast<ObjetoEstatico*>(Item));
-            }
-        }
-        if(!Movibles->empty())
-            MomentoEnergia(Objeto, Movibles->at(0));
-        if(!Estaticos->empty())
-        {
-            float k=0.1;
-            if(Objeto!=Player)
-            {
-                k=0.1;
-            }
-            Objeto->Velocidad->setX(Objeto->Velocidad->x()*-k);
-            Objeto->Posicion->setX(Pos0.x());
-        }
-
-        Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
-        *Objeto->Velocidad*=0.995;
-        if(abs(Objeto->Velocidad->x())<0.1)
-        {
-            Objeto->Velocidad->setX(0);
-        }
-        if(abs(Objeto->Velocidad->y())<0.1)
-        {
-            Objeto->Velocidad->setY(0);
-        }
-        delete Colisiones;
-        delete Movibles;
-        delete Estaticos;
+        /*QPointF Posicion=Player->getPistola()->pos();
+        QPointF Size=Player->getPistola()->getSize();
+        Size.setX(Size.x()*cos(Player->getPistola()->rotation()));
+        Size.setY(Size.y()*cos(Player->getPistola()->rotation()));
+        Objeto->SetPos(Posicion+Size);*/
+        return;
     }
+    if(Zona==Player->getPistola()->getRangoArma() and Objeto==Player)
+        return;
+
+    QPointF Pos0 = Objeto->pos();
+
+    float MagnitudFuerza = Zona->getFuerzaGravitacional();
+    float AnguloRadianes = Zona->DireccionFuerza * (M_PI / 180.0);
+    ZonaRadial *Radial =dynamic_cast<ZonaRadial*>(Zona);
+    if(Radial)
+    {
+        QPointF Centro = Radial->getCentro();
+        QPointF Direccion = Centro - Pos0;
+        if(Radial->TipoDeInteraccion==ZonaRadial::Interaccion::Repulsivo)
+        {
+            Direccion = Pos0-Centro;
+        }
+        AnguloRadianes= atan2(Direccion.y(), Direccion.x());
+
+    }
+
+    float FuerzaHorizontal = MagnitudFuerza * cos(AnguloRadianes);
+    float FuerzaVertical = MagnitudFuerza * sin(AnguloRadianes);
+    if(abs(FuerzaHorizontal)<0.1)
+        FuerzaHorizontal=0;
+    if(abs(FuerzaVertical)<0.1)
+        FuerzaVertical=0;
+
+    float AceleracionHorizontal = FuerzaHorizontal / Objeto->getMasa();
+    float AceleracionVertical = FuerzaVertical / Objeto->getMasa();
+
+    Objeto->Velocidad->setX(Objeto->Velocidad->x() + AceleracionHorizontal * Delta);
+    Objeto->Velocidad->setY(Objeto->Velocidad->y() + AceleracionVertical * Delta);
+
+    QPointF Desplazamiento = *Objeto->Velocidad * Delta;
+    QPointF SiguientePos=Pos0+Desplazamiento;
+
+    Objeto->Posicion->setX(Objeto->Posicion->x() + Desplazamiento.x());
+    Objeto->Posicion->setY(Objeto->Posicion->y() + Desplazamiento.y());
+
+    //Colisión en Y
+    Objeto->SetPos({Pos0.x(), SiguientePos.y()});
+    QList<QGraphicsItem*> *Colisiones=new QList<QGraphicsItem*>(Objeto->collidingItems());
+    QList<ObjetoMovible*> *Movibles = new QList<ObjetoMovible*>;
+    QList<ObjetoEstatico*> *Estaticos = new QList<ObjetoEstatico*>;
+    for(QGraphicsItem *Item : *Colisiones)
+    {
+        if(dynamic_cast<ObjetoMovible*>(Item))
+        {
+            Movibles->append(dynamic_cast<ObjetoMovible*>(Item));
+        }
+        else if(dynamic_cast<ObjetoEstatico*>(Item))
+        {
+            Estaticos->append(dynamic_cast<ObjetoEstatico*>(Item));
+        }
+        else if(Item==Player->getPistola() and Objeto!=Player and Player->getPistola()->Activa)
+        {
+            PegarObjetoAArma(Objeto);
+            delete Colisiones;
+            delete Movibles;
+            delete Estaticos;
+            return;
+        }
+    }
+    if(!Movibles->empty())
+        MomentoEnergia(Objeto, Movibles->at(0));
+
+    if(!Estaticos->empty())
+    {
+        float k=0.1;
+        if(Objeto!=Player)
+        {
+            k=0.1;
+        }
+        Objeto->Velocidad->setY(Objeto->Velocidad->y()*-k);
+        Objeto->Posicion->setY(Pos0.y());
+    }
+
+    //Colisión en X
+    Objeto->SetPos({SiguientePos.x(), Objeto->Posicion->y()});
+
+    Colisiones=new QList<QGraphicsItem*>(Objeto->collidingItems());
+    Movibles = new QList<ObjetoMovible*>;
+    Estaticos = new QList<ObjetoEstatico*>;
+    for(QGraphicsItem *Item : *Colisiones)
+    {
+        if(dynamic_cast<ObjetoMovible*>(Item))
+        {
+            Movibles->append(dynamic_cast<ObjetoMovible*>(Item));
+        }
+        else if(dynamic_cast<ObjetoEstatico*>(Item))
+        {
+            Estaticos->append(dynamic_cast<ObjetoEstatico*>(Item));
+        }
+        else if(Item==Player->getPistola() and Objeto!=Player and Player->getPistola()->Activa)
+        {
+            PegarObjetoAArma(Objeto);
+            delete Colisiones;
+            delete Movibles;
+            delete Estaticos;
+            return;
+        }
+    }
+    if(!Movibles->empty())
+        MomentoEnergia(Objeto, Movibles->at(0));
+    if(!Estaticos->empty())
+    {
+        float k=0.1;
+        if(Objeto!=Player)
+        {
+            k=0.1;
+        }
+        Objeto->Velocidad->setX(Objeto->Velocidad->x()*-k);
+        Objeto->Posicion->setX(Pos0.x());
+    }
+
+    Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
+    *Objeto->Velocidad*=0.995;
+    if(abs(Objeto->Velocidad->x())<0.1)
+    {
+        Objeto->Velocidad->setX(0);
+    }
+    if(abs(Objeto->Velocidad->y())<0.1)
+    {
+        Objeto->Velocidad->setY(0);
+    }
+    delete Colisiones;
+    delete Movibles;
+    delete Estaticos;
+}
+
+void Juego::PegarObjetoAArma(ObjetoMovible *Objeto)
+{
+    Objeto->ObjetoPegado=true;
+    Player->getPistola()->setObjetoPegado(Objeto);
+    Player->Disparar(Pantalla);
+    Player->getPistola()->MoviblePegado=true;
 }
 
 
@@ -257,17 +288,13 @@ void Juego::mouseMoveEvent(QMouseEvent *event)
 
 void Juego::mousePressEvent(QMouseEvent *event)
 {
-    if(event->button()==Qt::LeftButton)
+    switch(event->button())
     {
+    case Qt::LeftButton:
         Player->Disparar(Pantalla);
-    }
-}
-
-void Juego::mouseReleaseEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-    {
-        Player->Disparar(Pantalla);
+        break;
+    default:
+        break;
     }
 }
 

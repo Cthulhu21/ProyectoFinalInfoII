@@ -30,6 +30,7 @@ private:
     Jugador *Player;
     QList<ZonaGravitacional*> *ZonasGravitacionales;
     void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto);
+    void PegarObjetoAArma(ObjetoMovible *Objeto);
     QList<ObjetoMovible*> *Objetos;
     QList<ObjetoEstatico*> *ObjetosEstaticos;
 
@@ -44,7 +45,6 @@ private:
     void keyPressEvent(QKeyEvent *evento);
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
 
 private slots:
     void Actualizar();

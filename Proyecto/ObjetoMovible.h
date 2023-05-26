@@ -16,6 +16,8 @@ class ObjetoMovible:public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     ObjetoMovible(TipoDeObjeto Tipo,int Masa_=10, QPointF Pos={0,0},QPointF Vel={0,0}, QPointF Acel={0,0}, float VelMax=300, float Fric=0.95, QGraphicsItem *parent=nullptr);
+    ObjetoMovible(const ObjetoMovible &Otro);
+    ObjetoMovible();
     ~ObjetoMovible();
 
     QPointF *Posicion;
@@ -29,6 +31,10 @@ public:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
 
     int getMasa() const;
+    TipoDeObjeto getTipo() const;
+
+    QPointF *getSize() const;
+
 private:
 
     TipoDeObjeto Tipo;

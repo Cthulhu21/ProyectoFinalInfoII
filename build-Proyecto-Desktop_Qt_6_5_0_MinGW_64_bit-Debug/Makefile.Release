@@ -331,22 +331,23 @@ release/moc_Arma.cpp: ../Proyecto/Arma.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qrgba64.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qimage.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpixelformat.h \
-		../Proyecto/ZonaRecta.h \
-		../Proyecto/ZonaGravitacional.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbrush.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QPainter \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainter.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtextoption.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpen.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontinfo.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfont.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontmetrics.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsScene \
 		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfont.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpen.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
+		../Proyecto/ObjetoMovible.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QPainter \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainter.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtextoption.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontinfo.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontmetrics.h \
+		../Proyecto/ZonaRecta.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
 		release/moc_predefs.h \
 		../../../../Qt/6.5.0/mingw_64/bin/moc.exe
 	'D:\Qt\6.5.0\mingw_64\bin\moc.exe' $(DEFINES) --include 'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/build-Proyecto-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/release/moc_predefs.h' -ID:/Qt/6.5.0/mingw_64/mkspecs/win32-g++ -I'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/Proyecto' -ID:/Qt/6.5.0/mingw_64/include -ID:/Qt/6.5.0/mingw_64/include/QtWidgets -ID:/Qt/6.5.0/mingw_64/include/QtGui -ID:/Qt/6.5.0/mingw_64/include/QtCore -I. -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -ID:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ../Proyecto/Arma.h -o release/moc_Arma.cpp
@@ -530,10 +531,10 @@ release/moc_Juego.cpp: ../Proyecto/Juego.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainterpath.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QPainter \
 		../Proyecto/Arma.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../Proyecto/ZonaRecta.h \
 		../Proyecto/ZonaGravitacional.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../Proyecto/Plataforma.h \
 		../Proyecto/ObjetoEstatico.h \
 		../Proyecto/ZonaRadial.h \
@@ -686,12 +687,12 @@ release/moc_Jugador.cpp: ../Proyecto/Jugador.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontinfo.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontmetrics.h \
 		../Proyecto/Arma.h \
-		../Proyecto/ZonaRecta.h \
-		../Proyecto/ZonaGravitacional.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
+		../Proyecto/ZonaRecta.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
 		release/moc_predefs.h \
 		../../../../Qt/6.5.0/mingw_64/bin/moc.exe
 	'D:\Qt\6.5.0\mingw_64\bin\moc.exe' $(DEFINES) --include 'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/build-Proyecto-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/release/moc_predefs.h' -ID:/Qt/6.5.0/mingw_64/mkspecs/win32-g++ -I'D:/Proyectos Qt/Informatica/ProyectoFinalInfoII/Proyecto' -ID:/Qt/6.5.0/mingw_64/include -ID:/Qt/6.5.0/mingw_64/include/QtWidgets -ID:/Qt/6.5.0/mingw_64/include/QtGui -ID:/Qt/6.5.0/mingw_64/include/QtCore -I. -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -ID:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ../Proyecto/Jugador.h -o release/moc_Jugador.cpp
@@ -1712,22 +1713,23 @@ release/Arma.o: ../Proyecto/Arma.cpp ../Proyecto/Arma.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qrgba64.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qimage.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpixelformat.h \
-		../Proyecto/ZonaRecta.h \
-		../Proyecto/ZonaGravitacional.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsScene \
+		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbrush.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfont.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpen.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
+		../Proyecto/ObjetoMovible.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QPainter \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainter.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qtextoption.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpen.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontinfo.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfont.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontmetrics.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/QGraphicsScene \
-		../../../../Qt/6.5.0/mingw_64/include/QtWidgets/qgraphicsscene.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h
+		../Proyecto/ZonaRecta.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Arma.o ../Proyecto/Arma.cpp
 
 release/Juego.o: ../Proyecto/Juego.cpp ../Proyecto/Juego.h \
@@ -1909,10 +1911,10 @@ release/Juego.o: ../Proyecto/Juego.cpp ../Proyecto/Juego.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainterpath.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QPainter \
 		../Proyecto/Arma.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../Proyecto/ZonaRecta.h \
 		../Proyecto/ZonaGravitacional.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../Proyecto/Plataforma.h \
 		../Proyecto/ObjetoEstatico.h \
 		../Proyecto/ZonaRadial.h
@@ -2063,12 +2065,12 @@ release/Jugador.o: ../Proyecto/Jugador.cpp ../Proyecto/Jugador.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontinfo.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qfontmetrics.h \
 		../Proyecto/Arma.h \
-		../Proyecto/ZonaRecta.h \
-		../Proyecto/ZonaGravitacional.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qcursor.h \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/qbitmap.h \
+		../Proyecto/ZonaRecta.h \
+		../Proyecto/ZonaGravitacional.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/Jugador.o ../Proyecto/Jugador.cpp
 
 release/ObjetoEstatico.o: ../Proyecto/ObjetoEstatico.cpp ../Proyecto/ObjetoEstatico.h \
@@ -3126,10 +3128,10 @@ release/main.o: ../Proyecto/main.cpp ../../../../Qt/6.5.0/mingw_64/include/QtWid
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/qpainterpath.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QPainter \
 		../Proyecto/Arma.h \
+		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../Proyecto/ZonaRecta.h \
 		../Proyecto/ZonaGravitacional.h \
 		../../../../Qt/6.5.0/mingw_64/include/QtGui/QBrush \
-		../../../../Qt/6.5.0/mingw_64/include/QtGui/QCursor \
 		../Proyecto/Plataforma.h \
 		../Proyecto/ObjetoEstatico.h \
 		../Proyecto/ZonaRadial.h

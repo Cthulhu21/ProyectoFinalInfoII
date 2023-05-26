@@ -3,10 +3,12 @@
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
-#include <ZonaRecta.h>
 #include <QGraphicsScene>
 #include <math.h>
 #include <QCursor>
+
+#include "ObjetoMovible.h"
+#include "ZonaRecta.h"
 
 #define PI 3.14159265
 
@@ -24,6 +26,7 @@ public:
     ~Arma();
     Disparo TipoDeDisparo;
     bool Activa;
+    bool MoviblePegado;
 
     void CrearZona(QGraphicsScene *Escena);
     void Rotar(qreal Angulo);
@@ -33,10 +36,14 @@ public:
 
     QPointF getSize() const;
 
+    void setObjetoPegado(ObjetoMovible *newObjetoPegado);
+    void MoverObjetoPegado();
+
 private:
     void CargarSprite();
     ZonaRecta *RangoArma;
     QPointF Size;
+    ObjetoMovible *ObjetoPegado;
 };
 
 #endif // ARMA_H
