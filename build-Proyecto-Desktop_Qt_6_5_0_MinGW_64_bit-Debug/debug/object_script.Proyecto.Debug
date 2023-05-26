@@ -1,6 +1,7 @@
 debug/Arma.o
 debug/Juego.o
 debug/Jugador.o
+debug/Mapa.o
 debug/ObjetoEstatico.o
 debug/ObjetoMovible.o
 debug/Plataforma.o

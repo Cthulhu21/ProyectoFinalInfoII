@@ -15,64 +15,46 @@ Juego::Juego(QWidget *parent)
     setMouseTracking(true);
 }
 
-void Juego::Jugar()
-{
-    ContadorGlobal=0;
-
-    ZonasGravitacionales = new QList<ZonaGravitacional*>;
-    ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));
-    /*ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{500,0},100,1500,0.5));
-    ZonasGravitacionales->append(new ZonaGravitacional(1000,0,-90,{700,0},100,1500,0.5));
-    ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{1500,0},100,1500,0.5));*/
-
-    ZonasGravitacionales->append(new ZonaRadial({700,700}, 1000, ZonaRadial::Interaccion::Repulsivo, 150, 0.3));
-    ZonasGravitacionales->append(new ZonaRadial({1100,400}, 1000, ZonaRadial::Interaccion::Atractivo, 150, 0.3));
-
-    for(int i=0; i<ZonasGravitacionales->size(); i++)
-    {
-        Pantalla->addItem(ZonasGravitacionales->at(i));
-    }
-
-    ObjetosEstaticos = new QList<ObjetoEstatico*>;
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(PantallaSizeX, 20))); // Pared superior
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(PantallaSizeX-20, 0), QPointF(20, 2000))); // Pared derecha
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, PantallaSizeY - 20), QPointF(PantallaSizeX,20))); // Pared inferior
-    ObjetosEstaticos->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(20, 2000))); // Pared izquierda
-
-
-    for(int i=0; i<ObjetosEstaticos->size(); i++)
-    {
-        Pantalla->addItem(ObjetosEstaticos->at(i));
-    }
-
-    Objetos = new QList<ObjetoMovible*>;
-    Objetos->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{500,500}));
-    Objetos->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{1500,500}));
-    for(int i=0; i<Objetos->size(); i++)
-    {
-        Pantalla->addItem(Objetos->at(i));
-    }
-
-    Player = new Jugador(10,{30,800});
-    Pantalla->addItem(Player);
-    Player->AgregarArma(Pantalla);
-
-    Timer = new QTimer;
-    connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
-}
-
 Juego::~Juego()
 {
     delete Timer;
     delete Pantalla;
     delete Player;
-    delete ZonasGravitacionales;
-    delete Objetos;
-    delete ObjetosEstaticos;
+    delete MapaActual;
+}
+
+void Juego::EmpezarJuego(unsigned int IDMapa)
+{
+    ContadorGlobal=0;
+
+    Player = new Jugador(10);
+
+    Timer = new QTimer;
+
+    connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
+    MapaActual = new Mapa(IDMapa, Pantalla, Player);
+    //*MapaActual = Mapa(1, Pantalla, Player);
+    Timer->start(10);
+    JuegoActivo=true;
 }
 
 void Juego::keyPressEvent(QKeyEvent *evento)
 {
+    if(evento->key()==Qt::Key_Space)
+    {
+        if(JuegoActivo)
+        {
+            JuegoActivo=false;
+            Timer->stop();
+        }
+        else
+        {
+            JuegoActivo=true;
+            Timer->start(10);
+        }
+    }
+    if(!JuegoActivo)
+        return;
     switch(evento->key())
     {
     case Qt::Key_W:
@@ -84,16 +66,11 @@ void Juego::keyPressEvent(QKeyEvent *evento)
     case Qt::Key_D:
         Player->Velocidad->setX(50);
         break;
-    case Qt::Key_Space:
-        if(Timer->isActive())
-            Timer->stop();
-        else
-            Timer->start(10);
-        break;
     case Qt::Key_R:
         Pantalla->clear();
         delete Timer;
-        Jugar();
+        EmpezarJuego(MapaActual->getID());
+        JuegoActivo=false;
         break;
     default:
         break;
@@ -104,11 +81,6 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
 {
     if(Objeto->ObjetoPegado)
     {
-        /*QPointF Posicion=Player->getPistola()->pos();
-        QPointF Size=Player->getPistola()->getSize();
-        Size.setX(Size.x()*cos(Player->getPistola()->rotation()));
-        Size.setY(Size.y()*cos(Player->getPistola()->rotation()));
-        Objeto->SetPos(Posicion+Size);*/
         return;
     }
     if(Zona==Player->getPistola()->getRangoArma() and Objeto==Player)
@@ -285,11 +257,15 @@ void Juego::MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2)
 
 void Juego::mouseMoveEvent(QMouseEvent *event)
 {
+    if(!JuegoActivo)
+        return;
     Player->RotarArma();
 }
 
 void Juego::mousePressEvent(QMouseEvent *event)
 {
+    if(!JuegoActivo)
+        return;
     switch(event->button())
     {
     case Qt::LeftButton:

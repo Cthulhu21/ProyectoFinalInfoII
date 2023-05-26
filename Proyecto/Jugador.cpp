@@ -8,6 +8,11 @@ Jugador::Jugador(int Masa, QPointF Pos, QPointF Vel,
     Jugador::SetPos(Pos);
 }
 
+Jugador::Jugador()
+{
+
+}
+
 Jugador::~Jugador()
 {
 
@@ -43,7 +48,7 @@ void Jugador::DispararObjeto()
         return;
     ObjetoMovible *Objeto = Pistola ->getObjetoPegado();
     int Rotacion=Pistola->rotation();
-    int VelocidadDisparo=175;
+    int VelocidadDisparo=200;
     Objeto->Velocidad->setX(Velocidad->x()+VelocidadDisparo*cos(Rotacion*M_PI/180));
     Objeto->Velocidad->setY(Velocidad->y()+VelocidadDisparo*sin(Rotacion*M_PI/180));
     Objeto->ObjetoPegado=false;

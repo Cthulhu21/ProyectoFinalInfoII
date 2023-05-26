@@ -14,6 +14,7 @@ class Jugador: public ObjetoMovible
 public:
     Jugador(int Masa, QPointF Pos={0,0},  QPointF Vel={0,0},
              QPointF Acel={0,0}, float VelMax=300, float Fric=0.95, QGraphicsItem *parent=nullptr);
+    Jugador();
     ~Jugador();
 
     void AgregarArma(QGraphicsScene *Pantalla);

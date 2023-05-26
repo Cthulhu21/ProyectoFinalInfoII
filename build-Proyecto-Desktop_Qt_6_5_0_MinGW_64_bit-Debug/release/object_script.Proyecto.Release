@@ -1,6 +1,7 @@
 release/Arma.o
 release/Juego.o
 release/Jugador.o
+release/Mapa.o
 release/ObjetoEstatico.o
 release/ObjetoMovible.o
 release/Plataforma.o

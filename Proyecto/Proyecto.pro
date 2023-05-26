@@ -10,6 +10,7 @@ SOURCES += \
         Arma.cpp \
         Juego.cpp \
         Jugador.cpp \
+        Mapa.cpp \
         ObjetoEstatico.cpp \
         ObjetoMovible.cpp \
         Plataforma.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     Arma.h \
     Juego.h \
     Jugador.h \
+    Mapa.h \
     ObjetoEstatico.h \
     ObjetoMovible.h \
     Plataforma.h \
