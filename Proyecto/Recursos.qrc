@@ -36,6 +36,7 @@
     </qresource>
     <qresource prefix="/Flechas">
         <file alias="Flecha">Recursos/Flecha/Flecha.png</file>
+        <file alias="Brocha">Recursos/Flecha/BrochaFlechas.png</file>
     </qresource>
     <qresource prefix="/Armas">
         <file alias="1">Recursos/DefineSprite_1340/1.png</file>

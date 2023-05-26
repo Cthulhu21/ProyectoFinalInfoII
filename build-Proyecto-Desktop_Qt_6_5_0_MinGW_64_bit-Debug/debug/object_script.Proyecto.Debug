@@ -17,3 +17,4 @@ debug/moc_ObjetoMovible.o
 debug/moc_Plataforma.o
 debug/moc_ZonaGravitacional.o
 debug/moc_ZonaRadial.o
+debug/moc_ZonaRecta.o

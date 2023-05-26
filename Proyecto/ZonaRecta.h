@@ -5,6 +5,7 @@
 
 class ZonaRecta: public ZonaGravitacional
 {
+    Q_OBJECT
 public:
     ZonaRecta(QPointF Pos, QPointF Size, float Fuerza, float Rotacion, float DireccionFuerza, float Opacidad=0);
     ~ZonaRecta();

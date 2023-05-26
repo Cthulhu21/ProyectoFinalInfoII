@@ -25,7 +25,8 @@ void Juego::Jugar()
     ZonasGravitacionales->append(new ZonaGravitacional(1000,0,-90,{700,0},100,1500,0.5));
     ZonasGravitacionales->append(new ZonaGravitacional(100,0,-90,{1500,0},100,1500,0.5));*/
 
-    ZonasGravitacionales->append(new ZonaRadial({700,700}, 100, ZonaRadial::Interaccion::Atractivo, 500, 0.5));
+    ZonasGravitacionales->append(new ZonaRadial({700,700}, 500, ZonaRadial::Interaccion::Repulsivo, 150, 0.3));
+    ZonasGravitacionales->append(new ZonaRadial({1500,800}, 500, ZonaRadial::Interaccion::Atractivo, 150, 0.3));
 
     for(int i=0; i<ZonasGravitacionales->size(); i++)
     {
@@ -101,12 +102,26 @@ void Juego::keyPressEvent(QKeyEvent *evento)
 
 void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
 {
+
     if(!(Zona==Player->getPistola()->getRangoArma() and Objeto==Player))
     {
         QPointF Pos0 = Objeto->pos();
 
         float MagnitudFuerza = Zona->getFuerzaGravitacional();
         float AnguloRadianes = Zona->DireccionFuerza * (M_PI / 180.0);
+        ZonaRadial *Radial =dynamic_cast<ZonaRadial*>(Zona);
+        if(Radial)
+        {
+            QPointF Centro = Radial->getCentro();
+            QPointF Direccion = Centro - Pos0;
+            AnguloRadianes= atan2(Direccion.y(), Direccion.x());
+            if(Radial->TipoDeInteraccion==ZonaRadial::Interaccion::Repulsivo)
+            {
+               Direccion = Pos0-Centro;
+               AnguloRadianes= atan2(Direccion.y(), Direccion.x());
+            }
+
+        }
 
         float FuerzaHorizontal = MagnitudFuerza * cos(AnguloRadianes);
         float FuerzaVertical = MagnitudFuerza * sin(AnguloRadianes);
@@ -186,6 +201,7 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
             Objeto->Velocidad->setX(Objeto->Velocidad->x()*-k);
             Objeto->Posicion->setX(Pos0.x());
         }
+
         Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
         *Objeto->Velocidad*=0.995;
         if(abs(Objeto->Velocidad->x())<0.1)
@@ -201,6 +217,7 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
         delete Estaticos;
     }
 }
+
 
 void Juego::GameOver()
 {
@@ -273,7 +290,7 @@ void Juego::Actualizar()
                 QList<QGraphicsItem*> items=Objeto->collidingItems();
                 for(QGraphicsItem *item : items)
                 {
-                     ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
+                    ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
                     if(Zona)
                         InteraccionZonas(Zona, Objeto);
                 }

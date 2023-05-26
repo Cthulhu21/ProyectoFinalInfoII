@@ -6,31 +6,67 @@ ZonaRadial::ZonaRadial(QPointF Posicion, float Fuerza_, Interaccion TipoRadial_,
     setPos(Posicion);
     TipoDeInteraccion = TipoRadial_;
     Radio = Radio_;
-}
 
+    Imagen = new QPixmap(":/Flechas/Flecha");
+    *Imagen = Imagen->scaled(25, 25);
+    setBrush(*Imagen);
+
+    QPainterPath Camino;
+    Camino.addEllipse(QRectF(-Radio, -Radio, Radio * 2, Radio * 2));
+
+    setCacheMode(QGraphicsPixmapItem::DeviceCoordinateCache);
+    setScale(1);
+}
 QRectF ZonaRadial::boundingRect() const
 {
     return QRectF(-Radio, -Radio, Radio*2, Radio*2);
 }
 
+float ZonaRadial::getRadio() const
+{
+    return Radio;
+}
+
+QPointF ZonaRadial::getCentro()
+{
+    return mapToScene(QPointF(0,0));
+}
+
 void ZonaRadial::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->setPen(Qt::black);
-    unsigned int numFlechas=10;
 
-    for (unsigned int i = 0; i < numFlechas; ++i)
+    /*QPainterPath shapePath = shape();
+    painter->fillPath(shapePath, brush());*/
+
+    QBrush Patron(brush());
+    QPainterPath Camino;
+    Camino.addRect(QRectF(0, 0, Radio, 25));
+    QPainterPath Pasado;
+    unsigned int NumeroDeRadios = 50;
+    for (unsigned int i = 0; i < NumeroDeRadios; i++)
     {
-        float angle = i * (360.0 / numFlechas) ;
-        QPointF arrowTip = PuntaFlecha(angle);
-        QPointF arrowPoint1 = PuntoFlecha(angle + 30);
-        QPointF arrowPoint2 = PuntoFlecha(angle - 30);
+        // Calcular el ángulo de rotación para el radio actual
+        float angulo = rotation() + i * (360.0 / NumeroDeRadios);
 
-        QPen Flecha(Qt::magenta);
-        Flecha.setWidth(5);
-        painter->setPen(Flecha);
-        painter->drawLine(QPointF(), arrowTip);
-        painter->drawLine(arrowTip, arrowPoint1);
-        painter->drawLine(arrowTip, arrowPoint2);
+        if(TipoDeInteraccion==Interaccion::Repulsivo)
+            Patron.setTransform(QTransform().rotate(angulo));
+        else
+            Patron.setTransform(QTransform().rotate(angulo+180));
+
+        // Crear una nueva matriz de transformación para cada radio
+        QTransform Transformacion;
+        //Transformacion.translate(pos().x(), pos().y()); // Mover al centro de la zona radial
+        Transformacion.rotate(angulo); // Aplicar el ángulo de rotación
+        //Transformacion.translate(-pos().x(), -pos().y()); // Mover de regreso al origen
+
+        // Aplicar la transformación al QPainterPath
+        QPainterPath CaminoRotado = Transformacion.map(Camino);
+
+        QPainterPath Final = CaminoRotado.subtracted(Pasado);
+        Pasado = CaminoRotado;
+
+        // Dibujar el QPainterPath rotado con el patrón
+        painter->fillPath(Final, Patron);
     }
 }
 
@@ -43,7 +79,14 @@ QPointF ZonaRadial::PuntaFlecha(float angle) const
 
 QPointF ZonaRadial::PuntoFlecha(float angle) const
 {
-    float x = Radio*0.8 * qCos(qDegreesToRadians(angle));
-    float y = Radio*0.8 * qSin(qDegreesToRadians(angle));
+    float x = Radio*0.1 * qCos(qDegreesToRadians(angle));
+    float y = Radio*0.1 * qSin(qDegreesToRadians(angle));
     return QPointF(x, y);
+}
+
+QPainterPath ZonaRadial::shape() const
+{
+    QPainterPath path;
+    path.addEllipse(boundingRect());
+    return path;
 }

@@ -6,8 +6,6 @@ ZonaRecta::ZonaRecta(QPointF Pos, QPointF Size, float Fuerza, float Rotacion, fl
     setRect(Pos.x(), Pos.y(), Size.x(), Size.y());
     Imagen = new QPixmap(":/Flechas/Flecha");
     *Imagen = Imagen->scaled(25,25);
-    Brocha = new QBrush(*Imagen);
-    setBrush(*Brocha);
 }
 
 ZonaRecta::~ZonaRecta()

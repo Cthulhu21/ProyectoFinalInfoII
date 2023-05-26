@@ -21,7 +21,6 @@ public:
     float DireccionFuerza;
     TipoDeZona ZonaTipo;
     QPixmap *Imagen;
-    QBrush *Brocha;
     QPointF *getSize() const;
 
 private:

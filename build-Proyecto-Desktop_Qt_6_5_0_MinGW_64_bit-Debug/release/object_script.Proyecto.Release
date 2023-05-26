@@ -17,3 +17,4 @@ release/moc_ObjetoMovible.o
 release/moc_Plataforma.o
 release/moc_ZonaGravitacional.o
 release/moc_ZonaRadial.o
+release/moc_ZonaRecta.o

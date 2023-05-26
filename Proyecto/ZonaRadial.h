@@ -6,7 +6,7 @@
 #include <QPainter>
 #include "ZonaGravitacional.h"
 
-class ZonaRadial: public ZonaGravitacional
+class ZonaRadial:public ZonaGravitacional
 {
     Q_OBJECT
 public:
@@ -20,12 +20,15 @@ public:
     QRectF boundingRect() const override;
     Interaccion TipoDeInteraccion;
 
+    float getRadio() const;
+    QPointF getCentro();
 private:
     //void CargarSprite() override;
     float Radio;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
     QPointF PuntaFlecha(float angle) const;
     QPointF PuntoFlecha(float angle) const;
+    QPainterPath shape() const override;
 };
 
 #endif // ZONARADIAL_H
