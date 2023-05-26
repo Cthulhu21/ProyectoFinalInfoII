@@ -36,7 +36,6 @@ public:
 
     QPointF getSize() const;
 
-
     void MoverObjetoPegado();
 
     void setObjetoPegado(ObjetoMovible *newObjetoPegado);

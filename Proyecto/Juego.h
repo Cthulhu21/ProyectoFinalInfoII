@@ -27,8 +27,10 @@ private:
 
     bool JuegoActivo=false;
 
+    void SiguienteMapa();
     void GameOver();
-    void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto);
+
+    void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, bool *Parar);
     void PegarObjetoAArma(ObjetoMovible *Objeto);
     void MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2);
 

@@ -6,6 +6,6 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Juego *Game = new Juego;
     Game->show();
-    Game->EmpezarJuego();
+    Game->EmpezarJuego(2);
     return a.exec();
 }

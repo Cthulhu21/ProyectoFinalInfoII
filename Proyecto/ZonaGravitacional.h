@@ -17,10 +17,13 @@ class ZonaGravitacional:public QObject, public QGraphicsRectItem
 public:
     ZonaGravitacional(int Fuerza, float Rotacion_=0, float DireccionFuerza_=0, QPointF Pos={0,0}, QPointF Size_={0,0}, float Opacidad=1, TipoDeZona Tipo=Recta, QGraphicsItem *parent=nullptr);
     ~ZonaGravitacional();
+
     int getFuerzaGravitacional() const;
+
     float DireccionFuerza;
     TipoDeZona ZonaTipo;
     QPixmap *Imagen;
+
     QPointF *getSize() const;
 
 private:

@@ -25,6 +25,8 @@ Juego::~Juego()
 
 void Juego::EmpezarJuego(unsigned int IDMapa)
 {
+    Pantalla->clear();
+
     ContadorGlobal=0;
 
     Player = new Jugador(10);
@@ -33,9 +35,12 @@ void Juego::EmpezarJuego(unsigned int IDMapa)
 
     connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
     MapaActual = new Mapa(IDMapa, Pantalla, Player);
-    //*MapaActual = Mapa(1, Pantalla, Player);
-    Timer->start(10);
-    JuegoActivo=true;
+    JuegoActivo=false;
+}
+
+void Juego::SiguienteMapa()
+{
+    EmpezarJuego(MapaActual->getID()+1);
 }
 
 void Juego::keyPressEvent(QKeyEvent *evento)
@@ -77,7 +82,7 @@ void Juego::keyPressEvent(QKeyEvent *evento)
     }
 }
 
-void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
+void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, bool *Next)
 {
     if(Objeto->ObjetoPegado)
     {
@@ -145,6 +150,14 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
             delete Estaticos;
             return;
         }
+        else if(Item==MapaActual->getZonaDeMeta())
+        {
+            delete Colisiones;
+            delete Movibles;
+            delete Estaticos;
+            *Next=true;
+            return;
+        }
     }
     if(!Movibles->empty())
         MomentoEnergia(Objeto, Movibles->at(0));
@@ -182,6 +195,14 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto)
             delete Colisiones;
             delete Movibles;
             delete Estaticos;
+            return;
+        }
+        else if(Item==MapaActual->getZonaDeMeta())
+        {
+            delete Colisiones;
+            delete Movibles;
+            delete Estaticos;
+            *Next=true;
             return;
         }
     }
@@ -280,6 +301,7 @@ void Juego::mousePressEvent(QMouseEvent *event)
 
 void Juego::Actualizar()
 {
+    bool NextLevel=false;
     ContadorGlobal+=1;
     ContadorGlobal%=10;
     //Actualizar el frame
@@ -299,9 +321,11 @@ void Juego::Actualizar()
                 {
                     ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
                     if(Zona)
-                        InteraccionZonas(Zona, Objeto);
+                        InteraccionZonas(Zona, Objeto, &NextLevel);
                 }
             }
         }
     }
+    if(NextLevel)
+        SiguienteMapa();
 }
