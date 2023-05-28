@@ -110,7 +110,38 @@ void Mapa::CargarElementos()
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
+    case 4:
+        ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
+
+        ZonasGravitacionales->append(new ZonaRecta({20,500},{800,100},10000,0,90,0.3));
+        ZonasGravitacionales->append(new ZonaRecta({1090,500},{800,100},10000,0,90,0.3));
+
+        ZonasGravitacionales->append(new ZonaRecta({20,400},{600,100},25000,0,-45,0.3));
+        ZonasGravitacionales->append(new ZonaRecta({1290,400},{600,100},25000,0,-135,0.3));
+
+        ZonasGravitacionales->append(new ZonaRadial({955,450},2000, ZonaRadial::Interaccion::Atractivo, 100, 0.7)); //335
+
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(620, 200), QPointF(670, 20)));
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(620, 300), QPointF(20, 200)));
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(1270, 300), QPointF(20, 200)));
+
+        AgregarParedes();
+
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{150,850}));
+
+        AgregarElementos();
+
+        ZonaDeMeta = new QGraphicsRectItem(690,190,530,10);
+        ZonaDeMeta->setBrush(QBrush(Qt::green));
+        Escenario->addItem(ZonaDeMeta);
+
+
+        Player->SetPos({750,850});
+        Player->AgregarArma(Escenario);
+        Escenario->addItem(Player);
+        break;
     default:
+
         break;
     }
 }
