@@ -85,6 +85,30 @@ void Mapa::CargarElementos()
         break;
     case 3:
 
+        ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
+
+        ZonasGravitacionales->append(new ZonaRecta({500,10},{200,1100},3000,0,180,0.3));
+        ZonasGravitacionales->append(new ZonaRecta({20,10},{200,500},40000,0,0,0.3));
+
+        AgregarParedes();
+
+        Plataformas->append(new Plataforma(Color::Negra, QPointF(1490, 10), QPointF(20, 1000)));
+        Plataformas->append(new Plataforma(Color::Negra, QPointF(1490, 600), QPointF(20, 800)));
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(0, 500), QPointF(300, 20)));
+
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,5,{1490,550}));
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{150,850}));
+
+        AgregarElementos();
+
+        ZonaDeMeta = new QGraphicsRectItem(1550,10,340,SizePantalla.y()-30);
+        ZonaDeMeta->setBrush(QBrush(Qt::green));
+        Escenario->addItem(ZonaDeMeta);
+
+
+        Player->SetPos({20,850});
+        Player->AgregarArma(Escenario);
+        Escenario->addItem(Player);
         break;
     default:
         break;
