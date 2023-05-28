@@ -1,4 +1,5 @@
 #include "ZonaRadial.h"
+#include "Arma.h"
 
 ZonaRadial::ZonaRadial(QPointF Posicion, float Fuerza_, Interaccion TipoRadial_, float Radio_,float Opacidad, QGraphicsObject *parent):
     ZonaGravitacional(Fuerza_, 0, 90, Posicion, {0, 0}, Opacidad,TipoDeZona::Radial)
@@ -37,7 +38,7 @@ void ZonaRadial::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWid
 
     /*QPainterPath shapePath = shape();
     painter->fillPath(shapePath, brush());*/
-
+    /*
     QBrush Patron(brush());
     QPainterPath Camino;
     Camino.addRect(QRectF(0, 0, Radio, 25));
@@ -67,6 +68,24 @@ void ZonaRadial::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWid
 
         // Dibujar el QPainterPath rotado con el patrón
         painter->fillPath(Final, Patron);
+    }*/
+    if(TipoDeInteraccion==Interaccion::Atractivo)
+    {
+        QRadialGradient Gradiente(QPointF(0,0), Radio);
+        Gradiente.setColorAt(0,Qt::magenta);
+        Gradiente.setColorAt(1,Qt::transparent);
+        painter->setBrush(Gradiente);
+        painter->setPen(Qt::NoPen);
+        painter->drawEllipse(boundingRect());
+    }
+    else
+    {
+        QRadialGradient Gradiente(QPointF(0,0), Radio);
+        Gradiente.setColorAt(1,Qt::magenta);
+        Gradiente.setColorAt(0,Qt::transparent);
+        painter->setBrush(Gradiente);
+        painter->setPen(Qt::NoPen);
+        painter->drawEllipse(boundingRect());
     }
 }
 

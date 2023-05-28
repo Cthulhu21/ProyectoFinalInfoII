@@ -94,7 +94,7 @@ void ObjetoMovible::CargarSprites()
             Sprites.append(QPixmap(*Map));
 
         }
-        *Size = {30,55};
+        *Size = {30,60};
         break;
     case Cubo:
         Sprites.append(QPixmap(":/Imagenes/Cubo"));

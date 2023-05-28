@@ -17,7 +17,6 @@ Mapa::Mapa()
 
 Mapa::~Mapa()
 {
-    delete PosicionInicialJugador;
     delete ObjetosMovibles;
     delete Plataformas;
     delete ZonasGravitacionales;
@@ -33,31 +32,18 @@ void Mapa::CargarElementos()
     case 1:
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
-        ZonasGravitacionales->append(new ZonaRadial({700,700}, 1000, ZonaRadial::Interaccion::Repulsivo, 150, 0.3));
-        ZonasGravitacionales->append(new ZonaRadial({1200,300}, 950, ZonaRadial::Interaccion::Atractivo, 200, 0.3));
+        AgregarParedes();
 
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(SizePantalla.x(), 20))); // Pared superior
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(SizePantalla.x()-20, 0), QPointF(20, 2000))); // Pared derecha
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(0, SizePantalla.y() - 20), QPointF(SizePantalla.x(),20))); // Pared inferior
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(20, 2000))); // Pared izquierda
+        ZonasGravitacionales->append(new ZonaRadial({700,700}, 1000, ZonaRadial::Interaccion::Repulsivo, 150, 0.5));
+        ZonasGravitacionales->append(new ZonaRadial({1200,300}, 950, ZonaRadial::Interaccion::Atractivo, 200, 0.5));
+
 
         Plataformas->append(new Plataforma(Color::Blanca, QPointF(1400, 400), QPointF(500, 20))); //Pared de bloqueo 1
 
         ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{500,900}));
 
-        for(int i=0; i<Plataformas->size(); i++)
-        {
-            Escenario->addItem(Plataformas->at(i));
-        }
-        for(int i=0; i<ZonasGravitacionales->size(); i++)
-        {
-            Escenario->addItem(ZonasGravitacionales->at(i));
-        }
+        AgregarElementos();
 
-        for(int i=0; i<ObjetosMovibles->size(); i++)
-        {
-            Escenario->addItem(ObjetosMovibles->at(i));
-        }
 
         ZonaDeMeta = new QGraphicsRectItem(1820,10,75,390);
         ZonaDeMeta->setBrush(QBrush(Qt::green));
@@ -68,44 +54,43 @@ void Mapa::CargarElementos()
         Escenario->addItem(Player);
         break;
     case 2:
+
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
-        ZonasGravitacionales->append(new ZonaRecta({300,0},{200,1000}, 1000,0, 90, 0.3));
-        ZonasGravitacionales->append(new ZonaRecta({600,0},{200,1000},1000,0,-90,0.3));
-        ZonasGravitacionales->append(new ZonaRecta({900,0},{200,1000},1000,0,90,0.3));
-        ZonasGravitacionales->append(new ZonaRecta({1200,0},{200,1000},1000,0,-90,0.3));
+        AgregarParedes();
 
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(SizePantalla.x(), 20))); // Pared superior
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(SizePantalla.x()-20, 0), QPointF(20, 2000))); // Pared derecha
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(0, SizePantalla.y() - 20), QPointF(SizePantalla.x(),20))); // Pared inferior
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(20, 2000))); // Pared izquierda
+        ZonasGravitacionales->append(new ZonaRecta({300,0},{200,700}, 300,0, -90, 0.3));
+        ZonasGravitacionales->append(new ZonaRecta({600,0},{200,700},300,0,-90,0.3));
+        ZonasGravitacionales->append(new ZonaRecta({900,0},{200,700},300,0,90,0.3));
+        ZonasGravitacionales->append(new ZonaRecta({1200,0},{200,700},300,0,90,0.3));
 
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(20, 550), QPointF(100, 20))); // Plataforma Inicial
+        ZonasGravitacionales->append(new ZonaRadial({500,650},1800, ZonaRadial::Interaccion::Repulsivo, 200, 0.5));
+        ZonasGravitacionales->append(new ZonaRadial({0,250},4000, ZonaRadial::Interaccion::Repulsivo, 200, 0.5));
+        ZonasGravitacionales->append(new ZonaRadial({1100,0},300, ZonaRadial::Interaccion::Atractivo, 200, 0.7));
 
-        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{40,520}));
+        Plataformas->append(new Plataforma(Color::Negra, QPointF(20, 550), QPointF(100, 20)));
+        Plataformas->append(new Plataforma(Color::Negra, QPointF(300, 700), QPointF(100, 500)));
 
-        for(int i=0; i<Plataformas->size(); i++)
-        {
-            Escenario->addItem(Plataformas->at(i));
-        }
-        for(int i=0; i<ZonasGravitacionales->size(); i++)
-        {
-            Escenario->addItem(ZonasGravitacionales->at(i));
-        }
-        for(int i=0; i<ObjetosMovibles->size(); i++)
-        {
-            Escenario->addItem(ObjetosMovibles->at(i));
-        }
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{20,925}));
 
-        Player->SetPos({30,500});
+        AgregarElementos();
+
+        ZonaDeMeta = new QGraphicsRectItem(1490,935,400,50);
+        ZonaDeMeta->setBrush(QBrush(Qt::green));
+        Escenario->addItem(ZonaDeMeta);
+
+        Player->SetPos({50,925});
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
     case 3:
+
         break;
     default:
         break;
     }
+
+
 }
 
 unsigned int Mapa::getID() const
@@ -116,4 +101,28 @@ unsigned int Mapa::getID() const
 QGraphicsRectItem *Mapa::getZonaDeMeta() const
 {
     return ZonaDeMeta;
+}
+
+void Mapa::AgregarParedes()
+{
+    Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(SizePantalla.x(), 20))); // Pared superior
+    Plataformas->append(new Plataforma(Color::Negra, QPointF(SizePantalla.x()-20, 0), QPointF(20, 2000))); // Pared derecha
+    Plataformas->append(new Plataforma(Color::Negra, QPointF(0, SizePantalla.y() - 20), QPointF(SizePantalla.x(),20))); // Pared inferior
+    Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(20, 2000))); // Pared izquierda
+}
+
+void Mapa::AgregarElementos()
+{
+    for(int i=0; i<Plataformas->size(); i++)
+    {
+        Escenario->addItem(Plataformas->at(i));
+    }
+    for(int i=0; i<ZonasGravitacionales->size(); i++)
+    {
+        Escenario->addItem(ZonasGravitacionales->at(i));
+    }
+    for(int i=0; i<ObjetosMovibles->size(); i++)
+    {
+        Escenario->addItem(ObjetosMovibles->at(i));
+    }
 }

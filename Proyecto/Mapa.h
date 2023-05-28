@@ -32,10 +32,11 @@ private:
 
     Jugador *Player;
 
-    QPointF *PosicionInicialJugador;
     QList<ObjetoMovible*> *ObjetosMovibles;
     QList<Plataforma*> *Plataformas;
     QList<ZonaGravitacional*> *ZonasGravitacionales;
+    void AgregarParedes();
+    void AgregarElementos();
 
     QGraphicsRectItem *ZonaDeMeta;
 };
