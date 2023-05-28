@@ -16,10 +16,13 @@ public:
     Plataforma(Color Color_, QPointF Pos, QPointF Size, float Rotacion=0, QGraphicsItem *parent=nullptr);
     ~Plataforma();
 
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;;
 private:
 
     Color ColorPlataforma;
     void CargarSprite();
+
 };
 
 #endif // PLATAFORMA_H

@@ -12,8 +12,6 @@ public:
     float Angulo;
     QPointF Size;
     QPixmap *Imagen;
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
 };
 
 #endif // OBJETOESTATICO_H

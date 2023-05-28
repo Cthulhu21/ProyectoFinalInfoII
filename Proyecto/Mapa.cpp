@@ -113,8 +113,6 @@ void Mapa::CargarElementos()
     default:
         break;
     }
-
-
 }
 
 unsigned int Mapa::getID() const

@@ -13,6 +13,19 @@ Plataforma::~Plataforma()
 
 }
 
+QRectF Plataforma::boundingRect() const
+{
+    QRectF Retorno(0,0, Size.x(), Size.y());
+    QTransform Transformacion = QTransform().rotate(Angulo);
+    return Transformacion.mapRect(Retorno);;
+}
+
+void Plataforma::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+{
+    setPixmap(*Imagen);
+    painter->drawPixmap(QPointF(), *Imagen);
+}
+
 void Plataforma::CargarSprite()
 {
     QString Nombre;
@@ -28,7 +41,6 @@ void Plataforma::CargarSprite()
         break;
     }
     *Imagen = QPixmap(Nombre);
-    *Imagen=Imagen->scaled(QSize(Size.x(),Size.y()));
-    *Imagen=Imagen->transformed(QTransform().rotate(Angulo));
-    setPixmap(*Imagen);
+    *Imagen = Imagen->scaled(QSize(Size.x(), Size.y()));
+    *Imagen = Imagen->transformed(QTransform().rotate(Angulo));
 }
