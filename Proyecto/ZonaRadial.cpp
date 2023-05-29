@@ -35,40 +35,6 @@ QPointF ZonaRadial::getCentro()
 
 void ZonaRadial::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-
-    /*QPainterPath shapePath = shape();
-    painter->fillPath(shapePath, brush());*/
-    /*
-    QBrush Patron(brush());
-    QPainterPath Camino;
-    Camino.addRect(QRectF(0, 0, Radio, 25));
-    QPainterPath Pasado;
-    unsigned int NumeroDeRadios = 50;
-    for (unsigned int i = 0; i < NumeroDeRadios; i++)
-    {
-        // Calcular el ángulo de rotación para el radio actual
-        float angulo = rotation() + i * (360.0 / NumeroDeRadios);
-
-        if(TipoDeInteraccion==Interaccion::Repulsivo)
-            Patron.setTransform(QTransform().rotate(angulo));
-        else
-            Patron.setTransform(QTransform().rotate(angulo+180));
-
-        // Crear una nueva matriz de transformación para cada radio
-        QTransform Transformacion;
-        //Transformacion.translate(pos().x(), pos().y()); // Mover al centro de la zona radial
-        Transformacion.rotate(angulo); // Aplicar el ángulo de rotación
-        //Transformacion.translate(-pos().x(), -pos().y()); // Mover de regreso al origen
-
-        // Aplicar la transformación al QPainterPath
-        QPainterPath CaminoRotado = Transformacion.map(Camino);
-
-        QPainterPath Final = CaminoRotado.subtracted(Pasado);
-        Pasado = CaminoRotado;
-
-        // Dibujar el QPainterPath rotado con el patrón
-        painter->fillPath(Final, Patron);
-    }*/
     if(TipoDeInteraccion==Interaccion::Atractivo)
     {
         QRadialGradient Gradiente(QPointF(0,0), Radio);

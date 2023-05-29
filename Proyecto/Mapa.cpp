@@ -127,7 +127,7 @@ void Mapa::CargarElementos()
 
         AgregarParedes();
 
-        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{150,850}));
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{250,900}));
 
         AgregarElementos();
 
@@ -136,7 +136,7 @@ void Mapa::CargarElementos()
         Escenario->addItem(ZonaDeMeta);
 
 
-        Player->SetPos({750,850});
+        Player->SetPos({150,900});
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
