@@ -33,6 +33,7 @@ private:
     void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, bool *Parar);
     void PegarObjetoAArma(ObjetoMovible *Objeto);
     void MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2);
+    void MoverPlataformas();
 
     unsigned int ContadorGlobal;
 

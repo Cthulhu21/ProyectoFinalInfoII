@@ -276,6 +276,14 @@ void Juego::MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2)
     }
 }
 
+void Juego::MoverPlataformas()
+{
+    for(Plataforma *Plataforma_ : *MapaActual->getPlataformas())
+    {
+        Plataforma_->SiguientePos(Delta);
+    }
+}
+
 void Juego::mouseMoveEvent(QMouseEvent *event)
 {
     if(!JuegoActivo)
@@ -303,7 +311,7 @@ void Juego::Actualizar()
 {
     bool NextLevel=false;
     ContadorGlobal+=1;
-    ContadorGlobal%=10;
+    ContadorGlobal%=100;
     //Actualizar el frame
     if(ContadorGlobal%5==0)
     {
@@ -325,6 +333,10 @@ void Juego::Actualizar()
                 }
             }
         }
+    }
+    if(ContadorGlobal%20==0)
+    {
+        MoverPlataformas();
     }
     if(NextLevel)
         SiguienteMapa();

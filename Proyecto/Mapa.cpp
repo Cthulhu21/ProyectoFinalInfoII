@@ -146,8 +146,26 @@ void Mapa::CargarElementos()
         Escenario->addItem(Player);
         break;
     }
-    default:
+    case 5:
+    {
+        ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
+        AgregarParedes();
+
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{250,900}));
+
+        Plataformas->append(new Plataforma(Color::Negra, {500,500},{100,20}));
+        QList<QPointF> Ruta={{500,0},{0,500},{-500,0},{0,-500}};
+        Plataformas->at(4)->AgregarRutas(Ruta, 1);
+
+        AgregarElementos();
+
+        Player->SetPos({150,900});
+        Player->AgregarArma(Escenario);
+        Escenario->addItem(Player);
+        break;
+    }
+    default:
         break;
     }
 }
@@ -160,6 +178,21 @@ unsigned int Mapa::getID() const
 QGraphicsRectItem *Mapa::getZonaDeMeta() const
 {
     return ZonaDeMeta;
+}
+
+QList<ObjetoMovible *> *Mapa::getObjetosMovibles() const
+{
+    return ObjetosMovibles;
+}
+
+QList<Plataforma *> *Mapa::getPlataformas() const
+{
+    return Plataformas;
+}
+
+QList<ZonaGravitacional *> *Mapa::getZonasGravitacionales() const
+{
+    return ZonasGravitacionales;
 }
 
 void Mapa::AgregarParedes()

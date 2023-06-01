@@ -24,6 +24,12 @@ public:
 
     QGraphicsRectItem *getZonaDeMeta() const;
 
+    QList<ObjetoMovible *> *getObjetosMovibles() const;
+
+    QList<Plataforma *> *getPlataformas() const;
+
+    QList<ZonaGravitacional *> *getZonasGravitacionales() const;
+
 private:
     unsigned int ID;
 
