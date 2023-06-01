@@ -167,7 +167,7 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, boo
         float k=0.1;
         if(Objeto!=Player)
         {
-            k=0.1;
+            k=0.2;
         }
         Objeto->Velocidad->setY(Objeto->Velocidad->y()*-k);
         Objeto->Posicion->setY(Pos0.y());
@@ -213,12 +213,12 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, boo
         float k=0.1;
         if(Objeto!=Player)
         {
-            k=0.1;
+            k=0.2;
         }
         Objeto->Velocidad->setX(Objeto->Velocidad->x()*-k);
         Objeto->Posicion->setX(Pos0.x());
     }
-
+    Objeto->SetPos(*Objeto->Posicion);
     if(Objeto==Player)
         Objeto->Velocidad->setX(Objeto->Velocidad->x()*0.95);
     else

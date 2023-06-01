@@ -30,6 +30,7 @@ void Mapa::CargarElementos()
     ZonasGravitacionales = new QList<ZonaGravitacional*>;
     switch (ID) {
     case 1:
+    {
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
         AgregarParedes();
@@ -53,8 +54,9 @@ void Mapa::CargarElementos()
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
+    }
     case 2:
-
+    {
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
         AgregarParedes();
@@ -83,8 +85,9 @@ void Mapa::CargarElementos()
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
+    }
     case 3:
-
+    {
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
         ZonasGravitacionales->append(new ZonaRecta({500,10},{200,1100},3000,0,180,0.3));
@@ -92,11 +95,11 @@ void Mapa::CargarElementos()
 
         AgregarParedes();
 
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(1490, 10), QPointF(20, 1000)));
-        Plataformas->append(new Plataforma(Color::Negra, QPointF(1490, 600), QPointF(20, 800)));
+        Plataformas->append(new Plataforma(Color::Negra, QPointF(1490, 10), QPointF(20, 980)));
+        Plataformas->append(new Plataforma(Color::Negra, QPointF(1490, 580), QPointF(20, 820)));
         Plataformas->append(new Plataforma(Color::Blanca, QPointF(0, 500), QPointF(300, 20)));
 
-        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,5,{1490,550}));
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,5,{1490,530}));
         ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{150,850}));
 
         AgregarElementos();
@@ -110,7 +113,9 @@ void Mapa::CargarElementos()
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
+    }
     case 4:
+    {
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
         ZonasGravitacionales->append(new ZonaRecta({20,500},{800,100},10000,0,90,0.3));
@@ -140,6 +145,7 @@ void Mapa::CargarElementos()
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
+    }
     default:
 
         break;
@@ -159,9 +165,9 @@ QGraphicsRectItem *Mapa::getZonaDeMeta() const
 void Mapa::AgregarParedes()
 {
     Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(SizePantalla.x(), 20))); // Pared superior
-    Plataformas->append(new Plataforma(Color::Negra, QPointF(SizePantalla.x()-20, 0), QPointF(20, 2000))); // Pared derecha
+    Plataformas->append(new Plataforma(Color::Blanca, QPointF(SizePantalla.x()-20, 0), QPointF(20, 2000))); // Pared derecha
     Plataformas->append(new Plataforma(Color::Negra, QPointF(0, SizePantalla.y() - 20), QPointF(SizePantalla.x(),20))); // Pared inferior
-    Plataformas->append(new Plataforma(Color::Negra, QPointF(0, 0), QPointF(20, 2000))); // Pared izquierda
+    Plataformas->append(new Plataforma(Color::Blanca, QPointF(0, 0), QPointF(20, 2000))); // Pared izquierda
 }
 
 void Mapa::AgregarElementos()
