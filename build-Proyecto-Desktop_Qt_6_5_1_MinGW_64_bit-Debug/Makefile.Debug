@@ -2944,7 +2944,15 @@ debug/ZonaRadial.o: ../Proyecto/ZonaRadial.cpp ../Proyecto/ZonaRadial.h \
 		../../../../Qt/6.5.1/mingw_64/include/QtGui/qfont.h \
 		../../../../Qt/6.5.1/mingw_64/include/QtGui/qfontmetrics.h \
 		../Proyecto/ZonaGravitacional.h \
-		../../../../Qt/6.5.1/mingw_64/include/QtGui/QBrush
+		../../../../Qt/6.5.1/mingw_64/include/QtGui/QBrush \
+		../Proyecto/Arma.h \
+		../../../../Qt/6.5.1/mingw_64/include/QtWidgets/QGraphicsScene \
+		../../../../Qt/6.5.1/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		../../../../Qt/6.5.1/mingw_64/include/QtGui/QCursor \
+		../../../../Qt/6.5.1/mingw_64/include/QtGui/qcursor.h \
+		../../../../Qt/6.5.1/mingw_64/include/QtGui/qbitmap.h \
+		../Proyecto/ObjetoMovible.h \
+		../Proyecto/ZonaRecta.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/ZonaRadial.o ../Proyecto/ZonaRadial.cpp
 
 debug/ZonaRecta.o: ../Proyecto/ZonaRecta.cpp ../Proyecto/ZonaRecta.h \

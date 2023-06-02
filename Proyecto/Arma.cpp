@@ -22,7 +22,7 @@ void Arma::CrearZona(QGraphicsScene *Escena)
     if(!Activa)
     {
         Activa=true;
-        RangoArma = new ZonaRecta({Size.x(), Size.y()/2.7}, {1000,20}, 700, 0, 180, 0.3, true);
+        RangoArma = new ZonaRecta({Size.x(), Size.y()/2.7}, {500,20}, 580, 0, 180, 0.3, true);
         RangoArma->setParentItem(this);
         Escena->addItem(RangoArma);
     }

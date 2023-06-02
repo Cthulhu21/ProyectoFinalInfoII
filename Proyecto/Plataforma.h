@@ -35,6 +35,10 @@ private:
 
     Color ColorPlataforma;
     QPointF RutaActual;
+    QPointF PosicionInicial;
+
+    qreal Distancia;
+
     qreal Velocidad;
     bool ConRuta;
 

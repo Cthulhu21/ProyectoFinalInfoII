@@ -10,6 +10,7 @@ Plataforma::Plataforma(Color Color_, QPointF Pos, QPointF Size, float Rotacion, 
     Ruta = new QList<QPointF>;
     Velocidad = 0;
     ConRuta=false;
+    PosicionInicial=pos();
 }
 
 Plataforma::~Plataforma()
@@ -28,6 +29,7 @@ void Plataforma::AgregarRutas(QList<QPointF> Ruta_, qreal Velocidad_)
     RutaActual =  Ruta->at(0);
     ConRuta=true;
     NumeroRutaActual=0;
+    Distancia=INFINITY;
 }
 
 void Plataforma::SiguientePos(qreal Delta)
@@ -36,13 +38,43 @@ void Plataforma::SiguientePos(qreal Delta)
         return;
     Delta*=0.1;
     QPointF PosActual = pos();
-    QPointF PosFinal =PosActual + RutaActual;
+    QPointF PosFinal =PosicionInicial + RutaActual;
     QPointF SiguientePos = PosActual + RutaActual*Delta*Velocidad;
-    setPos(SiguientePos);
-    //NumeroRutaActual+=1;
-    //NumeroRutaActual%=Ruta->size();
-    //RutaActual=Ruta->at(NumeroRutaActual);
-    //RutaActual=Ruta
+    qreal DistanciaMovimiento = sqrt(QPointF::dotProduct(PosFinal-SiguientePos,PosFinal-SiguientePos));
+    if(Distancia>DistanciaMovimiento)
+    {
+        setPos(SiguientePos);
+        Distancia=DistanciaMovimiento;
+    }
+    else
+    {
+        setPos(PosFinal);
+        ++NumeroRutaActual%=Ruta->size();
+        RutaActual=Ruta->at(NumeroRutaActual);
+
+        PosicionInicial=pos();
+        Distancia=INFINITY;
+    }
+    /*
+    if(PosActual!=PosFinal)
+        setPos(SiguientePos);
+    if(PosicionInicial)
+    if(std::abs(PosActual.x())>std::abs(PosFinal.x()))
+    {
+        setX(PosFinal.x());
+        NumeroRutaActual+=1;
+        RutaActual=Ruta->at(NumeroRutaActual);
+        NumeroRutaActual%=Ruta->size();
+        PosicionInicial=pos();
+    }
+    else if(std::abs(PosActual.y())>std::abs(PosFinal.y()))
+    {
+        setY(PosFinal.y());
+        NumeroRutaActual+=1;
+        RutaActual=Ruta->at(NumeroRutaActual);
+        NumeroRutaActual%=Ruta->size();
+        PosicionInicial=pos();
+    }*/
 }
 
 QRectF Plataforma::boundingRect() const

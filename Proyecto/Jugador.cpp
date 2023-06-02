@@ -62,7 +62,7 @@ void Jugador::RotarArma()
     QPointF mousePos = QCursor::pos();
 
     // Calcular la dirección del mouse con respecto al arma
-    QPointF direction = mousePos - Pistola->pos()-QPointF(10,50);
+    QPointF direction = mousePos - Pistola->pos()-QPointF{225,125};//QPointF(10,50);
 
     // Calcular el ángulo de rotación en radianes
     qreal angle = std::atan2(direction.y(), direction.x());

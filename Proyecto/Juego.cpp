@@ -3,13 +3,14 @@
 Juego::Juego(QWidget *parent)
 {
     Pantalla = new QGraphicsScene;
-    PantallaSizeX=GetSystemMetrics(SM_CXSCREEN)-10;
-    PantallaSizeY=GetSystemMetrics(SM_CYSCREEN)-75;
+    PantallaSizeX=1500;
+    PantallaSizeY=800;
     Pantalla->setSceneRect(0,0,PantallaSizeX,PantallaSizeY);
     setFixedSize(PantallaSizeX,PantallaSizeY);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setScene(Pantalla);
+
     setAutoFillBackground(false);
 
     setMouseTracking(true);
@@ -309,6 +310,8 @@ void Juego::mousePressEvent(QMouseEvent *event)
 
 void Juego::Actualizar()
 {
+    if(!JuegoActivo)
+        return;
     bool NextLevel=false;
     ContadorGlobal+=1;
     ContadorGlobal%=100;
@@ -334,7 +337,7 @@ void Juego::Actualizar()
             }
         }
     }
-    if(ContadorGlobal%20==0)
+    if(ContadorGlobal%1==0)
     {
         MoverPlataformas();
     }
