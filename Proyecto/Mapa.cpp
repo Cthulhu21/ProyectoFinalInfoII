@@ -124,7 +124,7 @@ void Mapa::CargarElementos()
         ZonasGravitacionales->append(new ZonaRecta({20,400},{480,100},25000,0,-45,0.3));
         ZonasGravitacionales->append(new ZonaRecta({920,400},{560,100},25000,0,-135,0.3));
 
-        ZonasGravitacionales->append(new ZonaRadial({750,450},2000, ZonaRadial::Interaccion::Atractivo, 100, 0.7)); //335
+        ZonasGravitacionales->append(new ZonaRadial({700,450},2000, ZonaRadial::Interaccion::Atractivo, 200, 0.7)); //335
 
         Plataformas->append(new Plataforma(Color::Blanca, QPointF(500, 200), QPointF(400, 20)));
         Plataformas->append(new Plataforma(Color::Blanca, QPointF(500, 300), QPointF(20, 200)));
