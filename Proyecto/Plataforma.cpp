@@ -32,7 +32,7 @@ void Plataforma::AgregarRutas(QList<QPointF> Ruta_, qreal Velocidad_)
     Distancia=INFINITY;
 }
 
-void Plataforma::SiguientePos(qreal Delta)
+void Plataforma::SiguientePos(qreal Delta, QPointF *Cambio)
 {
     if(!ConRuta)
         return;
@@ -55,6 +55,7 @@ void Plataforma::SiguientePos(qreal Delta)
         PosicionInicial=pos();
         Distancia=INFINITY;
     }
+    *Cambio=RutaActual*Delta*Velocidad;;
     /*
     if(PosActual!=PosFinal)
         setPos(SiguientePos);

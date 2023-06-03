@@ -20,7 +20,7 @@ public:
     unsigned int NumeroRutaActual;
 
     void AgregarRutas(QList<QPointF>, qreal Velocidad_);
-    void SiguientePos(qreal Delta);
+    void SiguientePos(qreal Delta, QPointF *Cambio);
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;;

@@ -279,9 +279,19 @@ void Juego::MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2)
 
 void Juego::MoverPlataformas()
 {
+    QPointF Movimiento;
     for(Plataforma *Plataforma_ : *MapaActual->getPlataformas())
     {
-        Plataforma_->SiguientePos(Delta);
+        Plataforma_->SiguientePos(Delta, &Movimiento);
+
+        for(QGraphicsItem *Item: Plataforma_->collidingItems())
+        {
+            ObjetoMovible *Objeto = dynamic_cast<ObjetoMovible *>(Item);
+            if(Objeto)
+            {
+                Objeto->SetPos(Objeto->pos()+Movimiento);
+            }
+        }
     }
 }
 
