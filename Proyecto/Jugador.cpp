@@ -6,6 +6,7 @@ Jugador::Jugador(int Masa, QPointF Pos, QPointF Vel,
 {
     Pistola = new Arma();
     Jugador::SetPos(Pos);
+    Saltando=false;
 }
 
 Jugador::Jugador()

@@ -24,6 +24,8 @@ public:
     void DispararObjeto();
     void RotarArma();
 
+    bool Saltando;
+
 private:
 
 

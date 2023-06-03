@@ -64,7 +64,10 @@ void Juego::keyPressEvent(QKeyEvent *evento)
     switch(evento->key())
     {
     case Qt::Key_W:
+        if(Player->Saltando)
+            return;
         Player->Velocidad->setY(-50);
+        Player->Saltando=true;
         break;
     case Qt::Key_A:
         Player->Velocidad->setX(-50);
@@ -172,6 +175,8 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, boo
         }
         Objeto->Velocidad->setY(Objeto->Velocidad->y()*-k);
         Objeto->Posicion->setY(Pos0.y());
+        if(Objeto==Player)
+            Player->Saltando=false;
     }
 
     //Colisión en X
