@@ -61,19 +61,20 @@ void Juego::keyPressEvent(QKeyEvent *evento)
     }
     if(!JuegoActivo)
         return;
+    float Vel=Player->VelocidadMovimiento;
     switch(evento->key())
     {
     case Qt::Key_W:
         if(Player->Saltando)
             return;
-        Player->Velocidad->setY(-50);
+        Player->Velocidad->setY(-Vel);
         Player->Saltando=true;
         break;
     case Qt::Key_A:
-        Player->Velocidad->setX(-50);
+        Player->Velocidad->setX(-Vel);
         break;
     case Qt::Key_D:
-        Player->Velocidad->setX(50);
+        Player->Velocidad->setX(Vel);
         break;
     case Qt::Key_R:
         Pantalla->clear();

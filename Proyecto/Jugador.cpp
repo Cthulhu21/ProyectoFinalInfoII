@@ -7,6 +7,7 @@ Jugador::Jugador(int Masa, QPointF Pos, QPointF Vel,
     Pistola = new Arma();
     Jugador::SetPos(Pos);
     Saltando=false;
+    VelocidadMovimiento=50;
 }
 
 Jugador::Jugador()
@@ -58,12 +59,10 @@ void Jugador::DispararObjeto()
 
 void Jugador::RotarArma()
 {
-    //QGraphicsView::mouseMoveEvent(event);
-
     QPointF mousePos = QCursor::pos();
 
     // Calcular la dirección del mouse con respecto al arma
-    QPointF direction = mousePos - Pistola->pos()-QPointF{225,125};//QPointF(10,50);
+    QPointF direction = mousePos - Pistola->pos() - QPointF{225,125};//QPointF(10,50);
 
     // Calcular el ángulo de rotación en radianes
     qreal angle = std::atan2(direction.y(), direction.x());

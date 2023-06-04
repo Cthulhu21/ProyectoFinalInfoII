@@ -51,6 +51,7 @@ void Mapa::CargarElementos()
         Escenario->addItem(ZonaDeMeta);
 
         Player->SetPos({25,700});
+        Player->VelocidadMovimiento=50;
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
@@ -82,6 +83,7 @@ void Mapa::CargarElementos()
         Escenario->addItem(ZonaDeMeta);
 
         Player->SetPos({25,700});
+        Player->VelocidadMovimiento=50;
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
@@ -110,6 +112,7 @@ void Mapa::CargarElementos()
 
 
         Player->SetPos({20,700});
+        Player->VelocidadMovimiento=50;
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
@@ -142,6 +145,7 @@ void Mapa::CargarElementos()
 
 
         Player->SetPos({25,700});
+        Player->VelocidadMovimiento=50;
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;
@@ -150,17 +154,42 @@ void Mapa::CargarElementos()
     {
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
+        ZonasGravitacionales->append(new ZonaRecta({100,600},{1380,180},5000,0,180,0.3));
+        ZonasGravitacionales->append(new ZonaRecta({20,320},{80,480},1000,0,-90,0.3));
+
+        ZonasGravitacionales->append(new ZonaRadial({1380,120},2000, ZonaRadial::Interaccion::Atractivo, 120, 0.7)); //335
+
         AgregarParedes();
+
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(100, 300), QPointF(100, 20)));
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(1260, 160), QPointF(100, 20)));
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(1260, 180), QPointF(20, 150)));
+        Plataformas->append(new Plataforma(Color::Blanca, QPointF(1260, 330), QPointF(100, 20)));
 
         ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{250,900}));
 
-        Plataformas->append(new Plataforma(Color::Negra, {500,500},{100,20}));
-        QList<QPointF> Ruta={{50,0},{0,50},{-50,0},{0,-50}};
-        Plataformas->at(4)->AgregarRutas(Ruta, 1);
+        QList<QPointF> Ruta={{0,200},{0,-200}};
+        Plataformas->append(new Plataforma(Color::Negra, {250,300},{100,20}));
+        Plataformas->back()->AgregarRutas(Ruta, 1);
+        Plataformas->append(new Plataforma(Color::Negra, {450,300},{100,20}));
+        Plataformas->back()->AgregarRutas(Ruta, 1);
+        Plataformas->append(new Plataforma(Color::Negra, {650,300},{100,20}));
+        Plataformas->back()->AgregarRutas(Ruta, 1);
+        Plataformas->append(new Plataforma(Color::Negra, {850,300},{100,20}));
+        Plataformas->back()->AgregarRutas(Ruta, 1);
+        Plataformas->append(new Plataforma(Color::Negra, {1050,300},{100,20}));
+        Plataformas->back()->AgregarRutas(Ruta, 1);
+
+        ObjetosMovibles->append(new ObjetoMovible(TipoDeObjeto::Cubo,10,{140,245}));
 
         AgregarElementos();
 
-        Player->SetPos({150,700});
+        ZonaDeMeta = new QGraphicsRectItem(1280,180,20,150);
+        ZonaDeMeta->setBrush(QBrush(Qt::green));
+        Escenario->addItem(ZonaDeMeta);
+
+        Player->SetPos({120,245});
+        Player->VelocidadMovimiento=50;
         Player->AgregarArma(Escenario);
         Escenario->addItem(Player);
         break;

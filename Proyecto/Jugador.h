@@ -25,10 +25,9 @@ public:
     void RotarArma();
 
     bool Saltando;
+    float VelocidadMovimiento;
 
 private:
-
-
     Arma *Pistola;
 };
 
