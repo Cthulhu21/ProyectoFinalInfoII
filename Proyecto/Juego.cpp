@@ -36,28 +36,123 @@ void Juego::EmpezarJuego(unsigned int IDMapa)
 
     connect(Timer, SIGNAL(timeout()),this,SLOT(Actualizar()));
     MapaActual = new Mapa(IDMapa, Pantalla, Player);
-    JuegoActivo=false;
+    JuegoActivo=true; // Se setea en true para que Pausar() lo ponga en false
+    Pausa = new QGraphicsTextItem;
+    ComoPausar = new QGraphicsTextItem;
+    ComoDisparar = new QGraphicsTextItem;
+    ComoAtraer = new QGraphicsTextItem;
+    ReiniciarNivel = new QGraphicsTextItem;
+
+    QFont font("Arial", 12);
+
+    QGraphicsTextItem *ComoPausar = new QGraphicsTextItem("Espacio: Pausar/ Despausar");
+    ComoPausar->setPos(30, 30);
+    ComoPausar->setFont(font);
+    Pantalla->addItem(ComoPausar);
+
+    QGraphicsTextItem *ComoDisparar = new QGraphicsTextItem("Click derecho con cubo en arma: Disparar");
+    ComoDisparar->setPos(30, 60);
+    ComoDisparar->setFont(font);
+    Pantalla->addItem(ComoDisparar);
+
+    QGraphicsTextItem *ComoAtraer = new QGraphicsTextItem("Click Izquierdo: Atraer objetos");
+    ComoAtraer->setPos(30, 90);
+    ComoAtraer->setFont(font);
+    Pantalla->addItem(ComoAtraer);
+
+    QGraphicsTextItem *ReiniciarNivel = new QGraphicsTextItem("R: Reiniciar nivel");
+    ReiniciarNivel->setPos(30, 120);
+    ReiniciarNivel->setFont(font);
+    Pantalla->addItem(ReiniciarNivel);
+    Pausar();
+}
+
+void Juego::LetrerosDePausa()
+{
+    if(JuegoActivo)
+    {
+        Pantalla->removeItem(Pausa);
+        delete Pausa;
+    }
+    else
+    {
+        QFont Fuente("Arial", 30);
+        Pausa = new QGraphicsTextItem("PAUSADO");
+        Pausa->setPos(600,PantallaSizeY/2);
+        Pausa->setFont(Fuente);
+        Pantalla->addItem(Pausa);
+
+    }
 }
 
 void Juego::SiguienteMapa()
 {
-    EmpezarJuego(MapaActual->getID()+1);
+    int ID =MapaActual->getID()+1;
+    ID%=5;
+    EmpezarJuego(ID);
+}
+
+void Juego::Pausar()
+{
+    if(JuegoActivo)
+    {
+        JuegoActivo=false;
+        Timer->stop();
+    }
+    else
+    {
+        JuegoActivo=true;
+        Timer->start(10);
+    }
+    Opacidades();
+    LetrerosDePausa();
+}
+
+void Juego::Opacidades()
+{
+    if(!JuegoActivo)
+    {
+        for(ObjetoMovible *Objeto: *MapaActual->getObjetosMovibles())
+        {
+            Objeto->setOpacity(0.1);
+        }
+        for(Plataforma *Objeto: *MapaActual->getPlataformas())
+        {
+            Objeto->setOpacity(0.1);
+        }
+        for(unsigned int i=1; i<MapaActual->getZonasGravitacionales()->size(); i++)
+        {
+            MapaActual->getZonasGravitacionales()->at(i)->setOpacity(0.1);
+        }
+        Player->setOpacity(0.1);
+        Player->getPistola()->setOpacity(0.1);
+        MapaActual->getZonaDeMeta()->setOpacity(0.1);
+    }
+    else
+    {
+        for(ObjetoMovible *Objeto: *MapaActual->getObjetosMovibles())
+        {
+            Objeto->setOpacity(1);
+        }
+        for(Plataforma *Objeto: *MapaActual->getPlataformas())
+        {
+            Objeto->setOpacity(1);
+        }
+        for(unsigned int i=1; i<MapaActual->getZonasGravitacionales()->size(); i++)
+        {
+            MapaActual->getZonasGravitacionales()->at(i)->setOpacity(0.3);
+        }
+        Player->setOpacity(1);
+        Player->getPistola()->setOpacity(1);
+        MapaActual->getZonaDeMeta()->setOpacity(1);
+    }
 }
 
 void Juego::keyPressEvent(QKeyEvent *evento)
 {
     if(evento->key()==Qt::Key_Space)
     {
-        if(JuegoActivo)
-        {
-            JuegoActivo=false;
-            Timer->stop();
-        }
-        else
-        {
-            JuegoActivo=true;
-            Timer->start(10);
-        }
+        Pausar();
     }
     if(!JuegoActivo)
         return;
@@ -77,10 +172,10 @@ void Juego::keyPressEvent(QKeyEvent *evento)
         Player->Velocidad->setX(Vel);
         break;
     case Qt::Key_R:
+        Pausar();
         Pantalla->clear();
         delete Timer;
         EmpezarJuego(MapaActual->getID());
-        JuegoActivo=false;
         break;
     default:
         break;

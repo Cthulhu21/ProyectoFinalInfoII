@@ -25,9 +25,20 @@ private:
     Jugador *Player;
     Mapa *MapaActual;
 
+    QGraphicsTextItem *Pausa;
+    QGraphicsTextItem *ReiniciarNivel;
+    QGraphicsTextItem *ComoPausar;
+    QGraphicsTextItem *ComoDisparar;
+    QGraphicsTextItem *ComoAtraer;
+
+    void LetrerosDePausa();
+
+
     bool JuegoActivo=false;
 
     void SiguienteMapa();
+    void Pausar();
+    void Opacidades();
     void GameOver();
 
     void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, bool *Parar);

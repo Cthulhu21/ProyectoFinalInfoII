@@ -154,7 +154,7 @@ void Mapa::CargarElementos()
     {
         ZonasGravitacionales->append(new ZonaRecta({-500,-500},{3000,3000},100,0,90));//Gravedad
 
-        ZonasGravitacionales->append(new ZonaRecta({100,600},{1380,180},5000,0,180,0.3));
+        ZonasGravitacionales->append(new ZonaRecta({100,600},{1380,180},2500,0,180,0.3));
         ZonasGravitacionales->append(new ZonaRecta({20,320},{80,480},1000,0,-90,0.3));
 
         ZonasGravitacionales->append(new ZonaRadial({1380,120},2000, ZonaRadial::Interaccion::Atractivo, 120, 0.7)); //335
