@@ -20,15 +20,22 @@ public:
     void AgregarArma(QGraphicsScene *Pantalla);
     Arma *getPistola() const;
     void SetPos(QPointF Pos) override;
+    void SiguienteFrame() override;
     void Disparar(QGraphicsScene *Escena);
     void DispararObjeto();
     void RotarArma();
+
+    void DifusionBarra();
+    bool MostrarBarra;
 
     bool Saltando;
     float VelocidadMovimiento;
 
 private:
     Arma *Pistola;
+    QGraphicsRectItem *BarraVida;
+    int ContadorBarra;
+
 };
 
 #endif // JUGADOR_H

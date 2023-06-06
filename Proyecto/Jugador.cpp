@@ -8,6 +8,10 @@ Jugador::Jugador(int Masa, QPointF Pos, QPointF Vel,
     Jugador::SetPos(Pos);
     Saltando=false;
     VelocidadMovimiento=50;
+    BarraVida = new QGraphicsRectItem(-25,-10,100,10,this);
+    BarraVida->setBrush(QBrush(Qt::red));
+    MostrarBarra=true;
+    ContadorBarra=5;
 }
 
 Jugador::Jugador()
@@ -32,6 +36,12 @@ void Jugador::SetPos(QPointF Pos)
     Pos.setY(Pos.y()+10);
     Pistola->SetPos(Pos);
     RotarArma();
+}
+
+void Jugador::SiguienteFrame()
+{
+    ObjetoMovible::SiguienteFrame();
+    DifusionBarra();
 }
 
 void Jugador::AgregarArma(QGraphicsScene *Pantalla)
@@ -72,4 +82,20 @@ void Jugador::RotarArma()
 
     // Rotar el arma
     Pistola->Rotar(rotation);
+}
+
+void Jugador::DifusionBarra()
+{
+    if(BarraVida)
+    {
+        if(MostrarBarra==true)
+        {
+            float Coeficiente=float(ContadorBarra)/5;
+            BarraVida->setOpacity(Coeficiente);
+            ContadorBarra-=1;
+            ContadorBarra%=6;
+            if(ContadorBarra==-1)
+                MostrarBarra=false;
+        }
+    }
 }
