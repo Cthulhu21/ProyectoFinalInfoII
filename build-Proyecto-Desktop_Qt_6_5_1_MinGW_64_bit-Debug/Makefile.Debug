@@ -157,12 +157,6 @@ compiler_rcc_clean:
 debug/qrc_Recursos.cpp: ../Proyecto/Recursos.qrc \
 		../../../../Qt/6.5.1/mingw_64/bin/rcc.exe \
 		../Proyecto/Recursos/DefineSprite_1340/1.png \
-		../Proyecto/Recursos/Fantasma.png \
-		../Proyecto/Recursos/Pacman.png \
-		../Proyecto/Recursos/SpritesPacman.png \
-		../Proyecto/Recursos/Sprites.png \
-		../Proyecto/Recursos/Laberinto.png \
-		../Proyecto/Recursos/Comestibles.png \
 		../Proyecto/Recursos/DefineSprite_1318/1.png \
 		../Proyecto/Recursos/DefineSprite_220/1.png \
 		../Proyecto/Recursos/DefineSprite_1706/1.png \
@@ -190,7 +184,6 @@ debug/qrc_Recursos.cpp: ../Proyecto/Recursos.qrc \
 		../Proyecto/Recursos/Jugador/Correr\ (11).png \
 		../Proyecto/Recursos/Jugador/Correr\ (13).png \
 		../Proyecto/Recursos/Jugador/Correr\ (5).png \
-		../Proyecto/Recursos/Flecha/BrochaFlechas.png \
 		../Proyecto/Recursos/Flecha/Flecha.png
 	'D:\Qt\6.5.1\mingw_64\bin\rcc.exe' -name Recursos --no-zstd ../Proyecto/Recursos.qrc -o debug/qrc_Recursos.cpp
 
