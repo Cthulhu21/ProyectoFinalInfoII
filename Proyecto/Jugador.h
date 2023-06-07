@@ -20,22 +20,31 @@ public:
     void AgregarArma(QGraphicsScene *Pantalla);
     Arma *getPistola() const;
     void SetPos(QPointF Pos) override;
-    void SiguienteFrame() override;
+    void SiguienteFrame(QGraphicsScene *Escenario) override;
     void Disparar(QGraphicsScene *Escena);
     void DispararObjeto();
     void RotarArma();
 
-    void DifusionBarra();
-    bool MostrarBarra;
+    void Herir(qreal Damage);
+
+    void MostrarBarra();
 
     bool Saltando;
     float VelocidadMovimiento;
+    int Invulnerable;
+
+    int getVida() const;
 
 private:
+    int Vida;
     Arma *Pistola;
-    QGraphicsRectItem *BarraVida;
-    int ContadorBarra;
 
+
+
+    QGraphicsRectItem *BarraVida;
+    void DifusionBarra(QGraphicsScene *Escena);
+    int ContadorBarra;
+    bool boolBarra;
 };
 
 #endif // JUGADOR_H

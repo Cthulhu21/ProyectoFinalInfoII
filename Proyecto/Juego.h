@@ -33,17 +33,18 @@ private:
 
     void LetrerosDePausa();
 
-
     bool JuegoActivo=false;
 
     void SiguienteMapa();
     void Pausar();
+    void Reiniciar();
     void Opacidades();
     void GameOver();
 
     void InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, bool *Parar);
     void PegarObjetoAArma(ObjetoMovible *Objeto);
     void MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2);
+    void JugadorColisionObjetoMovible(ObjetoMovible *Objeto);
     void MoverPlataformas();
 
     unsigned int ContadorGlobal;

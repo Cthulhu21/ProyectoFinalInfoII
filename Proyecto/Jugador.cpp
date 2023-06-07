@@ -8,10 +8,10 @@ Jugador::Jugador(int Masa, QPointF Pos, QPointF Vel,
     Jugador::SetPos(Pos);
     Saltando=false;
     VelocidadMovimiento=50;
-    BarraVida = new QGraphicsRectItem(-25,-10,100,10,this);
-    BarraVida->setBrush(QBrush(Qt::red));
-    MostrarBarra=true;
-    ContadorBarra=5;
+    Vida=100;
+    BarraVida = nullptr;
+    Invulnerable=0;
+    MostrarBarra();
 }
 
 Jugador::Jugador()
@@ -38,10 +38,10 @@ void Jugador::SetPos(QPointF Pos)
     RotarArma();
 }
 
-void Jugador::SiguienteFrame()
+void Jugador::SiguienteFrame(QGraphicsScene *Escenario)
 {
     ObjetoMovible::SiguienteFrame();
-    DifusionBarra();
+    DifusionBarra(Escenario);
 }
 
 void Jugador::AgregarArma(QGraphicsScene *Pantalla)
@@ -65,6 +65,7 @@ void Jugador::DispararObjeto()
     Objeto->Velocidad->setY(Velocidad->y()+VelocidadDisparo*sin(Rotacion*M_PI/180));
     Objeto->ObjetoPegado=false;
     Pistola->MoviblePegado=false;
+    Invulnerable=5;
 }
 
 void Jugador::RotarArma()
@@ -84,18 +85,51 @@ void Jugador::RotarArma()
     Pistola->Rotar(rotation);
 }
 
-void Jugador::DifusionBarra()
+void Jugador::Herir(qreal Damage)
 {
-    if(BarraVida)
+    Vida-=Damage;
+}
+
+void Jugador::DifusionBarra(QGraphicsScene *Escena)
+{
+    if(!BarraVida)
+        return;
+    if(!boolBarra)
+        return;
+
+    float Coeficiente=float(ContadorBarra)/5;
+    BarraVida->setOpacity(Coeficiente);
+    ContadorBarra-=1;
+    ContadorBarra%=6;
+    if(ContadorBarra!=-1)
+        return;
+
+    boolBarra=false;
+    Escena->removeItem(BarraVida);
+    delete BarraVida;
+    BarraVida=nullptr;
+}
+
+void Jugador::MostrarBarra()
+{
+    if(BarraVida==nullptr)
     {
-        if(MostrarBarra==true)
+        if(Vida>0)
         {
-            float Coeficiente=float(ContadorBarra)/5;
-            BarraVida->setOpacity(Coeficiente);
-            ContadorBarra-=1;
-            ContadorBarra%=6;
-            if(ContadorBarra==-1)
-                MostrarBarra=false;
+            BarraVida = new QGraphicsRectItem(-Vida/2+20,-10,Vida,10,this);
+            BarraVida->setBrush(QBrush(Qt::red));
+            boolBarra=true;
+            ContadorBarra=5;
         }
     }
+    else
+    {
+        boolBarra=true;
+        ContadorBarra=5;
+    }
+}
+
+int Jugador::getVida() const
+{
+    return Vida;
 }

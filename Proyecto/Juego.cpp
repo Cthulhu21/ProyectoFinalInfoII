@@ -88,7 +88,11 @@ void Juego::LetrerosDePausa()
 void Juego::SiguienteMapa()
 {
     int ID =MapaActual->getID()+1;
-    ID%=5;
+    ID%=6;
+    if(ID==0)
+    {
+        GameOver();
+    }
     EmpezarJuego(ID);
 }
 
@@ -106,6 +110,14 @@ void Juego::Pausar()
     }
     Opacidades();
     LetrerosDePausa();
+}
+
+void Juego::Reiniciar()
+{
+    Pausar();
+    Pantalla->clear();
+    delete Timer;
+    EmpezarJuego(MapaActual->getID());
 }
 
 void Juego::Opacidades()
@@ -172,10 +184,10 @@ void Juego::keyPressEvent(QKeyEvent *evento)
         Player->Velocidad->setX(Vel);
         break;
     case Qt::Key_R:
-        Pausar();
-        Pantalla->clear();
-        delete Timer;
-        EmpezarJuego(MapaActual->getID());
+        Reiniciar();
+        break;
+    case Qt::Key_Tab:
+        Player->MostrarBarra();
         break;
     default:
         break;
@@ -342,6 +354,7 @@ void Juego::InteraccionZonas(ZonaGravitacional *Zona, ObjetoMovible *Objeto, boo
 void Juego::PegarObjetoAArma(ObjetoMovible *Objeto)
 {
     Objeto->ObjetoPegado=true;
+    *Objeto->Velocidad={0,0};
     Player->getPistola()->setObjetoPegado(Objeto);
     Player->Disparar(Pantalla);
     Player->getPistola()->MoviblePegado=true;
@@ -356,26 +369,55 @@ void Juego::GameOver()
 
 void Juego::MomentoEnergia(ObjetoMovible *Objeto1, ObjetoMovible *Objeto2)
 {
-    if(!(Objeto1==Player or Objeto2==Player))
+    if(Objeto1->ObjetoPegado or Objeto2->ObjetoPegado)
+        return;
+
+    float Masa1=Objeto1->getMasa(), Masa2=Objeto2->getMasa();
+
+    if(Objeto1==Player)
     {
-        float Masa1=Objeto1->getMasa(), Masa2=Objeto2->getMasa();
-        float Vx0Objeto1=Objeto1->Velocidad->x();
-        float Vx0Objeto2=Objeto2->Velocidad->x();
-
-        float Vy0Objeto1=Objeto1->Velocidad->y();
-        float Vy0Objeto2=Objeto2->Velocidad->y();
-
-        float VxFObjeto1 = (2*Masa2*Vx0Objeto2-Vx0Objeto1*(Masa2-Masa1))/(Masa1+Masa2);
-        float VyFObjeto1 = (2*Masa2*Vy0Objeto2-Vy0Objeto1*(Masa2-Masa1))/(Masa1+Masa2);
-
-        Objeto1->Velocidad->setX(VxFObjeto1);
-        Objeto1->Velocidad->setY(VyFObjeto1);
-
-        float VxFObjeto2 = Vx0Objeto1-Vx0Objeto2 +VxFObjeto1;
-        float VyFObjeto2 = Vy0Objeto1-Vy0Objeto2 +VyFObjeto1;
-        Objeto2->Velocidad->setX(VxFObjeto2);
-        Objeto2->Velocidad->setY(VyFObjeto2);
+        if(Player->Invulnerable!=0)
+            return;
+        JugadorColisionObjetoMovible(Objeto2);
+        return;
     }
+    if(Objeto2==Player)
+    {
+        if(Player->Invulnerable!=0)
+            return;
+        JugadorColisionObjetoMovible(Objeto1);
+        return;
+    }
+
+
+    float Vx0Objeto1=Objeto1->Velocidad->x();
+    float Vx0Objeto2=Objeto2->Velocidad->x();
+
+    float Vy0Objeto1=Objeto1->Velocidad->y();
+    float Vy0Objeto2=Objeto2->Velocidad->y();
+
+    float VxFObjeto1 = (2*Masa2*Vx0Objeto2-Vx0Objeto1*(Masa2-Masa1))/(Masa1+Masa2);
+    float VyFObjeto1 = (2*Masa2*Vy0Objeto2-Vy0Objeto1*(Masa2-Masa1))/(Masa1+Masa2);
+
+    Objeto1->Velocidad->setX(VxFObjeto1);
+    Objeto1->Velocidad->setY(VyFObjeto1);
+
+    float VxFObjeto2 = Vx0Objeto1-Vx0Objeto2 +VxFObjeto1;
+    float VyFObjeto2 = Vy0Objeto1-Vy0Objeto2 +VyFObjeto1;
+
+    Objeto2->Velocidad->setX(VxFObjeto2);
+    Objeto2->Velocidad->setY(VyFObjeto2);
+}
+
+void Juego::JugadorColisionObjetoMovible(ObjetoMovible *Objeto)
+{
+    qreal Magnitud = sqrt(QPointF::dotProduct(*Objeto->Velocidad, *Objeto->Velocidad));
+    Magnitud/=3;
+    if(Magnitud<30)
+        return;
+    Player->Herir(Magnitud);
+    Player->MostrarBarra();
+    *Objeto->Velocidad*=-0.2;
 }
 
 void Juego::MoverPlataformas()
@@ -421,6 +463,11 @@ void Juego::mousePressEvent(QMouseEvent *event)
 
 void Juego::Actualizar()
 {
+    if(Player->getVida()<=0)
+    {
+        Reiniciar();
+        return;
+    }
     if(!JuegoActivo)
         return;
     bool NextLevel=false;
@@ -429,23 +476,29 @@ void Juego::Actualizar()
     //Actualizar el frame
     if(ContadorGlobal%5==0)
     {
-        Player->SiguienteFrame();
+        Player->SiguienteFrame(Pantalla);
+    }
+    if(Player->Invulnerable!=0)
+    {
+        Player->Invulnerable-=1;
     }
     {
-        QList<QGraphicsItem*> Items=Pantalla->items();
-        for(QGraphicsItem *Item : Items)
+        for(ObjetoMovible *Objeto : *MapaActual->getObjetosMovibles())
         {
-            ObjetoMovible *Objeto= dynamic_cast<ObjetoMovible*>(Item);
-            if(Objeto)
+            QList<QGraphicsItem*> items=Objeto->collidingItems();
+            for(QGraphicsItem *item : items)
             {
-                QList<QGraphicsItem*> items=Objeto->collidingItems();
-                for(QGraphicsItem *item : items)
-                {
-                    ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
-                    if(Zona)
-                        InteraccionZonas(Zona, Objeto, &NextLevel);
-                }
+                ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
+                if(Zona)
+                    InteraccionZonas(Zona, Objeto, &NextLevel);
             }
+        }
+        QList<QGraphicsItem*> items=Player->collidingItems();
+        for(QGraphicsItem *item : items)
+        {
+            ZonaGravitacional *Zona=dynamic_cast<ZonaGravitacional*>(item);
+            if(Zona)
+                InteraccionZonas(Zona, Player, &NextLevel);
         }
     }
     if(ContadorGlobal%1==0)
