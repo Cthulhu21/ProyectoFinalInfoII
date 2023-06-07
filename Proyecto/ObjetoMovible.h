@@ -26,7 +26,7 @@ public:
     bool ObjetoPegado;
 
     virtual void SetPos(QPointF Pos);
-    void SiguienteFrame();
+    virtual void SiguienteFrame(QGraphicsScene *Escenario=nullptr);
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem*, QWidget*) override;
 

@@ -50,7 +50,7 @@ void ObjetoMovible::SetPos(QPointF Pos)
     setPos(Pos);
 }
 
-void ObjetoMovible::SiguienteFrame()
+void ObjetoMovible::SiguienteFrame(QGraphicsScene *Escenario)
 {
     setPixmap(Sprites[FrameActual++]);
     FrameActual%=Sprites.size();

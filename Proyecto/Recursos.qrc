@@ -1,11 +1,5 @@
 <RCC>
     <qresource prefix="/Imagenes">
-        <file alias="Pacman">Recursos/Pacman.png</file>
-        <file alias="Laberinto">Recursos/Laberinto.png</file>
-        <file alias="Sprites">Recursos/Sprites.png</file>
-        <file alias="SpritesPacman">Recursos/SpritesPacman.png</file>
-        <file alias="Fantasma">Recursos/Fantasma.png</file>
-        <file alias="Comestibles">Recursos/Comestibles.png</file>
         <file alias="Cubo">Recursos/DefineSprite_1318/1.png</file>
     </qresource>
     <qresource prefix="/Jugador">
@@ -36,7 +30,6 @@
     </qresource>
     <qresource prefix="/Flechas">
         <file alias="Flecha">Recursos/Flecha/Flecha.png</file>
-        <file alias="Brocha">Recursos/Flecha/BrochaFlechas.png</file>
     </qresource>
     <qresource prefix="/Armas">
         <file alias="1">Recursos/DefineSprite_1340/1.png</file>
